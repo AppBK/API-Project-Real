@@ -22,6 +22,10 @@ const validateSignup = [
     .exists({ checkFalsy: true })
     .isLength({ min: 6 })
     .withMessage('Password must be 6 characters or more.'),
+  check('firstName')
+    .isLength({min: 0}),
+  check('lastName')
+    .isLength({ min: 0 }),
   handleValidationErrors
 ];
 
@@ -30,8 +34,8 @@ const validateSignup = [
 const router = express.Router();
 
 router.post('/', validateSignup, async (req, res) => {
-    const { email, password, username } = req.body;
-    const user = await User.signup({ email, username, password });
+    const { email, password, username, firstName, lastName } = req.body;
+    const user = await User.signup({ email, username, password, firstName, lastName });
 
     await setTokenCookie(res, user);
 
@@ -89,12 +93,14 @@ fetch('/api/users', {
   method: 'POST',
   headers: {
     "Content-Type": "application/json",
-    "XSRF-TOKEN": "CDbmUYMY-xEWiWHYjF74twbjaDBM7BHsJdm0"
+    "XSRF-TOKEN": "alm8w6Ly-eAA_6KzG_uOLgipOZhuTbIqLYs8"
   },
   body: JSON.stringify({
     email: 'firestar@spider.man',
     username: 'Firestar',
-    password: 'passw'
+    password: 'password',
+    firstName: 'Splangy',
+    lastName: 'Bear-Costume'
   })
 }).then(res => res.json()).then(data => console.log(data));
 
