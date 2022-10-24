@@ -12,7 +12,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('People', [{
+    await queryInterface.bulkInsert('ReviewImages', [{
       reviewId: 1,
       url: 'https://a0.muscache.com/im/pictures/prohost-api/Hosting-654354735692804099/original/39994223-4c25-49ac-ac21-7b47e2dfb957.jpeg?im_w=960',
     },

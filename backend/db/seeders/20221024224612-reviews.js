@@ -37,7 +37,7 @@ module.exports = {
       stars: 4,
     },
     {
-      sporId: 5,
+      spotId: 5,
       userId: 1,
       review: 'Do you think I can lift 200 pounds over my head?',
       stars: 3,
