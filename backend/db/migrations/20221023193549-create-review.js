@@ -23,7 +23,7 @@ module.exports = {
           model: 'Users',
         }
       },
-      reviews: {
+      review: {
         type: Sequelize.STRING
       },
       stars: {
