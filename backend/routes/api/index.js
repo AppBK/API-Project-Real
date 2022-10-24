@@ -7,6 +7,10 @@ const usersRouter = require('./users.js');
 
 router.use(restoreUser);
 
+// router.get('/test', function(req, res) {
+//   res.json({message: 'success'})
+// });
+
 router.use('/session', sessionRouter);
 
 router.use('/users', usersRouter);

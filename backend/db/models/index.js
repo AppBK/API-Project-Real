@@ -10,7 +10,7 @@ const config = require(__dirname + '/../../config/database.js')[env];
 const db = {};
 
 let sequelize;
-if (config.use_env_variable) {
+if (config.use_env_variable) { // Only passes when in production
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
@@ -34,5 +34,5 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-
+console.log(db.sequelize);
 module.exports = db;
