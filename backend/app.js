@@ -14,8 +14,9 @@ const isProduction = environment === 'production';
 
 const app = express();
 
+// morgan logs and prints requests to the terminal
 app.use(morgan('dev'));
-app.use(cookieParser());  //Needed for accessing the cookies in headers
+app.use(cookieParser());  //Needed for accessing the cookies in headers and things like tokens and jwts
 app.use(express.json());
 
 
@@ -46,6 +47,8 @@ app.use(
 
 app.use(routes); // Connect all the routes
 
+
+// Error Handling middleware
 app.use((_req, _res, next) => {
   const err = new Error("The requested resource couldn't be found.");
   err.title = "Resource Not Found";
