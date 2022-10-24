@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     toSafeObject() {
-      // Is this just making sure that the user object ONLY contains the data we want?...
+      // Is this just making sure that the user object ONLY contains the data we want?...YES!!!
       const { id, username, email } = this;
       return { id, username, email };
     }

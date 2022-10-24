@@ -6,7 +6,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 
 const validateLogin = [
-  check('credential')
+  check('credential') // email OR UserName
     .exists({ checkFalsy: true })
     .notEmpty()
     .withMessage('Please provide a valid email or username.'),

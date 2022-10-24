@@ -5,11 +5,10 @@ const { restoreUser, requireAuth  } = require('../../utils/auth.js');
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 
-router.use(restoreUser);
 
-// router.get('/test', function(req, res) {
-//   res.json({message: 'success'})
-// });
+router.get('/test', requireAuth, function(req, res) {
+  res.json({message: 'success'})
+});
 
 router.use('/session', sessionRouter);
 
@@ -33,6 +32,7 @@ router.use('/users', usersRouter);
 //     return res.json(req.user);
 //   }
 // );
+router.use(restoreUser);
 
 router.post('/test', function(req, res) {
   res.json({ requestBody: req.body });
