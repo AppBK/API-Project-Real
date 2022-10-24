@@ -7,3 +7,5 @@ module.exports = {
     expiresIn: process.env.JWT_EXPIRES_IN
   }
 };
+
+// Exporting our .env variables to JS/Sequelize

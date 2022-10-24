@@ -50,6 +50,7 @@ const restoreUser = (req, res, next) => {
   });
 };
 
+// Do I need restoreUser here?...
 const requireAuth = function (req, _res, next) {
   if (req.user) return next();
 

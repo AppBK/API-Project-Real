@@ -20,3 +20,5 @@ module.exports = {
     }
   }
 };
+
+// How Sequelize connects to our database...
