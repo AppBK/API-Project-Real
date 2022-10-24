@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     toSafeObject() {
-      const { id, username, email} = this;
+      // Is this just making sure that the user object ONLY contains the data we want?...YES!!!
+      const { id, username, email } = this;
       return { id, username, email };
     }
 
@@ -54,6 +55,12 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
+      // The 1 side of the 1-to-many with table Spots
+      User.hasMany(models.Spot, { foreignKey: 'ownerId' });
+      // The 1 side of the 1-to-many with table Bookings
+      User.hasMany(models.Booking, { foreignKey: 'userId' });
+      // The 1 side of the 1-to-many with table Reviews
+      User.hasMany(models.Review, { foreignKey: 'userId' });
     }
   };
 
