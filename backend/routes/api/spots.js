@@ -4,8 +4,28 @@ const { Spot, SpotImage, Review, Sequelize } = require('../../db/models');
 // const Sequelize = db.Sequelize;
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { setTokenCookie, requireAuth } = require('../../utils/auth');
 
 const router = express.Router();
+
+router.post('/spots', requireAuth, async (req, res) => {
+  const { address, city, state, country, lat, lng, name, description, price } = req.body;
+
+  const newSpot = await Spot.create({
+    address: address,
+    city: city,
+    state: state,
+    country: country,
+    lat: lat,
+    lng: lng,
+    name: name,
+    description: description,
+    price: price
+  });
+
+  return res.json(newSpot);
+
+});
 
 router.get('/', async (_req, res) => {
   const spots = await Spot.findAll({
