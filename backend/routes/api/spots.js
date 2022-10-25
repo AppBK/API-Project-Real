@@ -1,17 +1,18 @@
 const express = require('express');
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
+const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { Spot, SpotImage, Review, Sequelize } = require('../../db/models');
-// const Sequelize = db.Sequelize;
-const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 
 const router = express.Router();
 
-router.post('/spots', requireAuth, async (req, res) => {
+
+router.post('/', [restoreUser, requireAuth], async (req, res) => {
   const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
-  const newSpot = await Spot.create({
+
+  await Spot.create({
+    ownerId: req.user.dataValues.id,
     address: address,
     city: city,
     state: state,
@@ -23,7 +24,13 @@ router.post('/spots', requireAuth, async (req, res) => {
     price: price
   });
 
-  return res.json(newSpot);
+  const newestSpot = await Spot.findAll({
+    limit: 1,
+    order: [[ 'createdAt', 'DESC']],
+  });
+
+  res.statusCode = 201;
+  return res.json(newestSpot.pop());
 
 });
 

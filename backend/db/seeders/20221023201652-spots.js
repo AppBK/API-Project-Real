@@ -14,7 +14,7 @@ module.exports = {
     */
     await queryInterface.bulkInsert('Spots', [{
       ownerId: 1,
-      address: '',
+      address: '123 Portculis Dr.',
       city: 'Carnelian Bay',
       state: 'California',
       country: 'United States',
@@ -26,7 +26,7 @@ module.exports = {
     },
     {
       ownerId: 2,
-      address: '',
+      address: '444 Lakeview Rd.',
       city: 'Lakeport',
       country: 'United States',
       lat: 72.7,
@@ -37,7 +37,7 @@ module.exports = {
     },
     {
       ownerId: 3,
-      address: '',
+      address: '7001 Holland Ln.',
       city: 'Jenner',
       state: 'California',
       country: 'United States',
@@ -49,7 +49,7 @@ module.exports = {
     },
     {
       ownerId: 4,
-      address: '',
+      address: '8832 Reindeer Wy.',
       city: 'San Rafael',
       state: 'California',
       country: 'United States',
@@ -61,7 +61,7 @@ module.exports = {
     },
     {
       ownerId: 5,
-      address: '',
+      address: '1566 Mosshollow St.',
       city: 'Moss Beach',
       state: 'California',
       country: 'United States',
