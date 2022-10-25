@@ -57,7 +57,7 @@ app.use((_req, _res, next) => {
   next(err);
 });
 
-app.use((err, _req, _res, next) => {
+app.use((err, _req, res, next) => {
   // check if error is a Sequelize error:
   if (err instanceof ValidationError) {
     err.errors = err.errors.map((e) => e.message);
@@ -65,6 +65,22 @@ app.use((err, _req, _res, next) => {
 
     if (err.errors.includes("email must be unique")) {
       err.status = 403;
+      return res.json({
+        "message": "User already exists",
+        "statusCode": 403,
+        "errors": {
+          "email": "User with that email already exists"
+        }
+      });
+    } else if (err.errors.includes("username must be unique")) {
+      err.status = 403;
+      return res.json({
+        "message": "User already exists",
+        "statusCode": 403,
+        "errors": {
+          "email": "User with that username already exists"
+        }
+      });
     }
   }
   next(err);
