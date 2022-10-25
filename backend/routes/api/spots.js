@@ -9,7 +9,7 @@ router.post('/:spotId/images', [restoreUser, requireAuth], async (req, res) => {
   const { url, preview } = req.body;
   const spotId = req.params.spotId;
 
-  const testSpot = await Spot.findOne({ where: { id: 1000 } });
+  const testSpot = await Spot.findOne({ where: { id: spotId } });
 
   if (!testSpot) {
     const error = new Error("Spot couldn't be found");
