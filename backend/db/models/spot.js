@@ -28,9 +28,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     ownerId: {
       type: DataTypes.INTEGER,
+      allowNull: false,
     },
     address: {
       type: DataTypes.STRING,
+      unique: true,
     },
     city: {
       type: DataTypes.STRING,
@@ -49,12 +51,15 @@ module.exports = (sequelize, DataTypes) => {
     },
     name: {
       type: DataTypes.STRING,
+      unique: true,
     },
     description: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     price: {
       type: DataTypes.DECIMAL,
+      allowNull: false,
     }
   }, {
     sequelize,
