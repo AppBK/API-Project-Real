@@ -6,9 +6,16 @@ const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
 router.post('/:spotId/images', [restoreUser, requireAuth], async (req, res) => {
-  const { spotId } = req.params;
-  console.log(req.params);
   const { url, preview } = req.body;
+  const spotId = req.params.spotId;
+
+  const testSpot = await Spot.findOne({ where: { id: 1000 } });
+
+  if (!testSpot) {
+    const error = new Error("Spot couldn't be found");
+    error.status = 404;
+    throw error;
+  }
 
   await SpotImage.create({
     spotId: spotId,
@@ -16,12 +23,13 @@ router.post('/:spotId/images', [restoreUser, requireAuth], async (req, res) => {
     preview: preview,
   });
 
-  const newestSpotImage = await SpotImage.findAll({
+  const newestSpotImage = await SpotImage.scope('defaultScope', 'createSpotImage').findAll({
     limit: 1,
     order: [['createdAt', 'DESC']],
   });
 
-  return res.json(newestSpotImage);
+
+  return res.json(newestSpotImage.pop());
 });
 
 router.post('/', [restoreUser, requireAuth], async (req, res) => {
