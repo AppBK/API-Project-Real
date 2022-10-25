@@ -5,6 +5,24 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
+router.post('/:spotId/images', [restoreUser, requireAuth], async (req, res) => {
+  const { spotId } = req.params;
+  console.log(req.params);
+  const { url, preview } = req.body;
+
+  await SpotImage.create({
+    spotId: spotId,
+    url: url,
+    preview: preview,
+  });
+
+  const newestSpotImage = await SpotImage.findAll({
+    limit: 1,
+    order: [['createdAt', 'DESC']],
+  });
+
+  return res.json(newestSpotImage);
+});
 
 router.post('/', [restoreUser, requireAuth], async (req, res) => {
   const { address, city, state, country, lat, lng, name, description, price } = req.body;
@@ -54,7 +72,7 @@ router.get('/', async (_req, res) => {
       where: { spotId: tempSpot.id }
     });
 
-    const tempRevs = await Review.findAll({
+   const tempRevs = await Review.findAll({
       where: { spotId: tempSpot.id },
     });
 
