@@ -46,10 +46,6 @@ router.post('/', validateSignup, async (req, res) => {
   }
 );
 
-router.post('/session', validateSignup, async (req, res) => {
-
-});
-
 module.exports = router;
 
 /*
