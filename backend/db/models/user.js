@@ -68,13 +68,13 @@ module.exports = (sequelize, DataTypes) => {
     firstName: {
       type: DataTypes.STRING,
       validate: {
-        len: [0, 256]
+        len: [0, 256],
       }
     },
     lastName: {
       type: DataTypes.STRING,
       validate: {
-        len: [0, 256]
+        len: [0, 256],
       }
     },
     username:{

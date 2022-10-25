@@ -39,6 +39,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Review',
+    scopes: {
+      onlyAvg: {
+        include: ['avgRating'],
+      },
+    },
   });
   return Review;
 };
