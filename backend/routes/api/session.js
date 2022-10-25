@@ -29,6 +29,7 @@ router.get('/', restoreUser, (req, res) => {
   }
 );
 
+
 router.post('/', validateLogin, async (req, res, next) => {
   const { credential, password } = req.body;
 
@@ -43,6 +44,7 @@ router.post('/', validateLogin, async (req, res, next) => {
   }
 
   await setTokenCookie(res, user);
+  user.dataValues.token = "";
 
   return res.json({
     user

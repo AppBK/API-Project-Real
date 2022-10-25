@@ -86,6 +86,19 @@ app.use((err, _req, res, next) => {
   next(err);
 });
 
+app.use((err, _req, res, next) => {
+  if (err.errors) {
+    if (err.errors.includes("The provided credentials were invalid.")) {
+      err.status = 401;
+      return res.json({
+        "message": "Invalid credentials",
+        "statusCode": 401
+      });
+    }
+  }
+  next(err);
+});
+
 app.use((err, _req, res, _next) => {
   res.status(err.status || 500);
   console.error(err);

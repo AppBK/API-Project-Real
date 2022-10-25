@@ -16,7 +16,9 @@ module.exports = (sequelize, DataTypes) => {
       //The 1 side of the 1-to-many with table Bookings
       Spot.hasMany(models.Booking, { foreignKey: 'spotId' });
       // The 1 side of a 1-to-many with table SpotImages
-      Spot.hasMany(models.SpotImage, { foreignKey: 'spotId' });
+      Spot.hasMany(models.SpotImage, { foreignKey: 'spotId', as: 'previewImage' });
+      // The 1 side of a 1-to-many with table Reviews
+      Spot.hasMany(models.Review, { foreignKey: 'spotId', as: 'avgRating' });
     }
   }
   Spot.init({
@@ -57,6 +59,14 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Spot',
+    defaultScope: {
+      attributes: {},
+    },
+    scopes: {
+      getAll: {
+        attributes: {},
+      },
+    }
   });
   return Spot;
 };
