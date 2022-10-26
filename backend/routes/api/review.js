@@ -62,13 +62,59 @@ router.post('/:reviewId/images', [restoreUser, requireAuth], async (req, res) =>
 ///////////////////////// GET //////////////////////////////////////////////
 
 router.get('/current', [restoreUser, requireAuth], async (req, res) => {
-  let reviews = await Review.findAll({ where: { userId: req.user.id } });
+  let reviews = await Review.findAll({
+    where: { userId: req.user.id },
+    // include: [
+    //   {
+    //     model: User,
+    //     raw: true,
+    //   },
+    // ],
+  });
 
-  console.log(reviews);
+  // console.log(reviews);
+  let user = await User.findByPk(req.user.id);
+  user = user.dataValues;
+  delete user.username;
+  console.log(user);
   if (reviews.length) {
-    reviews = reviews.dataValues;
+    for (let i = 0; i < reviews.length; i++) {
+      reviews[i] = reviews[i].dataValues;
+      reviews[i].User = user;
+
+      let spot = await Spot.scope('currentReviews').findOne({ where: { id: reviews[i].spotId } });
+      spot = spot.dataValues;
+
+      // Get image from SportsImages table for the tempSpot
+      const img = await SpotImage.findOne({
+        where: { spotId: spot.id }
+      });
+
+
+      // Assign url to temp object
+      if (img) {
+        spot.previewImage = img.dataValues.url;
+      } else {
+        spot.previewImage = null;
+      }
+
+      reviews[i].Spot = spot;
+
+      // Get review images
+      const imageArray = [];
+      let images = await ReviewImage.scope('currentReview').findAll({ where: { reviewId: reviews[i].id } });
+      for (let img of images) {
+        imageArray.push(img.dataValues);
+      }
+
+      reviews[i].ReviewImages = imageArray;
+    }
   }
 
+  // console.log({ Reviews: reviews });
+
+
+return res.json({ "Reviews": reviews });
 
 });
 

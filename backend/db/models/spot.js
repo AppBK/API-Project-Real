@@ -73,8 +73,10 @@ module.exports = (sequelize, DataTypes) => {
       attributes: {},
     },
     scopes: {
-      getAll: {
-        attributes: {},
+      currentReviews: {
+        attributes: {
+          exclude: ['description', 'createdAt', 'updatedAt'],
+        },
       },
     }
   });

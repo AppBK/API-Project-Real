@@ -28,6 +28,11 @@ module.exports = (sequelize, DataTypes) => {
     scopes: {
       createImage: {
         exclude: ['reviewId', 'createdAt', 'updatedAt'],
+      },
+      currentReview: {
+        attributes: {
+          exclude: [ 'reviewId', 'createdAt', 'updatedAt' ],
+        },
       }
     }
   });
