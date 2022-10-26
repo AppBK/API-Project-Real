@@ -73,7 +73,37 @@ router.put('/:spotId', [restoreUser, requireAuth], async (req, res) => {
   return res.json(spot);
 });
 
-/////////////////// GET /////////////////////////////////////////////////////
+
+/////////////////// DELETE /////////////////////////////////////////////////////
+
+router.delete('/:spotId', [restoreUser, requireAuth], async (req, res) => {
+  let spot = await Spot.findByPk(req.params.spotId);
+
+  if (spot) {
+    spot = spot.dataValues;
+  } else {
+    const error = new Error('Spot could not Found.');
+    error.status = 404;
+    throw error;
+  }
+
+  if (spot.ownerId !== req.user.id) {
+    const error = new Error('Current user is Unauthorized to delete specified data.');
+    error.status = 403;
+    throw error;
+  }
+
+  await Spot.destroy({ where: { id: spot.id } });
+
+  res.json({
+    "message": "Successfully deleted",
+    "statusCode": 200
+  });
+});
+
+
+
+/////////////////// GET ///////////////////////////////////////////////////////
 
 router.get('/current', [restoreUser, requireAuth], async (req, res) => {
 
@@ -247,8 +277,6 @@ router.get('/', async (_req, res) => {
 
     tempSpot.avgRating = avg;
     tempSpot.previewImage = img.url;
-
-    // await SpotImage.scope('defaultScope', 'createSpotImage')
 
     response.push(tempSpot);
   }
