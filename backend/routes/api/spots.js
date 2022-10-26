@@ -1,6 +1,6 @@
 const express = require('express');
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
-const { Spot, SpotImage, Review, User, Sequelize } = require('../../db/models');
+const { Spot, SpotImage, Review, User, ReviewImage, Sequelize } = require('../../db/models');
 const { handleValidationErrors } = require('../../utils/validation');
 // const user = require('../../db/models/user');
 
@@ -228,6 +228,45 @@ router.get('/:spotId/images', [restoreUser, requireAuth], async (req, res) => {
 
   return res.json(newestSpotImage.pop());
 });
+
+// Get all Reviews by a Spot's id
+router.get('/:spotId/reviews', [restoreUser, requireAuth], async (req, res) => {
+  const reviews = await Review.findAll({ where: { spotId: req.params.spotId } });
+
+  if (reviews.length) {
+    for (let i = 0; i < reviews.length; i++) {
+      // Just get the 'raw' review data object
+      reviews[i] = reviews[i].dataValues;
+
+      // Get info of user who gave the review
+      let user = await User.findByPk(req.user.id);
+      user = user.dataValues;
+      delete user.username;
+
+      reviews[i].User = user;
+
+      // Get review images
+      const imageArray = [];
+      let images = await ReviewImage.scope('currentReview').findAll({ where: { reviewId: reviews[i].id } });
+      for (let img of images) {
+        imageArray.push(img.dataValues);
+      }
+
+      reviews[i].ReviewImages = imageArray;
+    }
+  } else {
+    res.statusCode = 404;
+    return res.json({
+      "message": "Spot couldn't be found",
+      "statusCode": 404
+    });
+  }
+
+  // console.log(reviews);
+
+  return res.json({ "Reviews": reviews });
+});
+
 
 router.get('/:spotId', async (req, res) => {
   let spot = await Spot.findByPk(req.params.spotId);

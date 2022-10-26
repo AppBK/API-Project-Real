@@ -61,22 +61,19 @@ router.post('/:reviewId/images', [restoreUser, requireAuth], async (req, res) =>
 
 ///////////////////////// GET //////////////////////////////////////////////
 
+// Get all Reviews of the Current User
 router.get('/current', [restoreUser, requireAuth], async (req, res) => {
+  // Get all reviews belonging to current user
   let reviews = await Review.findAll({
     where: { userId: req.user.id },
-    // include: [
-    //   {
-    //     model: User,
-    //     raw: true,
-    //   },
-    // ],
   });
 
-  // console.log(reviews);
+  // Get current user
   let user = await User.findByPk(req.user.id);
   user = user.dataValues;
   delete user.username;
   console.log(user);
+  
   if (reviews.length) {
     for (let i = 0; i < reviews.length; i++) {
       reviews[i] = reviews[i].dataValues;
@@ -91,7 +88,7 @@ router.get('/current', [restoreUser, requireAuth], async (req, res) => {
       });
 
 
-      // Assign url to temp object
+      // Assign url to spot object
       if (img) {
         spot.previewImage = img.dataValues.url;
       } else {
@@ -111,10 +108,7 @@ router.get('/current', [restoreUser, requireAuth], async (req, res) => {
     }
   }
 
-  // console.log({ Reviews: reviews });
-
-
-return res.json({ "Reviews": reviews });
+  return res.json({ "Reviews": reviews });
 
 });
 
