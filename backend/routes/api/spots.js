@@ -8,6 +8,51 @@ const router = express.Router();
 
 //////////////////// POST ////////////////////////////////////////////
 
+router.post('/:spotId/reviews', [restoreUser, requireAuth], async (req, res) => {
+  let spot = await Spot.findByPk(req.params.spotId);
+
+  if (spot) {
+    spot = spot.dataValues;
+  } else {
+    const error = new Error("Spot couldn't be found");
+    error.status = 404;
+    throw error;
+  }
+
+  const hasReview = await Review.findOne({
+    where: {
+      spotId: spot.id,
+      userId: req.user.id,
+    }
+  });
+
+  if (hasReview) {
+    res.statusCode = 403;
+    res.json({
+      "message": "User already has a review for this spot",
+      "statusCode": 403
+    });
+  }
+
+  const { review, stars } = req.body;
+
+  await Review.create({
+    spotId: req.params.spotId,
+    userId: req.user.id,
+    review: review,
+    stars: stars,
+  });
+
+  const newestReview = await Review.findAll({
+    limit: 1,
+    order: [['createdAt', 'DESC']],
+  });
+
+  res.statusCode = 201;
+  return res.json(newestReview.pop());
+
+});
+
 router.post('/', [restoreUser, requireAuth], async (req, res) => {
   const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
