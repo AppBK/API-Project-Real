@@ -53,8 +53,60 @@ router.post('/:reviewId/images', [restoreUser, requireAuth], async (req, res) =>
 
 
 ///////////////////////// PUT //////////////////////////////////////////////
+// Edit a Review
+router.put('/:reviewId', [restoreUser, requireAuth], async (req, res) => {
+  let reviewEdit = await Review.findOne({ where: { id: req.params.reviewId } });
 
+  if (reviewEdit) {
+    reviewEdit = reviewEdit.dataValues;
+  } else {
+    res.statusCode = 404;
+    return res.json({
+      "message": "Review couldn't be found",
+      "statusCode": 404
+    });
+  }
 
+  if (reviewEdit.userId !== req.user.id) {
+    res.statusCode = 403;
+    return res.json('Unauthorized User');
+  }
+
+  const { review, stars } = req.body;
+
+  const values = [];
+
+  if (review) {
+    values.review = review;
+  } else {
+    res.statusCode = 400;
+    return res.json({
+      "message": "Validation error",
+      "statusCode": 400,
+      "errors": {
+        "review": "Review text is required",
+      }
+    });
+  }
+  if (stars) {
+    values.stars = stars;
+  } else {
+    res.statusCode = 400;
+    return res.json({
+      "message": "Validation error",
+      "statusCode": 400,
+      "errors": {
+        "stars": "Stars must be an integer from 1 to 5",
+      }
+    });
+  }
+
+  await Review.update(values, { where: { id: req.params.reviewId } });
+  let edited = await Review.findByPk(req.params.reviewId);
+  edited = edited.dataValues;
+
+  return res.json(edited);
+});
 
 ///////////////////////// DELETE //////////////////////////////////////////////
 
@@ -73,7 +125,7 @@ router.get('/current', [restoreUser, requireAuth], async (req, res) => {
   user = user.dataValues;
   delete user.username;
   console.log(user);
-  
+
   if (reviews.length) {
     for (let i = 0; i < reviews.length; i++) {
       reviews[i] = reviews[i].dataValues;
