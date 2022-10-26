@@ -1,7 +1,8 @@
 const express = require('express');
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
-const { Spot, SpotImage, Review, Sequelize } = require('../../db/models');
+const { Spot, SpotImage, Review, User, Sequelize } = require('../../db/models');
 const { handleValidationErrors } = require('../../utils/validation');
+const user = require('../../db/models/user');
 
 const router = express.Router();
 
@@ -25,7 +26,7 @@ router.post('/:spotId/images', [restoreUser, requireAuth], async (req, res) => {
     preview: preview,
   });
 
-  const newestSpotImage = await SpotImage.scope('defaultScope', 'createSpotImage').findAll({
+  const newestSpotImage = await SpotImage.scope('defaultScope').findAll({
     limit: 1,
     order: [['createdAt', 'DESC']],
   });
@@ -62,6 +63,63 @@ router.post('/', [restoreUser, requireAuth], async (req, res) => {
 });
 
 // GET
+
+router.get('/:spotId', async (req, res) => {
+  let spot = await Spot.findByPk(req.params.spotId);
+
+  // If no spot is found, throw an error!
+  if (!spot) {
+    const error = new Error("Spot couldn't be found");
+    error.status = 404;
+    throw error;
+  }
+
+  spot = spot.dataValues;
+
+  // Aggregates!
+  // Get all reviews for the current spot
+  const allReviews = await Review.findAll({
+    where: { spotId: spot.id },
+  });
+
+  spot.numReviews = allReviews.length;
+  // Get rating for each review
+  let sum = 0;
+  for (const review of allReviews) {
+    sum += review.dataValues.stars;
+  }
+
+  // Get average rating for spot
+  const avgRating = sum / allReviews.length;
+  // Add avg to temp object
+  spot.avgStarRating = avgRating;
+
+
+  let spotImages = await SpotImage.findAll({
+    where: {
+      spotId: spot.id,
+    }
+  });
+
+  // Collect all spot image objects into an array
+  const images = [];
+  if (spotImages) {
+    for (const image of spotImages) {
+      const tempImg = image.dataValues;
+      images.push(tempImg);
+    }
+  }
+  spot.SpotImages = images;
+
+  // Get owner of current Spot
+  let owner = await User.scope('getOwner').findOne({ where: { id: spot.ownerId } });
+  // Retrieve the user object!
+  if (owner) owner = owner.dataValues;
+
+  spot.Owner = owner;
+
+  return res.json(spot);
+});
 
 router.get('/current', [restoreUser, requireAuth], async (req, res) => {
   const currentUserId = req.user.id;

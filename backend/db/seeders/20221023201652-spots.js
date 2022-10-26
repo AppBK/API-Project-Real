@@ -29,6 +29,7 @@ module.exports = {
       address: '444 Lakeview Rd.',
       city: 'Lakeport',
       country: 'United States',
+      state: 'California',
       lat: 72.7,
       lng: 98.5,
       name: 'Sunrise Shores',
