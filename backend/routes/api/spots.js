@@ -8,33 +8,6 @@ const router = express.Router();
 
 //////////////////// POST ////////////////////////////////////////////
 
-router.post('/:spotId/images', [restoreUser, requireAuth], async (req, res) => {
-  const { url, preview } = req.body;
-  const spotId = req.params.spotId;
-
-  const testSpot = await Spot.findOne({ where: { id: spotId } });
-
-  if (!testSpot) {
-    const error = new Error("Spot couldn't be found");
-    error.status = 404;
-    throw error;
-  }
-
-  await SpotImage.create({
-    spotId: spotId,
-    url: url,
-    preview: preview,
-  });
-
-  const newestSpotImage = await SpotImage.scope('defaultScope').findAll({
-    limit: 1,
-    order: [['createdAt', 'DESC']],
-  });
-
-
-  return res.json(newestSpotImage.pop());
-});
-
 router.post('/', [restoreUser, requireAuth], async (req, res) => {
   const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
@@ -102,6 +75,85 @@ router.put('/:spotId', [restoreUser, requireAuth], async (req, res) => {
 
 /////////////////// GET /////////////////////////////////////////////////////
 
+router.get('/current', [restoreUser, requireAuth], async (req, res) => {
+
+  const currentUserSpots = await Spot.findAll({ where: { ownerId: req.user.id } });
+  const spots = [];
+
+  for (const spot of currentUserSpots) {
+    // Assign the Spot object to tempSpot
+    const tempSpot = spot.dataValues;
+
+    // Get all reviews for the current spot
+    const allReviews = await Review.findAll({
+      where: { spotId: tempSpot.id },
+    });
+
+    // Get rating for each review
+    let sum = 0;
+    for (const review of allReviews) {
+      sum += review.dataValues.stars;
+    }
+
+    // Get average rating for spot
+    const avgRating = sum / allReviews.length;
+    // Add avg to temp object
+    tempSpot.avgRating = avgRating;
+
+
+    // Get image from SportsImages table for the tempSpot
+    const img = await SpotImage.findOne({
+      where: { spotId: tempSpot.id }
+    });
+
+
+    // Assign url to temp object
+
+    if (img) {
+      tempSpot.previewImage = img.dataValues.url;
+    } else {
+      tempSpot.previewImage = null;
+    }
+
+    spots.push(tempSpot);
+  }
+
+  return res.json({ "Spots": spots });
+});
+
+router.get('/:spotId/images', [restoreUser, requireAuth], async (req, res) => {
+  const { url, preview } = req.body;
+  const spotId = req.params.spotId;
+
+  const testSpot = await Spot.findOne({ where: { id: spotId } });
+
+  if (!testSpot) {
+    const error = new Error("Spot couldn't be found");
+    error.status = 404;
+    throw error;
+  }
+
+  if (testSpot.dataValues.ownerId !== req.user.id) {
+    const error = new Error("Unauthorized Action");
+    error.status = 403;
+    throw error;
+  }
+
+  await SpotImage.create({
+    spotId: spotId,
+    url: url,
+    preview: preview,
+  });
+
+  const newestSpotImage = await SpotImage.scope('defaultScope').findAll({
+    limit: 1,
+    order: [['createdAt', 'DESC']],
+  });
+
+
+  return res.json(newestSpotImage.pop());
+});
+
 router.get('/:spotId', async (req, res) => {
   let spot = await Spot.findByPk(req.params.spotId);
 
@@ -159,48 +211,6 @@ router.get('/:spotId', async (req, res) => {
   return res.json(spot);
 });
 
-router.get('/current', [restoreUser, requireAuth], async (req, res) => {
-  // const currentUserId = req.user.id;
-  // req.user.id
-  console.log('CURRENT: ', req.user.id);
-
-  const currentUserSpots = await Spot.findAll({ where: { ownerId: req.user.id } });
-  const spots = [];
-
-  for (const spot of currentUserSpots) {
-    // Assign the Spot object to tempSpot
-    const tempSpot = spot.dataValues;
-
-    // Get all reviews for the current spot
-    const allReviews = await Review.findAll({
-      where: { spotId: tempSpot.id },
-    });
-
-    // Get rating for each review
-    let sum = 0;
-    for (const review of allReviews) {
-      sum += review.dataValues.stars;
-    }
-
-    // Get average rating for spot
-    const avgRating = sum / allReviews.length;
-    // Add avg to temp object
-    tempSpot.avgRating = avgRating;
-
-
-    // Get image from SportsImages table for the tempSpot
-    const img = await SpotImage.findOne({
-      where: { spotId: tempSpot.id }
-    });
-
-    // Assign url to temp object
-    tempSpot.preview = img.url;
-
-    spots.push(tempSpot);
-  }
-
-  return res.json({ "Spots": spots });
-});
 
 
 router.get('/', async (_req, res) => {
