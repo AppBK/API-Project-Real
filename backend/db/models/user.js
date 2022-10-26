@@ -120,6 +120,9 @@ module.exports = (sequelize, DataTypes) => {
       },
       loginUser: {
         attributes: {}
+      },
+      getOwner: {
+        attributes: { exclude: ['username', 'hashedPassword', 'email', 'createdAt', 'updatedAt'] },
       }
     }
   });
