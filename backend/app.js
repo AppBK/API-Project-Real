@@ -63,41 +63,41 @@ app.use((err, _req, res, next) => {
     err.errors = err.errors.map((e) => e.message);
     err.title = 'Validation error';
 
-    if (err.errors.includes("email must be unique")) {
-      err.status = 403;
-      return res.json({
-        "message": "User already exists",
-        "statusCode": 403,
-        "errors": {
-          "email": "User with that email already exists"
-        }
-      });
-    } else if (err.errors.includes("username must be unique")) {
-      err.status = 403;
-      return res.json({
-        "message": "User already exists",
-        "statusCode": 403,
-        "errors": {
-          "email": "User with that username already exists"
-        }
-      });
-    }
+    // if (err.errors.includes("email must be unique")) {
+    //   err.status = 403;
+    //   return res.json({
+    //     "message": "User already exists",
+    //     "statusCode": 403,
+    //     "errors": {
+    //       "email": "User with that email already exists"
+    //     }
+    //   });
+    // } else if (err.errors.includes("username must be unique")) {
+    //   err.status = 403;
+    //   return res.json({
+    //     "message": "User already exists",
+    //     "statusCode": 403,
+    //     "errors": {
+    //       "email": "User with that username already exists"
+    //     }
+    //   });
+    // }
   }
   next(err);
 });
 
-app.use((err, _req, res, next) => {
-  if (err.errors) {
-    if (err.errors.includes("The provided credentials were invalid.")) {
-      err.status = 401;
-      return res.json({
-        "message": "Invalid credentials",
-        "statusCode": 401
-      });
-    }
-  }
-  next(err);
-});
+// app.use((err, _req, res, next) => {
+//   if (err.errors) {
+//     if (err.errors.includes("The provided credentials were invalid.")) {
+//       err.status = 401;
+//       return res.json({
+//         "message": "Invalid credentials",
+//         "statusCode": 401
+//       });
+//     }
+//   }
+//   next(err);
+// });
 
 app.use((err, _req, res, _next) => {
   res.status(err.status || 500);

@@ -2,11 +2,11 @@ const express = require('express');
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { Spot, SpotImage, Review, User, Sequelize } = require('../../db/models');
 const { handleValidationErrors } = require('../../utils/validation');
-const user = require('../../db/models/user');
+// const user = require('../../db/models/user');
 
 const router = express.Router();
 
-// POST
+//////////////////// POST ////////////////////////////////////////////
 
 router.post('/:spotId/images', [restoreUser, requireAuth], async (req, res) => {
   const { url, preview } = req.body;
@@ -62,7 +62,45 @@ router.post('/', [restoreUser, requireAuth], async (req, res) => {
 
 });
 
-// GET
+/////////////////// PUT //////////////////////////////////////////////////////
+
+router.put('/:spotId', [restoreUser, requireAuth], async (req, res) => {
+  let spot = await Spot.findByPk(req.params.spotId);
+
+  if (spot) {
+    spot = spot.dataValues;
+  } else {
+    const error = new Error('Resource Not Found');
+    error.status = 400;
+    throw error;
+  }
+
+  if (spot.ownerId !== req.user.id) {
+    throw new Error('Validation Error');
+  }
+
+  const { address, city, state, country, lat, lng, name, description, price } = req.body;
+
+  const values = {};
+
+  if (address) values.address = address;
+  if (city) values.city = city;
+  if (state) values.state = state;
+  if (country) values.country = country;
+  if (lat) values.lat = lat;
+  if (lng) values.lng = lng;
+  if (name) values.name = name;
+  if (description) values.description = description;
+  if (price) values.price = price;
+
+  await Spot.update(values, { where: { ownerId: req.user.id, id: req.params.spotId }});
+  spot = await Spot.findByPk(req.params.spotId);
+  spot = spot.dataValues;
+
+  return res.json(spot);
+});
+
+/////////////////// GET /////////////////////////////////////////////////////
 
 router.get('/:spotId', async (req, res) => {
   let spot = await Spot.findByPk(req.params.spotId);
@@ -122,10 +160,11 @@ router.get('/:spotId', async (req, res) => {
 });
 
 router.get('/current', [restoreUser, requireAuth], async (req, res) => {
-  const currentUserId = req.user.id;
+  // const currentUserId = req.user.id;
+  // req.user.id
+  console.log('CURRENT: ', req.user.id);
 
-  const currentUserSpots = await Spot.findAll({ where: { ownerId: currentUserId } });
-// console.log(currentUserSpots);
+  const currentUserSpots = await Spot.findAll({ where: { ownerId: req.user.id } });
   const spots = [];
 
   for (const spot of currentUserSpots) {
@@ -213,4 +252,8 @@ module.exports = router;
 /*
 detail: 'Failing row contains (null, 6, aaa12789, San Francisco, California, United States of America, 37.7645358, -122.4730327, Apples, Place where web developers are created, 123, 2022-10-26 00:34:21.265+00, 2022-10-26 00:34:21.265+00).',
 
+{{url}}/spots/{{spotId}}/images
+Worked: https://splangy01.herokuapp.com/api/spots/2/images
+
+{{url}}/spots/{{spotId}}
 */
