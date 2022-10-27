@@ -16,9 +16,9 @@ module.exports = (sequelize, DataTypes) => {
       //The 1 side of the 1-to-many with table Bookings
       Spot.hasMany(models.Booking, { foreignKey: 'spotId' });
       // The 1 side of a 1-to-many with table SpotImages
-      Spot.hasMany(models.SpotImage, { foreignKey: 'spotId', as: 'previewImage' });
+      Spot.hasMany(models.SpotImage, { foreignKey: 'spotId', onDelete: 'CASCADE' });
       // The 1 side of a 1-to-many with table Reviews
-      Spot.hasMany(models.Review, { foreignKey: 'spotId', as: 'avgRating' });
+      Spot.hasMany(models.Review, { foreignKey: 'spotId' });
     }
   }
   Spot.init({
