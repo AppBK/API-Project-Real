@@ -521,12 +521,19 @@ router.get('/:spotId', async (req, res) => {
 
 //  Add Query Filters to Get All Spots
 router.get('/', async (req, res) => {
-  const spots = await Spot.findAll({});
+  // const spots = await Spot.findAll({});
 
   let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
 
   if (!page || page < 1 || page > 10) page = 1;
   if (!size || size < 1 || size > 20) size = 20;
+
+  let offset = size * (page - 1);
+
+  const spots = await Spot.findAll({
+    limit: size,
+    offset: offset,
+  });
 
   const response = [];
 

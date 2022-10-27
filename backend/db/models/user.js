@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     toSafeObject() {
       // Is this just making sure that the user object ONLY contains the data we want?...YES!!!
-      const { id, username, email } = this;
-      return { id, username, email };
+      const { id, firstName, lastName, username, email } = this;
+      return { id, firstName, lastName, username, email };
     }
 
     validatePassword(password) {
