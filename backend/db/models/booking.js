@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       // The many side of the 1-to-many with table Spots
-      Booking.belongsTo(models.Spot, { foreignKey: 'spotId' });
+      Booking.belongsTo(models.Spot, { foreignKey: 'spotId'});
       // The many side of the 1-to-many with table Users
       Booking.belongsTo(models.User, { foreignKey: 'userId' });
     }

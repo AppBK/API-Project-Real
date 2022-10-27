@@ -14,11 +14,13 @@ module.exports = (sequelize, DataTypes) => {
       //The many side of the 1-to-many with table Users
       Spot.belongsTo(models.User, { foreignKey: 'ownerId' });
       //The 1 side of the 1-to-many with table Bookings
-      Spot.hasMany(models.Booking, { foreignKey: 'spotId' });
+      Spot.hasMany(models.Booking, { foreignKey: 'spotId', onDelete: 'CASCADE', hooks: true });
       // The 1 side of a 1-to-many with table SpotImages
-      Spot.hasMany(models.SpotImage, { foreignKey: 'spotId', onDelete: 'CASCADE' });
+      Spot.hasMany(models.SpotImage, { foreignKey: 'spotId', onDelete: 'CASCADE', hooks: true });
       // The 1 side of a 1-to-many with table Reviews
-      Spot.hasMany(models.Review, { foreignKey: 'spotId' });
+      Spot.hasMany(models.Review, { foreignKey: 'spotId', onDelete: 'CASCADE', hooks: true });
+
+      // Spot.belongsToMany(models.User, { through: models.Booking, foreignKey: 'userId' });
     }
   }
   Spot.init({

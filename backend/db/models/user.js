@@ -56,11 +56,13 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       // The 1 side of the 1-to-many with table Spots
-      User.hasMany(models.Spot, { foreignKey: 'ownerId' });
+      User.hasMany(models.Spot, { foreignKey: 'ownerId', onDelete: 'CASCADE', hooks: true });
       // The 1 side of the 1-to-many with table Bookings
-      User.hasMany(models.Booking, { foreignKey: 'userId' });
+      User.hasMany(models.Booking, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true });
       // The 1 side of the 1-to-many with table Reviews
-      User.hasMany(models.Review, { foreignKey: 'userId' });
+      User.hasMany(models.Review, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true });
+
+      // User.belongsToMany(models.Spot, { through: models.Booking, foreignKey: 'spotId', onDelete: 'CASCADE', hooks: true });
     }
   };
 

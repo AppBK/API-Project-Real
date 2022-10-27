@@ -12,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       //1 side of a 1-to-many with table ReviewImages
-      Review.hasMany(models.ReviewImage, { foreignKey: 'reviewId' });
+      Review.hasMany(models.ReviewImage, { foreignKey: 'reviewId', onDelete: 'CASCADE', hooks: true });
       //many side of a 1-to-many with table Users
       Review.belongsTo(models.User, { foreignKey: 'userId' });
       //manmy side of a 1-to-many with table Spots
-      Review.belongsTo(models.Spot, { foreignKey: 'spotId' });
+      Review.belongsTo(models.Spot, { foreignKey: 'spotId'});
     }
   }
   Review.init({

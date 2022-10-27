@@ -14,10 +14,11 @@ const router = express.Router();
 ///////////////////////// PUT //////////////////////////////////////////////
 
 router.put('/:bookingId', [restoreUser, requireAuth], async (req, res) => {
+  // console.log('bookingId: ',  req.params.bookingId);
   let booking = await Booking.findByPk(req.params.bookingId);
 
   if (booking) {
-    booking = booking.dataValues;
+    booking = booking.toJSON();
   } else {
     res.statusCode = 404;
     return res.json({
@@ -26,6 +27,7 @@ router.put('/:bookingId', [restoreUser, requireAuth], async (req, res) => {
     });
   }
 
+  // Get today's date
   let currentDate = new Date();
   let year = currentDate.getUTCFullYear();
   let month = currentDate.getUTCMonth() + 1;
@@ -104,7 +106,42 @@ router.put('/:bookingId', [restoreUser, requireAuth], async (req, res) => {
 
 ///////////////////////// DELETE //////////////////////////////////////////////
 
+router.delete('/:bookingId', [restoreUser, requireAuth], async (req, res) => {
+  let booking = await Booking.findByPk(req.params.bookingId);
 
+  if (booking) {
+    booking = booking.toJSON();
+  } else {
+    res.statusCode = 404;
+    return res.json({
+      "message": "Booking couldn't be found",
+      "statusCode": 404
+    });
+  }
+
+  //Get today's date
+  let currentDate = new Date();
+  let year = currentDate.getUTCFullYear();
+  let month = currentDate.getUTCMonth() + 1;
+  let day = currentDate.getUTCDate();
+
+  currentDate = `${year}-${month}-${day}`;
+
+  if (booking.startDate < currentDate) {
+    res.statusCode = 403;
+    return res.json({
+      "message": "Bookings that have been started can't be deleted",
+      "statusCode": 403
+    });
+  }
+
+  await Booking.destroy({ where: { id: booking.id} })
+
+  return res.json({
+    "message": "Successfully deleted",
+    "statusCode": 200
+  });
+});
 
 ///////////////////////// GET //////////////////////////////////////////////
 

@@ -134,6 +134,42 @@ router.post('/:spotId/bookings', [restoreUser, requireAuth], async (req, res) =>
   return res.json(newestBooking);
 });
 
+router.post('/:spotId/images', [restoreUser, requireAuth], async (req, res) => {
+  let spot = await Spot.findByPk(req.params.spotId);
+
+  if (spot) {
+    spot = spot.dataValues;
+  } else {
+    res.statusCode = 404;
+    return res.json({
+      "message": "Spot couldn't be found",
+      "statusCode": 404
+    });
+  }
+
+  if (spot.ownerId !== req.user.id) {
+    res.statusCode = 403;
+    return res.json({ "message": "Unauthorized User!"});
+  }
+
+  const { url, preview } = req.body;
+
+  await SpotImage.create({
+    spotId: req.params.spotId,
+    url: url,
+    preview: preview,
+  });
+
+  let newestSpotImg = await SpotImage.findAll({
+    limit: 1,
+    order: [['createdAt', 'DESC']],
+  });
+
+  newestSpotImg = newestSpotImg[0].dataValues;
+
+  return res.json(newestSpotImg);
+});
+
 router.post('/', [restoreUser, requireAuth], async (req, res) => {
   const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
@@ -160,6 +196,8 @@ router.post('/', [restoreUser, requireAuth], async (req, res) => {
   return res.json(newestSpot.pop());
 
 });
+
+
 
 /////////////////// PUT //////////////////////////////////////////////////////
 
@@ -218,6 +256,11 @@ router.delete('/:spotId', [restoreUser, requireAuth], async (req, res) => {
     error.status = 403;
     throw error;
   }
+
+  await SpotImage.destroy({ where: { spotId: spot.id } });
+  await Review.destroy({ where: { spotId: spot.id } });
+  await Booking.destroy({ where: { spotId: spot.id } });
+
 
   await Spot.destroy({ where: { id: spot.id } });
 
@@ -476,19 +519,14 @@ router.get('/:spotId', async (req, res) => {
 });
 
 
+//  Add Query Filters to Get All Spots
+router.get('/', async (req, res) => {
+  const spots = await Spot.findAll({});
 
-router.get('/', async (_req, res) => {
-  const spots = await Spot.findAll({
-  //   include: [
-  //   {
-  //       model: Review,
-  //       as: 'avgRating',
-  //       attributes: {
-  //         include: [[Sequelize.fn("AVG", Sequelize.col("stars")), "avgRating"]],
-  //       }
-  //   },
-  // ],
-  });
+  let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+
+  if (!page || page < 1 || page > 10) page = 1;
+  if (!size || size < 1 || size > 20) size = 20;
 
   const response = [];
 
@@ -515,7 +553,13 @@ router.get('/', async (_req, res) => {
     response.push(tempSpot);
   }
 
-  return res.json({ "Spots": response });
+  if (req.query.page) {
+    return res.json({ "Spots": response, "page": page, "size": size });
+  } else {
+    return res.json({
+      "Spots": response
+    });
+  }
 });
 
 module.exports = router;
@@ -529,3 +573,15 @@ Worked: https://splangy01.herokuapp.com/api/spots/2/images
 
 {{url}}/spots/{{spotId}}
 */
+
+/*
+  //   include: [
+  //   {
+  //       model: Review,
+  //       as: 'avgRating',
+  //       attributes: {
+  //         include: [[Sequelize.fn("AVG", Sequelize.col("stars")), "avgRating"]],
+  //       }
+  //   },
+  // ],
+  */
