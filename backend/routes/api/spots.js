@@ -2,6 +2,7 @@ const express = require('express');
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { Spot, SpotImage, Review, User, ReviewImage, Booking, Sequelize } = require('../../db/models');
 const { handleValidationErrors } = require('../../utils/validation');
+const { verify } = require('jsonwebtoken');
 // const user = require('../../db/models/user');
 
 const router = express.Router();
@@ -345,6 +346,75 @@ router.get('/:spotId/reviews', [restoreUser, requireAuth], async (req, res) => {
   // console.log(reviews);
 
   return res.json({ "Reviews": reviews });
+});
+
+// Get all Bookings for a Spot based on the Spot's id
+router.get('/:spotId/bookings', [restoreUser, requireAuth], async (req, res) => {
+  // Verify the owner of the spot
+  let verifyOwner = await Spot.findByPk(req.params.spotId);
+
+  if (verifyOwner) {
+    verifyOwner = verifyOwner.dataValues;
+  } else {
+    res.statusCode = 404;
+    return res.json({
+      "message": "Spot couldn't be found",
+      "statusCode": 404
+    });
+  }
+
+// {{spotIdForBooking}}
+
+  let bookings;
+  if (verifyOwner.ownerId === req.user.id) {
+    // Return ALL info!
+    let owner = await User.scope('getOwner').findByPk(req.user.id);
+    owner = owner.dataValues;
+
+    bookings = await Booking.findAll({ where: { spotId: req.params.spotId } });
+
+    if (bookings.length) {
+      const response = [];
+      for (let i = 0; i < bookings.length; i++) {
+        let tempBooking = {};
+        tempBooking.User = owner;
+        bookings[i] = bookings[i].dataValues;
+        // Tedium
+        tempBooking.id = bookings[i].id;
+        tempBooking.spotId = bookings[i].spotId;
+        tempBooking.userId = bookings[i].userId;
+        tempBooking.startDate = bookings[i].startDate;
+        tempBooking.endDate = bookings[i].endDate;
+        tempBooking.createdAt = bookings[i].createdAt;
+        tempBooking.updatedAt = bookings[i].updatedAt;
+
+        response.push(tempBooking);
+      }
+
+      return res.json({ "Bookings": response });
+    } else {
+      return res.json({ "Bookings": [] });
+    }
+
+  } else {
+    // Return sparse info.
+    bookings = await Booking.scope('allBookingsNonOwner').findAll({ where: { spotId: req.params.spotId } });
+
+    if (bookings.length) {
+      for (let i = 0; i < bookings.length; i++) {
+        bookings[i] = bookings[i].dataValues;
+      }
+      return res.json({ "Bookings": bookings });
+    } else {
+      return res.json({ "Bookings": []});
+    }
+  }
+
+
+  console.log(verifyOwner);
+
+  console.log(bookings);
+
 });
 
 
