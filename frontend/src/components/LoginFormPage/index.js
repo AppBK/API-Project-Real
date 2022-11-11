@@ -24,8 +24,6 @@ export default function LoginFormPage() {
       password: pass
     }
 
-    console.log(creds);
-
     return dispatch(thunkUserLogin(creds))
       .catch(async (res) => {
         const data = await res.json();

@@ -42,6 +42,21 @@ export const thunkRestoreUser = () => async (dispatch) => {
   return response;
 }
 
+export const thunkSignupUser = (body) => async (dispatch) => {
+  const response = await csrfFetch('/api/users', {
+    method: 'POST',
+    body: JSON.stringify({
+      ...body
+    })
+  });
+
+  if (response.ok) {
+    const data = await (await response).json();
+    dispatch(actionUserAdd(data));
+    return response;
+  }
+}
+
 // Reducer
 export default function sessionReducer(state = { user: null }, action) {
   switch(action.type) {
