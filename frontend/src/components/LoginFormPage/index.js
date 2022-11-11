@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { thunkUserLogin } from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import './LoginForm.css';
 
 
 export default function LoginFormPage() {
@@ -34,19 +35,18 @@ export default function LoginFormPage() {
 
   return (
     <div>
+      <h2>User Login</h2>
       <form onSubmit={onSubmit}>
+        <fieldset className="login-box">
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
-        <label>
-          Username or Email
-          <input type="text" value={cred} onChange={(e) => setCred(e.target.value)} required/>
-        </label>
-        <label>
-          Password
-          <input type="text" value={pass} onChange={(e) => setPass(e.target.value)} required/>
-        </label>
+        <label>Username or Email</label>
+        <input type="text" value={cred} onChange={(e) => setCred(e.target.value)} required/>
+          <label>Password</label>
+          <input type="password" value={pass} onChange={(e) => setPass(e.target.value)} required/>
         <button>Log In</button>
+        </fieldset>
       </form>
     </div>
   );
