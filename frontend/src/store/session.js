@@ -51,8 +51,22 @@ export const thunkSignupUser = (body) => async (dispatch) => {
   });
 
   if (response.ok) {
-    const data = await (await response).json();
+    const data = await response.json();
     dispatch(actionUserAdd(data));
+    return response;
+  }
+}
+
+export const thunkLogoutUser = (user) => async (dispatch) => {
+  const response = await csrfFetch('/api/session', {
+    method: 'DELETE',
+    body: JSON.stringify({
+      ...user
+    })
+  });
+
+  if (response.ok) {
+    dispatch(actionUserDelete());
     return response;
   }
 }

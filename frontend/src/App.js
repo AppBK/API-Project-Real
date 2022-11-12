@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Switch, Route, NavLink } from 'react-router-dom';
 import LoginFormPage from './components/LoginFormPage';
 import { thunkRestoreUser } from './store/session';
 import SignupForm from './components/SignupForm';
+import Navigation from './components/Navigation';
 
 function App() {
   const dispatch = useDispatch();
@@ -14,7 +15,8 @@ function App() {
 
   return isLoaded && (
     <>
-      <h1>Hello from App</h1>
+      <Navigation isLoaded={isLoaded} />
+      {isLoaded && (
       <Switch>
         <Route path="/login">
           <LoginFormPage />
@@ -23,6 +25,7 @@ function App() {
           <SignupForm />
         </Route>
       </Switch>
+      )}
     </>
   );
 }
