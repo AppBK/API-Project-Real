@@ -1,0 +1,23 @@
+#modal-logout-div {
+  border-radius: 18px;
+  border: 1px solid rgb(213,213,213);
+  width: 170px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  position: absolute;
+  top: 12px;
+  right: 40px;
+}
+
+#logout-button-div {
+  margin-top: 16px;
+  margin-bottom: 0px;
+}
+
+#logout-creds-cont {
+  color: rgb(120,120,120);
+}

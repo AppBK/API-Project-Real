@@ -10,7 +10,7 @@ export default function LoginFormPage() {
   const [pass, setPass] = useState('');
   const [errors, setErrors] = useState([]);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch({ props });
   const sessionUser = useSelector(state => state.session.user);
 
   if (sessionUser) return ( <Redirect to="/" /> );
@@ -33,15 +33,15 @@ export default function LoginFormPage() {
 
   return (
     <div>
-      <h2>User Login</h2>
       <form onSubmit={onSubmit}>
+        <h2>User Login</h2>
         <fieldset className="login-box">
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
         <label>Username or Email</label>
         <input type="text" value={cred} onChange={(e) => setCred(e.target.value)} required/>
-          <label>Password</label>
+        <label>Password</label>
           <input type="password" value={pass} onChange={(e) => setPass(e.target.value)} required/>
         <button>Log In</button>
         </fieldset>

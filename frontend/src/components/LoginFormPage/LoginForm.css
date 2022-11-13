@@ -12,3 +12,7 @@ input {
   margin-top: 8px;
   margin-bottom: 8px;
 }
+
+.login-form-input {
+  width: 200px;
+}
