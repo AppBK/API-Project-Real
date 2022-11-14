@@ -48,7 +48,6 @@ export default function SignupForm () {
       setLastName('');
       setEmail('');
       setPassword('');
-      setSubmitted(false);
       setErrors([]);
 
       history.push("/");
