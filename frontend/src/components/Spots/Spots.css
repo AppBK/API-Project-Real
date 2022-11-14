@@ -1,0 +1,22 @@
+#spots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: absolute;
+  z-index: 1;
+  width: 94%;
+  overflow: hidden;
+  top: 160px;
+  padding: 0px;
+}
+
+.tile {
+  position: relative;
+  overflow: hidden;
+  width: 255px;
+  height: 342px;
+  background-color: orange;
+  margin: 16px 16px;
+  border-radius: 16px;
+}

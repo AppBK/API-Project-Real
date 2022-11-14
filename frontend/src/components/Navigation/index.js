@@ -3,9 +3,12 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import LoginFormModal from '../LoginFormModal';
+import { useState } from 'react';
 
 export default function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
+  const [render, setRender] = useState(false);
+
 
   let loggedInMenu;
   let sessionLinks;
@@ -20,7 +23,7 @@ export default function Navigation({ isLoaded }) {
         {/* <li className="user-menu-li">
           <NavLink id="login-center-console" to="/login" className="navlink">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Log In&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</NavLink>
         </li> */}
-        <LoginFormModal />
+        <LoginFormModal render={() => setRender(true)}/>
         <li className="user-menu-li pointer">
           <NavLink id="signup-center-console" to="/signup" className="navlink"><div id="login-border"></div>&nbsp;&nbsp;&nbsp;&nbsp;    Sign Up</NavLink>
         </li>

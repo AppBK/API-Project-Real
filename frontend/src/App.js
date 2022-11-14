@@ -6,6 +6,7 @@ import SignupForm from './components/SignupForm';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import TypeCarousel from './components/TypeCarousel';
+import Spots from './components/Spots';
 
 function App() {
   const dispatch = useDispatch();
@@ -20,6 +21,9 @@ function App() {
       <TypeCarousel />
       {isLoaded && (
       <Switch>
+        <Route exact path="/">
+          <Spots />
+        </Route>
         <Route path="/signup">
           <SignupForm />
         </Route>

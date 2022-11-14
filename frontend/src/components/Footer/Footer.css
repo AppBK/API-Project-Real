@@ -8,6 +8,8 @@
   bottom: 0px;
   border: 1px solid rgb(221,221,221);
   padding: 0px 40px;
+  overflow: hidden;
+  z-index: 2;
 }
 
 #footer-content-div {
@@ -40,6 +42,7 @@
   display: flex;
   align-items: center;
   font-weight: lighter;
+  margin-left: 60px;
 }
 
 #footer-content-right {

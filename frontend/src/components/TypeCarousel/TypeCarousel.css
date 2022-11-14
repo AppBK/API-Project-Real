@@ -1,21 +1,130 @@
 #carousel-container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   position: fixed;
   top: 80px;
   border-bottom: 1px solid rgb(221, 221, 221);
   box-shadow: 0px 2px 1px 1px rgba(186, 179, 179, 0.2);
   width: 100%;
   height: 78px;
+  z-index: 2;
+  overflow: hidden;
+  background-color: white;
 }
 
 #carousel {
   display: flex;
 }
 
-.thumbnail:hover {
-  opacity: 1;
+#fade-left {
+  width: 26px;
+  height: 78px;
+  background-color: white;
+  /* background-image: linear-gradient(to left, transparent, 5%, white); */
+  position: fixed;
+  left: 0px;
+  top: 80px;
+  border-top: 1px solid rgb(221, 221, 221);
+  display: flex;
+  align-items: center;
+  padding-left: 40px;
+  z-index: 4;
+  visibility: hidden;
+}
+
+#fader {
+  width: 16px;
+  height: 78px;
+  position: fixed;
+  top: 80px;
+  border-top: 1px solid rgb(221, 221, 221);
+  left: 66px;
+  background-image: linear-gradient(to left, transparent, 10%, white);
+  z-index: 3;
+  visibility: hidden;
+}
+
+#swipe-left-button {
+    width: 28px;
+      height: 28px;
+      background-color: transparent;
+      border-radius: 50%;
+      border: 1px solid rgb(221, 221, 221);
+      transition-property: box-shadow;
+      transition-duration: 0.2s;
+      transition-timing-function: ease;
+      transition-delay: 0s;
+}
+
+#swipe-left-button:hover {
+  cursor: pointer;
+  box-shadow: 0px 6px 10px 5px rgba(221, 221, 221, 0.4);
+}
+
+#fade-right {
+  width: 32px;
+  height: 78px;
+  background-image: linear-gradient(to right, transparent, 20%, white);
+  position: fixed;
+  right: 168px;
+  top: 80px;
+  border-top: 1px solid rgb(221, 221, 221);
+  z-index: 3;
+}
+
+#fade-to-white {
+  width: 168px;
+  height: 78px;
+  position: fixed;
+  right: 0px;
+  top: 80px;
+  background-color: white;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-top: 1px solid rgb(221,221,221);
+  z-index: 3;
+}
+
+#swipe-right-button {
+  width: 28px;
+  height: 28px;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 1px solid rgb(221,221,221);
+  transition-property: box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+  z-index: 3;
+}
+
+#swipe-right-button:hover {
+  cursor: pointer;
+  box-shadow: 0px 6px 10px 5px rgba(221, 221, 221, 0.4);
+}
+
+#filter-button {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 90px;
+  height: 48px;
+  background-color: transparent;
+  font-size: 12px;
+  border: 1px solid rgba(221, 221, 221, 1);
+  border-radius: 12px;
+  z-index: 3;
+}
+
+#filter-button:hover {
+  cursor:pointer;
+}
+
+#filter-icon {
+  width: 14px;
+  height: 14px;
 }
 
 .carousel-button-container {
@@ -25,6 +134,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+  border-top: 1px solid lightgrey;
 }
 
 .carousel-button {
@@ -44,3 +154,15 @@
   color: black;
   border-bottom: 2px solid rgb(213,213,213);
 }
+
+.thumbnail {
+  opacity: 0.6;
+}
+
+.thumbnail:hover {
+  opacity: 1;
+}
+
+/* .carousel-button > .thumbnail:hover {
+    opacity: 1;
+} */
