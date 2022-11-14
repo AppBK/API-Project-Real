@@ -16,12 +16,6 @@ const router = express.Router();
 //   });
 // });
 
-if (process.env.NODE_ENV !== 'production') {
-  router.get('/api/csrf/restore', (req, res) => {
-    res.cookie('XSRF-TOKEN', req.csrfToken());
-    return res.json({});
-  });
-}
 
 const apiRouter = require('./api');
 router.use('/api', apiRouter);
@@ -47,6 +41,13 @@ if (process.env.NODE_ENV === 'production') {
     return res.sendFile(
       path.resolve(__dirname, '../../frontend', 'build', 'index.html')
     );
+  });
+}
+
+if (process.env.NODE_ENV !== 'production') {
+  router.get('/api/csrf/restore', (req, res) => {
+    res.cookie('XSRF-TOKEN', req.csrfToken());
+    return res.json({});
   });
 }
 
