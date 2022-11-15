@@ -19,7 +19,6 @@ module.exports = {
       },
       url: {
         type: Sequelize.STRING,
-        unique: true,
       },
       preview: {
         type: Sequelize.BOOLEAN

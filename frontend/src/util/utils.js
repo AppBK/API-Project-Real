@@ -23,3 +23,25 @@ export const addPixels = (current, add) => {
 
   return newValue;
 }
+
+export const monetary = (price) => {
+  let string = price.toString();
+  let countFromEnd = 0;
+  let num;
+  let output = '';
+
+  for (let i = string.length - 1; i >= 0; i--) {
+    num = string[i];
+    countFromEnd++;
+
+    if (countFromEnd === 3 && i !== 0) {
+      output = num + output;
+      output = ',' + output;
+      countFromEnd = 0;
+    } else {
+      output = num + output;
+    }
+  }
+
+  return '$' + output;
+}

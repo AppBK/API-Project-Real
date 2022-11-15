@@ -61,13 +61,15 @@ module.exports = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.STRING,
       allowNull: false,
-      allowNull: false,
     },
     price: {
       type: DataTypes.DECIMAL,
       allowNull: false,
+    },
+    category: {
+      type: DataTypes.STRING,
       allowNull: false,
-    }
+    },
   }, {
     sequelize,
     modelName: 'Spot',

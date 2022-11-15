@@ -155,6 +155,15 @@
   border-bottom: 2px solid rgb(213,213,213);
 }
 
+/* .carousel-button:active {
+  color: black;
+  border-bottom: 2px solid rgb(213, 213, 213);
+}
+
+.thumbnail:active {
+  opacity: 1;
+} */
+
 .thumbnail {
   opacity: 0.6;
 }

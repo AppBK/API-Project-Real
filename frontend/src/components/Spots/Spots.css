@@ -7,16 +7,96 @@
   z-index: 1;
   width: 94%;
   overflow: hidden;
-  top: 160px;
+  top: 168px;
   padding: 0px;
+  padding-bottom: 40px;
 }
 
 .tile {
   position: relative;
   overflow: hidden;
   width: 255px;
-  height: 342px;
-  background-color: orange;
-  margin: 16px 16px;
+  height: 300px;
   border-radius: 16px;
+}
+
+.tile:hover {
+  cursor: pointer;
+}
+
+.preview-carousel {
+  width: 255px;
+  height: 242px;
+  position: absolute;
+  border-radius: 16px;
+}
+
+.preview-img {
+  width: 255px;
+  height: 242px;
+  border-radius: 16px;
+}
+
+.preview-heart {
+  position: relative;
+  top: -232px;
+  left: 216px;
+  /* border: 1px solid white; */
+}
+
+.preview-info {
+  width: 255px;
+  height: 108px;
+  background-color: white;
+  position: relative;
+  top: 242px;
+}
+
+.preview-night {
+  color: rgba(0,0,0,0.6);
+}
+
+.preview-price {
+  font-weight: bold;
+  width: fit-content;
+}
+
+#spot-info-top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-right: 24px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.preview-city-state {
+  margin-right: -20px;
+}
+
+.rating {
+  padding: 0px;
+  margin: 0px;
+}
+
+.preview-rating {
+  width: 20px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.star-container {
+  margin-right: 4px;
+}
+
+.spot-selector {
+  padding: 0px;
+  margin: 0px;
+  width: fit-content;
+  height: fit-content;
+  background-color: transparent;
+  border-radius: 16px;
+  border: none;
+  margin: 16px 16px;
 }

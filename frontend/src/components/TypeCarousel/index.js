@@ -1,26 +1,37 @@
 import './TypeCarousel.css';
 import { types } from '../../assets/carousel/carousel';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { subPixels, addPixels } from '../../util/utils';
+import { RouterContext } from '../../context/RouterContext';
+import { useHistory } from 'react-router-dom';
 
 let carousel;
 let currentMargin;
 
 const TypeCarousel = () => {
+  const { spotType, setSpotType } = useContext(RouterContext);
   const [marginLeft, setMarginLeft] = useState("0px");
   const [showLeft, setShowLeft] = useState('hidden');
   const [showRight, setShowRight] = useState('visible');
+  const [active, setActive] = useState(false);
   // const carousel = document.getElementById('carousel');
   // const currentPadding = carousel.style.paddingLeft;
   // console.log('P-Left', currentPadding);
 
   // console.log('P-Left', currentPadding);
 
+  const history = useHistory();
+
   useEffect(() => {
     carousel = document.getElementById('carousel');
     carousel.style.marginLeft = "0px";
     currentMargin = carousel.style.marginLeft;
   }, []);
+
+  useEffect(() => {
+    console.log('SPOT TYPE: ', spotType);
+    history.push('/');
+  }, [spotType]);
 
   const swipeRight = () => {
     carousel = document.getElementById('carousel');
@@ -82,6 +93,10 @@ const TypeCarousel = () => {
     setMarginLeft(currentMargin);
   }
 
+  const setType = (e) => {
+    const element = document.getElementById(e.target.id);
+    console.log(element);
+  }
 
   return (
     <>
@@ -94,11 +109,11 @@ const TypeCarousel = () => {
     <div id="carousel-container">
       <div id="carousel">
         {types.map(type => (
-          <div className="carousel-button-container" key={type.name}>
-            <button className="carousel-button">
-              <div className="maybe" style={{ width: "fit-content", display: "flex", height: "48px", flexDirection: "column", justifyContent: "space-between", alignItems: "center"}}>
-                <img className="thumbnail"  src={type.url} style={{ display: "block", width: "24px", height: "24px", color: "#717171"}}></img>
-                <span style={{display: "block"}}>{type.name}</span>
+          <div id={type.name} className="carousel-button-container" key={type.name}>
+            <button id={type.name} type="button" className="carousel-button" onClick={(e) => setSpotType(e.target.id)}>
+              <div id={type.name} className="maybe" style={{ width: "fit-content", display: "flex", height: "48px", flexDirection: "column", justifyContent: "space-between", alignItems: "center"}}>
+                <img id={type.name} className="thumbnail"  src={type.url} style={{ display: "block", width: "24px", height: "24px", color: "#717171"}}></img>
+                <span id={type.name} style={{display: "block"}}>{type.name}</span>
               </div>
             </button>
           </div>

@@ -171,7 +171,7 @@ router.post('/:spotId/images', [restoreUser, requireAuth], async (req, res) => {
 });
 
 router.post('/', [restoreUser, requireAuth], async (req, res) => {
-  const { address, city, state, country, lat, lng, name, description, price } = req.body;
+  const { address, city, state, country, lat, lng, name, description, price, category } = req.body;
 
 
   await Spot.create({
@@ -184,7 +184,8 @@ router.post('/', [restoreUser, requireAuth], async (req, res) => {
     lng: lng,
     name: name,
     description: description,
-    price: price
+    price: price,
+    category
   });
 
   const newestSpot = await Spot.findAll({
@@ -452,12 +453,6 @@ router.get('/:spotId/bookings', [restoreUser, requireAuth], async (req, res) => 
       return res.json({ "Bookings": []});
     }
   }
-
-
-  console.log(verifyOwner);
-
-  console.log(bookings);
-
 });
 
 
@@ -523,7 +518,13 @@ router.get('/:spotId', async (req, res) => {
 router.get('/', async (req, res) => {
   // const spots = await Spot.findAll({});
 
-  let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+  let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice, where } = req.query;
+
+  if (where) {
+    where = { category: where };
+  }
+
+  console.log('WHERE: ', where);
 
   if (!page || page < 1 || page > 10) page = 1;
   if (!size || size < 1 || size > 20) size = 20;
@@ -533,6 +534,7 @@ router.get('/', async (req, res) => {
   const spots = await Spot.findAll({
     limit: size,
     offset: offset,
+    where,
   });
 
   const response = [];
