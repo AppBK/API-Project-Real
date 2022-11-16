@@ -7,6 +7,7 @@ import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import TypeCarousel from './components/TypeCarousel';
 import Spots from './components/Spots';
+import Spot from './components/Spot';
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +24,9 @@ function App() {
       <Switch>
         <Route exact path="/">
           <Spots />
+        </Route>
+        <Route path="/spots/:spotId">
+          <Spot />
         </Route>
         <Route path="/signup">
           <SignupForm />

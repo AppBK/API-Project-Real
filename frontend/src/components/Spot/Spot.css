@@ -1,0 +1,123 @@
+.spot-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    overflow: hidden;
+    top: 172px;
+    padding: 0px;
+    padding-bottom: 40px;
+
+    font-family: 'Roboto', sans-serif;
+}
+
+#inner-spot-cont {
+  width: 86%;
+  padding-bottom: 32px;
+}
+
+#header-bottom {
+  display: flex;
+  align-items: center;
+}
+
+#name-div {
+  margin: 0px;
+  margin-bottom: 12px;
+}
+
+#spot-name {
+  margin: 2px;
+}
+
+#star-div {
+  margin-right: 4px;
+}
+
+#rating-div {
+  margin: 4px;
+}
+
+.dot-spacer {
+  height: 10px;
+  width: 10px;
+}
+
+.dot-spacer-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 2px;
+}
+
+#reviews-div {
+  padding: 0px;
+  margin: 0px;
+}
+
+#preview-images {
+  width: 100%;
+  height: 500px;
+  background-color: white;
+  margin-top: 20px;
+  border-radius: 16px;
+  display: grid;
+  grid-gap: 8px;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  padding: 0px;
+  overflow: hidden;
+}
+
+#big-boy {
+  grid-row-start: span 2;
+  grid-column-start: span 4;
+}
+
+#upper-left {
+  grid-row-start: span 1;
+  grid-column-start: span 2;
+}
+
+#upper-right {
+  grid-row-start: span 1;
+  grid-column-start: span 2;
+}
+
+#lower-left {
+  grid-row-start: span 1;
+  grid-column-start: span 2;
+}
+
+#lower-right {
+  grid-row-start: span 1;
+  grid-column-start: span 2;
+}
+
+#user-options-menu {
+  border-top: 2px solid rgb(221,221,221);
+  border-bottom: 2px solid rgb(221,221,221);
+  width: 86%;
+  display: flex;
+  padding: 8px;
+  justify-content: space-evenly
+}
+
+.spotButtons {
+  background-color: #FF385C;
+  border: none;
+  color: white;
+  width: 140px;
+  height: 60px;
+  border-radius: 32px;
+  font-size: 1.5em;
+}
+
+.spotButtons:hover {
+  cursor: pointer;
+}

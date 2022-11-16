@@ -1,9 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Modal } from '../../context/Modal';
 import LoginForm from './LoginForm';
+import { RouterContext } from '../../context/RouterContext';
 
 export default function LoginFormModal({ render }) {
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
+  // const location = useLocation();
+  // const currentURL = location.pathname;
+  const { showModal, setShowModal } = useContext(RouterContext);
 
   return (
     <>

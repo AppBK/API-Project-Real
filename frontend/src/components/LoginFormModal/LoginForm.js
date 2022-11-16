@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import '../../context/Modal.css';
 import './Login.css';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+import { RouterContext } from "../../context/RouterContext";
+
 
 export default function LoginForm({ onClose, render }) {
   const dispatch = useDispatch();
@@ -11,11 +13,15 @@ export default function LoginForm({ onClose, render }) {
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
-  const [showModal, setShowModal] = useState(true);
+  // const [showModal, setShowModal] = useState(true);
+  const { showModal, setShowModal } = useContext(RouterContext);
+
+  const location = useLocation();
+  const currentURL = location.pathname;
 
   const closeModal = () => {
     setShowModal(false);
-    history.push('/');
+    history.push(currentURL);
   }
 
   const handleSubmit = (e) => {
@@ -37,7 +43,7 @@ export default function LoginForm({ onClose, render }) {
         <>
         <div id="modal-background" onClick={onClose} />
         <div id="modal-content">
-          <button id="close-button-login" onClick={render()}>X</button>
+          <button id="close-button-login" onClick={() => closeModal()}>X</button>
           <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
             <ul>
               {errors.map((error, idx) => (

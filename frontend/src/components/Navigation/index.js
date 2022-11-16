@@ -3,12 +3,18 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import LoginFormModal from '../LoginFormModal';
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
+import { RouterContext } from '../../context/RouterContext';
 
 export default function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
   const [render, setRender] = useState(false);
+  const { showModal, setSHowModal } = useContext(RouterContext);
 
+
+  useEffect(() => {
+    console.log('Got a re-render!');
+  },[showModal]);
 
   let loggedInMenu;
   let sessionLinks;
