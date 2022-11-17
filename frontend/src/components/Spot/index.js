@@ -7,6 +7,7 @@ import AddImageModal from "../addImageModal";
 import { thunkSpotDelete } from "../../store/spot";
 import EditSpotModal from "../EditSpotModal";
 import { RouterContext } from "../../context/RouterContext";
+import Reviews from '../Reviews';
 
 const Spot = ({ isLoaded }) => {
   console.log('IS LOADED Spot: ', isLoaded);
@@ -96,6 +97,7 @@ const Spot = ({ isLoaded }) => {
           <button className="spotButtons" onClick={deleteSpot}>Delete</button>
         </div>
       </div>)}
+      <Reviews spot={spot} isLoaded={isLoaded}/>
     </div>
   );
 }

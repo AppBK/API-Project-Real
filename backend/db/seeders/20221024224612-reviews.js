@@ -18,6 +18,24 @@ module.exports = {
       review: 'I thank it very very good. Please take me so much!',
       stars: 5
     },
+      {
+        spotId: 1,
+        userId: 3,
+        review: 'What a gorgeous woodland escape! But why do all the women around here look like Audrey Hepburn?... Minus 1 star!',
+        stars: 4
+      },
+      {
+        spotId: 1,
+        userId: 4,
+        review: 'Quite nice!',
+        stars: 5
+      },
+      {
+        spotId: 1,
+        userId: 2,
+        review: 'Haaaaaaaark, Triton!! Haaaaark!! ',
+        stars: 5
+      },
     {
       spotId: 2,
       userId: 4,
