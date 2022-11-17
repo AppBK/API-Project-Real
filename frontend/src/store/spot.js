@@ -6,6 +6,7 @@ const SPOTS_GET_CATEGORY = 'spots/SPOTS_GET_CATEGORY';
 const SPOTS_DELETE = 'spots/SPOTS_DELETE';
 const SPOTS_EDIT = 'spots/SPOTS_EDIT';
 const SPOTS_ADD_IMAGE = 'spots/SPOTS_ADD_IMAGE';
+const SPOTS_CREATE = 'spots/CREATE';
 
 // Action Creators
 export const actionSpotsGetCategory = (spots) => {
@@ -36,11 +37,13 @@ export const actionSpotDelete = (spotId) => {
     spotId
   }
 }
-// export const actionSpotsGetInfo = (spot) => {
-//   return {
-        // type: SPOTS_GET_ALL_INFO,
-//      spot
-// }
+
+export const actionSpotCreate = (spot) => {
+  return {
+    type: SPOTS_CREATE,
+    spot
+  }
+}
 
 // Thunks
 export const thunkGetAllSpots = (spotType) => async (dispatch) => {
@@ -59,8 +62,20 @@ export const thunkGetAllSpots = (spotType) => async (dispatch) => {
   }
 }
 
-export const thunkSpotEdit = () => async (dispatch) => {
-  const response = await csrfFetch();
+export const thunkSpotEdit = (spotId, spot) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}`, {
+    method: 'PUT',
+    body: JSON.stringify({
+      ...spot
+    })
+  });
+
+  if (response.ok) {
+    const updatedSpot = response.json();
+
+    dispatch(actionSpotEdit(updatedSpot));
+    return updatedSpot;
+  }
 }
 
 export const thunkSpotAddImage = (spotId, url, prev) => async (dispatch) => {
@@ -93,6 +108,24 @@ export const thunkSpotDelete = (spotId) => async (dispatch) => {
   }
 }
 
+export const thunkSpotCreate = (spot) => async (dispatch) => {
+  const response = await csrfFetch('/api/spots', {
+    method: 'POST',
+    body: JSON.stringify({
+      ...spot
+    })
+  });
+
+  if (response.ok) {
+    const newSpot = response.json();
+    console.log('A new spot?', newSpot);
+
+    dispatch(actionSpotCreate(newSpot));
+
+    return newSpot;
+  }
+}
+
 export default function spotReducer(state = {}, action) {
   switch(action.type) {
     case SPOTS_GET_CATEGORY: {
@@ -119,6 +152,18 @@ export default function spotReducer(state = {}, action) {
     case SPOTS_DELETE: {
       const newState = {...state};
       delete newState[action.spotId];
+
+      return newState;
+    }
+    case SPOTS_EDIT: {
+      const newState = {...state};
+      newState[action.spot.id] = action.spot;
+
+      return newState;
+    }
+    case SPOTS_CREATE: {
+      const newState = {...state};
+      newState[action.spot.id] = action.spot;
 
       return newState;
     }

@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import LogoutModal from '../LogoutModal';
+import { RouterContext } from '../../context/RouterContext';
+import { thunkLogoutUser } from '../../store/session';
+import { useSelector } from 'react-redux';
 
 function ProfileButton({ user }) {
+  const { showModal, setShowModal } = useContext(RouterContext);
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+  const currentUser = useSelector(state => state.session.user);
 
   const openMenu = () => {
     if (showMenu) return;
@@ -26,7 +31,8 @@ function ProfileButton({ user }) {
 
   const logout = (e) => {
     e.preventDefault();
-    dispatch(sessionActions.actionUserDelete());
+    dispatch(thunkLogoutUser(currentUser));
+    setShowModal(false);
   };
 
   return (

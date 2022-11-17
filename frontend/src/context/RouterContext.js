@@ -7,13 +7,22 @@ export const RouterProvider = props => {
   const [spotsRetrieved, setSpotsRetrieved] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [showAddImage, setShowAddImage] = useState(false);
+  const [showEditSpot, setShowEditSpot] = useState(false);
+  const [showCreateSpot, setShowCreateSpot] = useState(false);
 
   useEffect(() => {
     console.log('SPOT TYPE FROM PROVIDER: ', spotType);
-  },[spotType])
+  },[spotType]);
 
   return (
-    <RouterContext.Provider value={{ spotType, setSpotType, spotsRetrieved, setSpotsRetrieved, showModal, setShowModal, showAddImage, setShowAddImage }}>
+    <RouterContext.Provider value={{
+      spotType, setSpotType,
+      spotsRetrieved, setSpotsRetrieved,
+      showModal, setShowModal,
+      showAddImage, setShowAddImage,
+      showEditSpot, setShowEditSpot,
+      showCreateSpot, setShowCreateSpot
+    }}>
       {props.children}
     </RouterContext.Provider>
   );

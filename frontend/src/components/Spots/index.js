@@ -7,7 +7,9 @@ import { monetary } from '../../util/utils';
 import { useHistory } from 'react-router-dom';
 import { actionSpotsGetInfo, thunkGetAllSpotInfo } from '../../store/spot';
 
-const Spots = () => {
+const Spots = ({ isLoaded }) => {
+  console.log('IS LOADED Spots: ', isLoaded);
+
   const { spotType, setSpotType, spotsRetrieved, setSpotsRetrieved } = useContext(RouterContext);
   let spots = useSelector(state => state.spots);
   spots = Object.values(spots);

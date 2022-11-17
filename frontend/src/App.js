@@ -8,28 +8,49 @@ import Footer from './components/Footer';
 import TypeCarousel from './components/TypeCarousel';
 import Spots from './components/Spots';
 import Spot from './components/Spot';
+import { actionUserAdd } from './store/session';
 
+
+let validation;
 function App() {
+  const session = useSelector(state => state.session);
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
+
+  validation = localStorage.getItem("user");
+  if (validation && session['user']) validation = true;
+  else if (validation && !session['user']) {
+    dispatch(actionUserAdd(validation));
+    validation = true;
+  }
+
+  const [isLoaded, setIsLoaded] = useState(validation);
   useEffect(() => {
     dispatch(thunkRestoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
+  // if (!isLoaded) {
+  //   const hasLoginInfo = sessionStorage.getItem("user");
+
+  //   if (hasLoginInfo) {
+  //     dispatch(thunkRestoreUser()).then(() => setIsLoaded(true));
+  //   }
+  // }
+
+
   return isLoaded && (
     <>
       <Navigation isLoaded={isLoaded} />
-      <TypeCarousel />
+      <TypeCarousel isLoaded={isLoaded}/>
       {isLoaded && (
       <Switch>
         <Route exact path="/">
-          <Spots />
+          <Spots isLoaded={isLoaded}/>
         </Route>
         <Route path="/spots/:spotId">
-          <Spot />
+          <Spot isLoaded={isLoaded}/>
         </Route>
         <Route path="/signup">
-          <SignupForm />
+          <SignupForm isLoaded={isLoaded}/>
         </Route>
       </Switch>
       )}

@@ -3,7 +3,6 @@ import { useParams, useHistory } from 'react-router-dom';
 import { RouterContext } from "../../context/RouterContext";
 import { thunkSpotAddImage } from '../../store/spot';
 import { useDispatch } from 'react-redux';
-import thunk from 'redux-thunk';
 
 const AddImage = () => {
   const [urlValue, setUrlValue] = useState();
@@ -33,9 +32,9 @@ const AddImage = () => {
 
   return (
     <div id="add-image-spot">
-      <div id="close-modal">
+      {/* <div id="close-modal"> */}
         <button onClick={() => setShowAddImage(false)} id="close-add-image">X</button>
-      </div>
+      {/* </div> */}
       <div id="flex-modal">
       <form>
         <label for="url-input">

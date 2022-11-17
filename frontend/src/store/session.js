@@ -75,9 +75,13 @@ export const thunkLogoutUser = (user) => async (dispatch) => {
 export default function sessionReducer(state = { user: null }, action) {
   switch(action.type) {
     case USER_ADD: {
+      localStorage.setItem("user", { user: action.user });
+
       return { user: action.user };
     }
     case USER_DELETE: {
+      localStorage.removeItem("user");
+
       return { user: null };
     }
     default: {

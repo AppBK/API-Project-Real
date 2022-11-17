@@ -1,0 +1,53 @@
+#outer-edit {
+    background-color: white;
+      border-radius: 16px;
+      border: 2px solid rgb(221, 221, 221);
+      width: 30%;
+      height: 56%;
+      position: absolute;
+}
+
+#edit-modal-button {
+  position: relative;
+  top: 16px;
+  left: 16px;
+}
+
+#edit-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#close-add-image {
+  border: 2px solid rgb(221,221,221);
+  top: 16px;
+  left: 16px;
+  position: relative;
+  border-radius: 50%;
+}
+
+#close-add-image:hover {
+  cursor: pointer;
+}
+
+#edit-submit {
+  padding: 0px;
+  margin: 0px;
+  border: none;
+  border-radius: 60px;
+  height: 40px;
+  width: 100px;
+  background-color: #FF385C;
+  color: white;
+  margin-left: 16%;
+}
+
+#edit-submit:hover {
+  cursor: pointer;
+}
+
+#generic {
+  margin-top: -16px;
+}

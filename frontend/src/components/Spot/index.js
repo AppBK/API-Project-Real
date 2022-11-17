@@ -1,14 +1,20 @@
 import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { thunkGetAllSpotInfo } from "../../store/singleSpot";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import './Spot.css';
 import AddImageModal from "../addImageModal";
 import { thunkSpotDelete } from "../../store/spot";
+import EditSpotModal from "../EditSpotModal";
+import { RouterContext } from "../../context/RouterContext";
 
-const Spot = () => {
+const Spot = ({ isLoaded }) => {
+  console.log('IS LOADED Spot: ', isLoaded);
+
   const history = useHistory();
   const dispatch = useDispatch();
+  const { showEditSpot } = useContext(RouterContext);
+  const user = useSelector(state => state.session);
 
   const { spotId } = useParams();
 
@@ -27,9 +33,24 @@ const Spot = () => {
 
   if (!spot) return null;
 
+  let isAuthorized;
+  if (user['user']) {
+    if (user.user.id === spot.ownerId) {
+      isAuthorized = true;
+    }
+  }
+
+  if (!spot.SpotImages.length) {
+    const puppy = 'https://cdn.royalcanin-weshare-online.io/UCImMmgBaxEApS7LuQnZ/v2/eukanuba-market-image-puppy-beagle?w=5596&h=2317&rect=574,77,1850,1045&auto=compress,enhance';
+    const img = { url: puppy, preview: true};
+    for (let i = 0; i < 5; i++) {
+      spot.SpotImages.push(img);
+    }
+  }
+
   const withReviews = (<svg className="star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false" style={{ display: "block", height: "12px", width: "12px", fill: "currentcolor" }}><path d="M15.094 1.579l-4.124 8.885-9.86 1.27a1 1 0 0 0-.542 1.736l7.293 6.565-1.965 9.852a1 1 0 0 0 1.483 1.061L16 25.951l8.625 4.997a1 1 0 0 0 1.482-1.06l-1.965-9.853 7.293-6.565a1 1 0 0 0-.541-1.735l-9.86-1.271-4.127-8.885a1 1 0 0 0-1.814 0z" fillRule="evenodd" /></svg>);
   const withoutReviews = (<svg className="star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false" style={{ display: "block", height: "12px", width: "12px", fill: "currentcolor", opacity: "0.5" }}><path d="M15.094 1.579l-4.124 8.885-9.86 1.27a1 1 0 0 0-.542 1.736l7.293 6.565-1.965 9.852a1 1 0 0 0 1.483 1.061L16 25.951l8.625 4.997a1 1 0 0 0 1.482-1.06l-1.965-9.853 7.293-6.565a1 1 0 0 0-.541-1.735l-9.86-1.271-4.127-8.885a1 1 0 0 0-1.814 0z" fillRule="evenodd" /></svg>);
-  const dotSpacer = (<svg className="dot-spacer" width="16px" height="16px" viewBox="0 0 16 16" class="bi bi-dot" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  const dotSpacer = (<svg className="dot-spacer bi bi-dot" width="16px" height="16px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
     <path fillRule="evenodd" d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
   </svg>)
 
@@ -62,18 +83,19 @@ const Spot = () => {
           </div>
         </div>
       </div>
-      <div id="user-options-menu">
+      {isLoaded && isAuthorized && (<div id="user-options-menu">
         <div>
           <AddImageModal />
           {/* <button className="spotButtons" onClick={() => setShowModal(true)}>Add Image</button> */}
         </div>
         <div>
-          <button className="spotButtons">Edit</button>
+          <EditSpotModal />
+          {/* <button className="spotButtons">Edit</button> */}
         </div>
         <div>
           <button className="spotButtons" onClick={deleteSpot}>Delete</button>
         </div>
-      </div>
+      </div>)}
     </div>
   );
 }

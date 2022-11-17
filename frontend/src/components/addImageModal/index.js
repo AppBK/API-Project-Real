@@ -3,6 +3,7 @@ import { Modal } from '../../context/Modal';
 import { RouterContext } from '../../context/RouterContext';
 import './addImage.css';
 import AddImage from './addImage';
+import '../../context/Modal.css';
 
 export default function AddImageModal() {
   const { showModal, setShowModal, showAddImage, setShowAddImage } = useContext(RouterContext);

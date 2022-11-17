@@ -1,6 +1,11 @@
 import './Logout.css';
+import { RouterContext } from '../../context/RouterContext';
+import { useContext } from 'react';
 
 const Logout = ({ onClose, user, logout }) => {
+  const { showModal, setShowModal } = useContext(RouterContext);
+
+
   return (
     <div id="modal-logout-div">
       <div id="logout-creds-cont">
