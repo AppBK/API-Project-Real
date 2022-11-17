@@ -16,14 +16,14 @@ function App() {
   const session = useSelector(state => state.session);
   const dispatch = useDispatch();
 
-  validation = localStorage.getItem("user");
-  if (validation && session['user']) validation = true;
-  else if (validation && !session['user']) {
-    dispatch(actionUserAdd(validation));
-    validation = true;
-  }
+  // validation = localStorage.getItem("user");
+  // if (validation && session['user']) validation = true;
+  // else if (validation && !session['user']) {
+  //   dispatch(actionUserAdd(validation));
+  //   validation = true;
+  // }
 
-  const [isLoaded, setIsLoaded] = useState(validation);
+  const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(thunkRestoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
