@@ -10,7 +10,7 @@ import CreateASpotModal from '../CreateSpot';
 export default function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
   const [render, setRender] = useState(false);
-  const { showModal, setSHowModal } = useContext(RouterContext);
+  const { showModal, setShowModal } = useContext(RouterContext);
 
   const history = useHistory();
 

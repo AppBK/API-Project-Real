@@ -29,6 +29,7 @@ function ProfileButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
+  // Should be actionUserDelete?...
   const logout = (e) => {
     e.preventDefault();
     dispatch(thunkLogoutUser(currentUser));

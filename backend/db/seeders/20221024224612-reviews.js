@@ -36,30 +36,30 @@ module.exports = {
         review: 'Haaaaaaaark, Triton!! Haaaaark!! ',
         stars: 5
       },
-    {
-      spotId: 2,
-      userId: 4,
-      review: 'Nanda kore ha?!!',
-      stars: 2,
-    },
-    {
-      spotId: 3,
-      userId: 3,
-      review: "Maybe don't take my word for it.",
-      stars: 5,
-    },
-    {
-      spotId: 4,
-      userId: 2,
-      review: 'Wonderbar!!',
-      stars: 4,
-    },
-    {
-      spotId: 5,
-      userId: 1,
-      review: 'Do you think I can lift 200 pounds over my head?',
-      stars: 3,
-    },
+    // {
+    //   spotId: 2,
+    //   userId: 4,
+    //   review: 'Nanda kore ha?!!',
+    //   stars: 2,
+    // },
+    // {
+    //   spotId: 3,
+    //   userId: 3,
+    //   review: "Maybe don't take my word for it.",
+    //   stars: 5,
+    // },
+    // {
+    //   spotId: 4,
+    //   userId: 2,
+    //   review: 'Wonderbar!!',
+    //   stars: 4,
+    // },
+    // {
+    //   spotId: 5,
+    //   userId: 1,
+    //   review: 'Do you think I can lift 200 pounds over my head?',
+    //   stars: 3,
+    // },
   ], {});
   },
 

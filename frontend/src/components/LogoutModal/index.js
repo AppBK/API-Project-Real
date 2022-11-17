@@ -4,7 +4,6 @@ import Logout from './Logout';
 
 const LogoutModal = ({ user, logout }) => {
   const [showModal, setShowModal] = useState(true);
-  console.log('Kinda Open')
 
   return (
     <>

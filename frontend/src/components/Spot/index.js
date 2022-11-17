@@ -8,10 +8,10 @@ import { thunkSpotDelete } from "../../store/spot";
 import EditSpotModal from "../EditSpotModal";
 import { RouterContext } from "../../context/RouterContext";
 import Reviews from '../Reviews';
+import { thunkReviewsRead } from '../../store/reviews';
 
 const Spot = ({ isLoaded }) => {
-  console.log('IS LOADED Spot: ', isLoaded);
-
+  // console.log('IS LOADED Spot: ', isLoaded);
   const history = useHistory();
   const dispatch = useDispatch();
   const { showEditSpot } = useContext(RouterContext);
@@ -19,8 +19,22 @@ const Spot = ({ isLoaded }) => {
 
   const { spotId } = useParams();
 
+  console.log('spotId: ', spotId)
+
+
   const spots = useSelector(state => state.spotDetails);
   let spot = spots[+spotId];
+
+  // let spotReviews = useSelector(state => state.reviews.Reviews[spotId]);
+
+  // if (!spotReviews) {
+  //   dispatch(thunkReviewsRead(spotId));
+  // }
+
+  // spotReviews = useSelector(state => state.reviews.Reviews[spotId]);
+
+  // let validatedReviews;
+  // if (!spotReviews) validatedReviews = {}
 
   function deleteSpot() {
     dispatch(thunkSpotDelete(spotId));
