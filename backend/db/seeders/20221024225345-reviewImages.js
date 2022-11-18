@@ -28,22 +28,22 @@ module.exports = {
       reviewId: 4,
       url: 'https://pleasurephotoroom.files.wordpress.com/2013/09/audrey-hepburn-photo-mark-shaw-1954-b.jpg'
     },
-    // {
-    //   reviewId: 5,
-    //   url: 'https://cdn.britannica.com/32/68032-050-26C49C30/Audrey-Hepburn-1955.jpg',
-    // },
-    // {
-    //   reviewId: 6,
-    //   url: 'https://images.mubicdn.net/images/cast_member/5030/cache-6050-1526604798/image-w856.jpg?size=256x',
-    // },
-    // {
-    //   reviewId: 7,
-    //   url: 'https://www.mapadoceu.com.br/photo/astro/audrey-hepburn.jpg?v=1521849600',
-    // },
-    // {
-    //   reviewId: 8,
-    //   url: 'https://pyxis.nymag.com/v1/imgs/5eb/518/926d2c37fb00ac4533194a82716c7b14f6-06-audrey-hepburn.2x.rvertical.w330.jpg',
-    // },
+    {
+      reviewId: 5,
+      url: 'https://cdn.britannica.com/32/68032-050-26C49C30/Audrey-Hepburn-1955.jpg',
+    },
+    {
+      reviewId: 6,
+      url: 'https://images.mubicdn.net/images/cast_member/5030/cache-6050-1526604798/image-w856.jpg?size=256x',
+    },
+    {
+      reviewId: 7,
+      url: 'https://www.mapadoceu.com.br/photo/astro/audrey-hepburn.jpg?v=1521849600',
+    },
+    {
+      reviewId: 8,
+      url: 'https://pyxis.nymag.com/v1/imgs/5eb/518/926d2c37fb00ac4533194a82716c7b14f6-06-audrey-hepburn.2x.rvertical.w330.jpg',
+    },
   ], {});
   },
 
