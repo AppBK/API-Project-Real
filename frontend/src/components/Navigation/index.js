@@ -1,4 +1,4 @@
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useHistory, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
@@ -11,16 +11,19 @@ export default function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
   const [render, setRender] = useState(false);
   const { showModal, setShowModal } = useContext(RouterContext);
+  const [resetHome, setResetHome] = useState(true);
 
   const history = useHistory();
+  // const navigate = useNavigate();
 
   const goHome = () => {
+    setResetHome(!resetHome);
     history.push('/');
   }
 
   useEffect(() => {
     console.log('Got a re-render!');
-  },[showModal]);
+  },[showModal, resetHome]);
 
   let loggedInMenu;
   let sessionLinks;

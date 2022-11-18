@@ -358,13 +358,15 @@ router.get('/:spotId/images', [restoreUser, requireAuth], async (req, res) => {
 router.get('/:spotId/reviews', [restoreUser, requireAuth], async (req, res) => {
   const reviews = await Review.findAll({ where: { spotId: req.params.spotId } });
 
+  console.log('GOT REVIEWS!!');
+
   if (reviews.length) {
     for (let i = 0; i < reviews.length; i++) {
       // Just get the 'raw' review data object
       reviews[i] = reviews[i].dataValues;
 
       // Get info of user who gave the review
-      let user = await User.findByPk(req.user.id);
+      let user = await User.findByPk(reviews[i].userId);
       user = user.dataValues;
       delete user.username;
 

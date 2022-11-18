@@ -1,9 +1,13 @@
 #reviews-outer {
   /* background-color: red;*/
-  height: 366px;
-  width: 86%;
+  height: fit-content;
+  width: 87.3%;
   background-color: transparent;
-  margin-top: 24px;
+  margin-top: 32px;
+  border-bottom: 2px solid rgb(221,221,221);
+  border-top: 2px solid rgb(221, 221, 221);
+  padding-bottom: 24px;
+  padding-top: 12px;
 }
 
 #rendered-reviews-container {
@@ -14,16 +18,20 @@
 #review {
   display: flex;
   flex-direction: column;
+  height: 183px;
 }
 
-#upper-rev {
+.upper-rev {
   display: flex;
+  align-items: center;
+
 }
 
 #name-date-container {
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 80px;
+  margin-left: 8px;
 }
 
 #avg-score-and-num-reviews {
@@ -36,8 +44,7 @@
 
 .review {
   width: 50%;
-  height: 366px;
-  background-color: red;
+  height: 50%;
 }
 
 #review-star-div {
@@ -68,6 +75,9 @@
   border-radius: 50%;
   width: 40px;
   height: 40px;
+  margin-left: 2px;
+  margin-right: 2px;
+  margin: 4px;
 }
 
 #img {
@@ -75,4 +85,49 @@
   height: 100%;
   width: 100%;
   border-radius: 50%;
+}
+
+#username {
+  padding: 0px;
+  margin: 0px;
+  margin-bottom: 4px;
+}
+
+#review-date {
+    padding: 0px;
+    margin: 0px;
+    opacity: 0.7;
+}
+
+.review-text {
+  margin: 4px;
+}
+
+#edit-delete-container {
+  display: flex;
+}
+
+#edit-button {
+  width: 40px;
+  height: 20px;
+  background-color: #FF385C;
+  border: none;
+  font-size: 12px;
+  color: white;
+  border-radius: 16px;
+  margin-right: 4px;
+}
+
+#delete-button {
+  width: 50px;
+  height: 20px;
+  background-color: #FF385C;
+  border: none;
+  font-size: 12px;
+  color: white;
+  border-radius: 16px;
+}
+
+#create-review-div {
+  margin-top: 60px;
 }

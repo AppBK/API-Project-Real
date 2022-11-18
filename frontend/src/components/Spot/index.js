@@ -9,6 +9,7 @@ import EditSpotModal from "../EditSpotModal";
 import { RouterContext } from "../../context/RouterContext";
 import Reviews from '../Reviews';
 import { thunkReviewsRead } from '../../store/reviews';
+import '../CreateReviewModal/CreateReview.css';
 
 const Spot = ({ isLoaded }) => {
   // console.log('IS LOADED Spot: ', isLoaded);
@@ -19,11 +20,12 @@ const Spot = ({ isLoaded }) => {
 
   const { spotId } = useParams();
 
-  console.log('spotId: ', spotId)
 
 
   const spots = useSelector(state => state.spotDetails);
   let spot = spots[+spotId];
+
+  // console.log('RENDERING A SPOT: ', spots);
 
   // let spotReviews = useSelector(state => state.reviews.Reviews[spotId]);
 
@@ -101,17 +103,15 @@ const Spot = ({ isLoaded }) => {
       {isLoaded && isAuthorized && (<div id="user-options-menu">
         <div>
           <AddImageModal />
-          {/* <button className="spotButtons" onClick={() => setShowModal(true)}>Add Image</button> */}
         </div>
         <div>
           <EditSpotModal />
-          {/* <button className="spotButtons">Edit</button> */}
         </div>
         <div>
           <button className="spotButtons" onClick={deleteSpot}>Delete</button>
         </div>
       </div>)}
-      <Reviews spot={spot} isLoaded={isLoaded}/>
+      <Reviews spot={spot} isLoaded={isLoaded} isAuthorized={isAuthorized}/>
     </div>
   );
 }

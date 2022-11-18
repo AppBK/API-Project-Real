@@ -1,0 +1,3 @@
+#!/bin/bash
+
+heroku restart && heroku pg:reset DATABASE --confirm splangy01 && heroku run npm run sequelize db:migrate && heroku run npm run sequelize db:seed:all

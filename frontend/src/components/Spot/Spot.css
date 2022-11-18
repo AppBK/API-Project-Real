@@ -121,3 +121,30 @@
 .spotButtons:hover {
   cursor: pointer;
 }
+
+#create-rev-form {
+  width: 400px;
+  height: 400px;
+  border: 2px solid rgb(221, 221, 221);
+  border-radius: 16px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto';
+}
+
+#review-submit {
+  background-color: #FF385C;
+  border: none;
+  border-radius: 30px;
+  width: 80px;
+  height: 30px;
+  color: white;
+  margin-left: 16px;
+}
+
+.errors {
+  color: red;
+  list-style: none;
+}

@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext } from 'react';
 import { Modal } from '../../context/Modal';
+import { useState, useEffect, useContext } from 'react';
 import { RouterContext } from '../../context/RouterContext';
 import './addImage.css';
 import AddImage from './addImage';

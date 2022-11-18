@@ -9,6 +9,8 @@ export const RouterProvider = props => {
   const [showAddImage, setShowAddImage] = useState(false);
   const [showEditSpot, setShowEditSpot] = useState(false);
   const [showCreateSpot, setShowCreateSpot] = useState(false);
+  const [showCreateReview, setShowCreateReview] = useState(false);
+  const [showEditReview, setShowEditReview] = useState(false);
 
   useEffect(() => {
     console.log('SPOT TYPE FROM PROVIDER: ', spotType);
@@ -21,7 +23,9 @@ export const RouterProvider = props => {
       showModal, setShowModal,
       showAddImage, setShowAddImage,
       showEditSpot, setShowEditSpot,
-      showCreateSpot, setShowCreateSpot
+      showCreateSpot, setShowCreateSpot,
+      showCreateReview, setShowCreateReview,
+      showEditReview, setShowEditReview,
     }}>
       {props.children}
     </RouterContext.Provider>

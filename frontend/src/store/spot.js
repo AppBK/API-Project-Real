@@ -71,7 +71,7 @@ export const thunkSpotEdit = (spotId, spot) => async (dispatch) => {
   });
 
   if (response.ok) {
-    const updatedSpot = response.json();
+    const updatedSpot = await response.json();
 
     dispatch(actionSpotEdit(updatedSpot));
     return updatedSpot;
@@ -157,6 +157,8 @@ export default function spotReducer(state = {}, action) {
     }
     case SPOTS_EDIT: {
       const newState = {...state};
+
+      console.log('EDITNIG A SPOT: ', action.spot);
       newState[action.spot.id] = action.spot;
 
       return newState;

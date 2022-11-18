@@ -1,0 +1,45 @@
+#create-rev-form {
+  width: 400px;
+  height: 400px;
+  border: 2px solid rgb(221,221,221);
+  border-radius: 16px;
+  background-color: white;
+  position: absolute;
+}
+
+#create-review-flex {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+}
+
+.errors {
+  color: red;
+  list-style: none;
+  font-size: 12px;
+}
+
+#close-modal {
+  position: relative;
+  top: -166px;
+  left: -70px;
+  margin: 0px;
+}
+
+#error-div {
+  position: relative;
+  left: 60px;
+  top: -166px;
+  padding: 0px;
+  margin: 0px;
+}
+
+#close-x {
+  background-color: transparent;
+  border: none;
+  opacity: 0.7;
+}
+
+#close-x:hover {
+  cursor: pointer;
+}
