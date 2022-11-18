@@ -44,13 +44,37 @@ router.post('/:spotId/reviews', [restoreUser, requireAuth], async (req, res) => 
     stars: stars,
   });
 
-  const newestReview = await Review.findAll({
+  let newestReview = await Review.findAll({
     limit: 1,
     order: [['createdAt', 'DESC']],
   });
 
+  newestReview = newestReview[0].dataValues;
+
+  // Get info of user who gave the review
+  let user = await User.findByPk(newestReview.userId);
+  user = user.dataValues;
+  delete user.username;
+
+  newestReview.User = user;
+
+  let revImg = await ReviewImage.create({
+    reviewId: newestReview.id,
+    url: 'https://cdn.royalcanin-weshare-online.io/UCImMmgBaxEApS7LuQnZ/v2/eukanuba-market-image-puppy-beagle?w=5596&h=2317&rect=574,77,1850,1045&auto=compress,enhance',
+  });
+
+  let defaultReviewImg = await ReviewImage.findAll({
+    limit: 1,
+    order: [['createdAt', 'DESC']],
+  });
+
+  // defaultReviewImg = defaultReviewImg.dataValues;
+  console.log(defaultReviewImg[0].dataValues);
+
+  newestReview.ReviewImages = defaultReviewImg;
+
   res.statusCode = 201;
-  return res.json(newestReview.pop());
+  return res.json(newestReview);
 
 });
 
@@ -188,13 +212,19 @@ router.post('/', [restoreUser, requireAuth], async (req, res) => {
     category
   });
 
-  const newestSpot = await Spot.findAll({
+  let newestSpot = await Spot.findAll({
     limit: 1,
     order: [[ 'createdAt', 'DESC']],
   });
 
+  // console.log('NEWEST-SPOT: ', newestSpot[0].dataValues);
+  newestSpot = newestSpot[0].dataValues;
+  newestSpot.avgRating = null;
+  newestSpot.previewImage = 'https://cdn.royalcanin-weshare-online.io/UCImMmgBaxEApS7LuQnZ/v2/eukanuba-market-image-puppy-beagle?w=5596&h=2317&rect=574,77,1850,1045&auto=compress,enhance';
+
+  // console.log('AFTER: ', newestSpot);
   res.statusCode = 201;
-  return res.json(newestSpot.pop());
+  return res.json(newestSpot);
 
 });
 
@@ -529,7 +559,7 @@ router.get('/', async (req, res) => {
   console.log('WHERE: ', where);
 
   if (!page || page < 1 || page > 10) page = 1;
-  if (!size || size < 1 || size > 20) size = 20;
+  if (!size || size < 1 || size > 20) size = 21;
 
   let offset = size * (page - 1);
 
@@ -559,6 +589,7 @@ router.get('/', async (req, res) => {
     const avg = sum / tempRevs.length;
 
     tempSpot.avgRating = avg;
+    // Help;
     tempSpot.previewImage = img.url;
 
     response.push(tempSpot);
@@ -595,4 +626,97 @@ Worked: https://splangy01.herokuapp.com/api/spots/2/images
   //       }
   //   },
   // ],
+
+
+RETURN from Create a Spot:
+  {
+      "id": 1,
+      "ownerId": 1,
+      "address": "123 Disney Lane",
+      "city": "San Francisco",
+      "state": "California",
+      "country": "United States of America",
+      "lat": 37.7645358,
+      "lng": -122.4730327,
+      "name": "App Academy",
+      "description": "Place where web developers are created",
+      "price": 123,
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-19 20:39:36"
+    }
+
+
+RETURN from Get all spots:
+
+    {
+      "Spots": [
+        {
+          "id": 1,
+          "ownerId": 1,
+          "address": "123 Disney Lane",
+          "city": "San Francisco",
+          "state": "California",
+          "country": "United States of America",
+          "lat": 37.7645358,
+          "lng": -122.4730327,
+          "name": "App Academy",
+          "description": "Place where web developers are created",
+          "price": 123,
+          "createdAt": "2021-11-19 20:39:36",
+          "updatedAt": "2021-11-19 20:39:36",
+          "avgRating": 4.5,
+          "previewImage": "image url"
+        }
+      ]
+    }
+
+
+NEWEST-SPOT:  [
+  Spot {
+    dataValues: {
+      id: 46,
+      ownerId: 6,
+      address: '1555 Farley Ave.',
+      city: 'San Jose',
+      state: 'California',
+      country: 'United States',
+      lat: 4567,
+      lng: 4567,
+      name: 'CHEESY',
+      description: 'Hey Now',
+      price: 30,
+      category: 'BeachFront',
+      createdAt: 2022-11-18T22:26:37.969Z,
+      updatedAt: 2022-11-18T22:26:37.969Z
+    },
+    _previousDataValues: {
+      id: 46,
+      ownerId: 6,
+      address: '1555 Farley Ave.',
+      city: 'San Jose',
+      state: 'California',
+      country: 'United States',
+      lat: 4567,
+      lng: 4567,
+      name: 'CHEESY',
+      description: 'Hey Now',
+      price: 30,
+      category: 'BeachFront',
+      createdAt: 2022-11-18T22:26:37.969Z,
+      updatedAt: 2022-11-18T22:26:37.969Z
+    },
+    uniqno: 1,
+    _changed: Set(0) {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+
+
   */

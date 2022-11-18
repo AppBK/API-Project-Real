@@ -8,8 +8,6 @@ import { useHistory } from 'react-router-dom';
 import { actionSpotsGetInfo, thunkGetAllSpotInfo } from '../../store/spot';
 
 const Spots = ({ isLoaded }) => {
-  console.log('IS LOADED Spots: ', isLoaded);
-
   const { spotType, setSpotType, spotsRetrieved, setSpotsRetrieved } = useContext(RouterContext);
   let spots = useSelector(state => state.spots);
   spots = Object.values(spots);
@@ -28,16 +26,6 @@ const Spots = ({ isLoaded }) => {
   useEffect(() => {
     // Get All Spots after initial render
     dispatch(thunkGetAllSpots(spotType));
-
-    // let tempSpots = useSelector(state => state.spots);
-    // tempSpots = Object.values(tempSpots);
-
-    // console.log('TEMP SPOTS: ', tempSpots);
-
-    // for (let i = 0; i < tempSpots.length; i++) {
-    //   console.log(tempSots[i])
-    //   await dispatch(thunkGetAllSpotInfo(tempSpots[i].id));
-    // }
   }, []);
 
   useEffect(() => {

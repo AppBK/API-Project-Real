@@ -1,4 +1,5 @@
 import { csrfFetch } from "./csrf";
+import { thunkGetAllSpotInfo } from './singleSpot';
 
 // Actions
 const REVIEWS_READ = 'reviews/REVIEWS_READ';
@@ -20,6 +21,15 @@ export const actionReviewCreate = (review) => {
     review
   }
 }
+
+export const actionReviewDelete = (spotId, reviewId) => {
+  return {
+    type: REVIEW_DELETE,
+    spotId,
+    reviewId
+  }
+}
+
 
 // Thunks
 export const thunkReviewsRead = (spotId) => async (dispatch) => {
@@ -44,10 +54,25 @@ export const thunkReviewCreate = (spotId, review) => async (dispatch) => {
   if (response.ok) {
     const review = await response.json();
 
-    dispatch(actionReviewCreate(review));
+    await dispatch(actionReviewCreate(review));
+
+    dispatch(thunkGetAllSpotInfo(spotId));
     return response;
   }
 }
+
+export const thunkReviewDelete = (spotId, reviewId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+    method: 'DELETE',
+  });
+
+  if (response.ok) {
+    dispatch(actionReviewDelete(spotId, reviewId));
+    dispatch(thunkGetAllSpotInfo(spotId));
+    return response;
+  }
+}
+
 
 // Reducer
 const reviewsReducer = (state = { Reviews: {}}, action) => {
@@ -66,8 +91,29 @@ const reviewsReducer = (state = { Reviews: {}}, action) => {
     case REVIEW_CREATE: {
       const newState = {...state};
 
-      if (!newState.Reviews[action.review.spotId]) newState.Reviews[action.review.spotId] = [];
-      newState.Reviews[action.review.spotId].push(action.review);
+      if (!newState.Reviews[action.review.spotId]) {
+        newState.Reviews[action.review.spotId] = [];
+        newState.Reviews[action.review.spotId].push(action.review);
+      } else {
+        newState.Reviews[action.review.spotId].push(action.review);
+      }
+
+      return newState;
+    }
+    case REVIEW_DELETE: {
+      const newState = {...state};
+      let spotReviewsArray = newState.Reviews[action.spotId];
+      console.log('SPOT REVIEWS ARRAY: ', newState.Reviews[action.spotId]);
+      console.log(action.reviewId);
+
+      for (let i = 0; i < spotReviewsArray.length; i++) {
+        console.log('ITERATING', spotReviewsArray[i]);
+        if (spotReviewsArray[i].id === +action.reviewId) {
+          console.log('BEFORE DELETE: ', newState.Reviews[action.spotId])
+          newState.Reviews[action.spotId].splice(i, 1);
+          console.log('AFTER DELETE: ', newState.Reviews[action.spotId])
+        }
+      }
 
       return newState;
     }
@@ -84,3 +130,7 @@ export default reviewsReducer;
 // /api/spots/:spotId/reviews GET
 // /api/spots/:spotId/reviews POST
 // /api/reviews/:reviewId DELETE
+
+/*
+SPOT REVIEWS ARRAY:
+*/

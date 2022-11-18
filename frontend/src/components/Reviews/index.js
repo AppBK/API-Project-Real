@@ -5,8 +5,9 @@ import { thunkEditSpot } from '../../store/spot';
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkSpotCreate } from '../../store/spot';
 import './Reviews.css';
-import { thunkReviewsRead } from '../../store/reviews';
+import { actionReviewDelete, thunkReviewsRead } from '../../store/reviews';
 import CreateReviewModal from '../CreateReviewModal';
+import { thunkReviewDelete } from '../../store/reviews';
 
 
 const withReviews = (<svg className="star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false" style={{ display: "block", height: "16px", width: "16px", fill: "currentcolor" }}><path d="M15.094 1.579l-4.124 8.885-9.86 1.27a1 1 0 0 0-.542 1.736l7.293 6.565-1.965 9.852a1 1 0 0 0 1.483 1.061L16 25.951l8.625 4.997a1 1 0 0 0 1.482-1.06l-1.965-9.853 7.293-6.565a1 1 0 0 0-.541-1.735l-9.86-1.271-4.127-8.885a1 1 0 0 0-1.814 0z" fillRule="evenodd" /></svg>);
@@ -28,11 +29,10 @@ export default function Reviews({ spot, isLoaded, isAuthorized }) {
     return string.slice(0, 10);
   }
 
-  const confirmPic = (ref) => {
-    if (!ref) {
-      return 'https://cdn.royalcanin-weshare-online.io/UCImMmgBaxEApS7LuQnZ/v2/eukanuba-market-image-puppy-beagle?w=5596&h=2317&rect=574,77,1850,1045&auto=compress,enhance';
-    }
-    return ref[0].url;
+  const deleteRev = (e) => {
+    e.preventDefault();
+
+    dispatch(thunkReviewDelete(spot.id, e.target.value));
   }
 
   useEffect(() => {
@@ -52,21 +52,21 @@ export default function Reviews({ spot, isLoaded, isAuthorized }) {
       </div>
       <div id="rendered-reviews-container">
       {spotReviews && spotReviews.map(review => (
-        <div className="review" key={review.firstName}>
+        <div className="review" key={review.id}>
           <div className="upper-rev">
             <div className="img-container">
-              <img id="img" src={confirmPic(review.ReviewImages)}></img>
+              <img id="img" src={review.ReviewImages[0].url}></img>
             </div>
             <div id="name-date-container">
               <h4 id="username">{review.User.firstName}</h4>
               <h5 id="review-date">{getDate(review.updatedAt)}</h5>
             </div>
             {isLoaded && isAuthorized && (<div id="edit-delete-container">
-              <div>
+              {/* <div>
                 <button id="edit-button">Edit</button>
-              </div>
+              </div> */}
               <div>
-                <button id="delete-button">Delete</button>
+                <button id="delete-button" value={review.id} onClick={(e) => deleteRev(e)}>Delete</button>
               </div>
             </div>)}
           </div>

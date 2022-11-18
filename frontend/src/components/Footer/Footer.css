@@ -34,9 +34,9 @@
   text-decoration: none;
 }
 
-.footer-links:hover {
+/* .footer-links:hover {
   text-decoration: underline;
-}
+} */
 
 #footer-content-left {
   display: flex;
@@ -55,10 +55,10 @@
   background-color: transparent;
 }
 
-#destinations:hover {
+/* #destinations:hover {
   text-decoration: underline;
   cursor: pointer;
-}
+} */
 
 #footer-access {
   display: flex;
@@ -85,7 +85,7 @@
   cursor: pointer;
 }
 
-#access-button:hover {
+/* #access-button:hover {
   text-decoration: underline;
 }
 
@@ -95,7 +95,7 @@
 
 #support-button:hover {
   text-decoration: underline;
-}
+} */
 
 #globe {
   display: inline-block;

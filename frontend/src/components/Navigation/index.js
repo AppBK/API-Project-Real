@@ -54,7 +54,7 @@ export default function Navigation({ isLoaded }) {
       <div className="center-console-container center-content">
         <ul className="center-console">
           <li className="user-menu-li pointer">
-            <button id="home-button" onClick={() => goHome()}>Home</button>
+            <button id="home-button" onClick={goHome}>Home</button>
           </li>
           {isLoaded && sessionLinks}
           <div className="search-icon-container">

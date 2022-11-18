@@ -117,7 +117,7 @@ export const thunkSpotCreate = (spot) => async (dispatch) => {
   });
 
   if (response.ok) {
-    const newSpot = response.json();
+    const newSpot = await response.json();
     console.log('A new spot?', newSpot);
 
     dispatch(actionSpotCreate(newSpot));
