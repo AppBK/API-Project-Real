@@ -199,3 +199,12 @@
 #home-button:hover {
   cursor: pointer;
 }
+
+#search-button-actual {
+  background-color: transparent;
+  border: none;
+}
+
+#search-button-actual:hover {
+  cursor: pointer;
+}

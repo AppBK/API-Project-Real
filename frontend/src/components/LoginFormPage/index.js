@@ -24,6 +24,11 @@ export default function LoginFormPage() {
       password: pass
     }
 
+  const demoUser = () => {
+    setCred('Demo-lition');
+    setPass('password');
+  }
+
     return dispatch(thunkUserLogin(creds))
       .catch(async (res) => {
         const data = await res.json();

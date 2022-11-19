@@ -37,8 +37,10 @@ const restoreUser = (req, res, next) => {
     }
 
     try {
+      console.log('IN TRY RESTORE USER');
       const { id } = jwtPayload.data;
       req.user = await User.scope('currentUser').findByPk(id);
+      console.log('THIS IS REQ.USER: ', req.user);
     } catch (e) {
       res.clearCookie('token');
       return next();

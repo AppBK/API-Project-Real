@@ -9,6 +9,7 @@ import TypeCarousel from './components/TypeCarousel';
 import Spots from './components/Spots';
 import Spot from './components/Spot';
 import { actionUserAdd } from './store/session';
+import ComingSoon from './components/ComingSoon';
 
 
 let validation;
@@ -51,6 +52,9 @@ function App() {
         </Route>
         <Route path="/signup">
           <SignupForm isLoaded={isLoaded}/>
+        </Route>
+        <Route path="/coming">
+          <ComingSoon />
         </Route>
       </Switch>
       )}
