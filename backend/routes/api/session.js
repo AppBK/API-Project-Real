@@ -116,4 +116,29 @@ fetch('/api/session', {
   }
 }).then(res => res.json()).then(data => console.log(data));
 
+
+// Rawaha's Infinite Wisdom!!! Let's fix this bitch!!
+
+1) home page is nto all. spots, it acutually defaultsto the first category, so. if you create a spotin another category,
+it doesnt show. up on the main page, and it looks like its not created, ut. it is under the correct category, just.
+not intuitive
+
+2) on refresh we get logged out
+
+3) no demo user button  # FIXED!!
+
+4) make category iterable drop down, had to figure out how to create a spot.
+
+5) is there a way to show all spots? or I can only see the spot I created on the category i put it on.
+
+6) when yo uadd an image, it doesnt dymanically update created a spot and when I click on the spot from the home page the spot detail page breaks.
+
+
+7) on edit,  able to submit a blank form and there is no error handling and it breaks the app
+
+8) able to submit a blank review form, we dont get error handling and it breaks the app.
+
+9) left a review as one user and was able to delete it as another user, was not able to delete it as the user
+who left the review.
+
 */
