@@ -11,6 +11,114 @@
   left: 298px;
 }
 
+
+#div-flex-upper-sliver {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgb(221,221,221);
+  height: 64px;
+  padding-left: 16px;
+  padding-right: 12px;
+}
+
+#the-closer {
+  border: none;
+  border-radius: 50%;
+  background-color: white;
+  height: 20px;
+}
+
+#the-closer:hover {
+  cursor: pointer;
+  background-color: rgb(227,227,227);
+}
+
 #close-button-login:hover {
   border: 1.5px solid rgb(187, 187, 187);
+}
+
+#outer-modal-div-flex {
+  display: flex;
+  flex-direction: column;
+  width: 568px;
+  height: 452px; /*  make 'fit-content' later */
+  background-color: white;
+  z-index: 100;
+  border-radius: 16px;;
+}
+
+#login-signup {
+  margin-left: 200px;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+#welcome {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0px;
+  margin-bottom: 22px;
+  width: 100%;
+}
+
+#form-flex {
+  padding: 24px;
+}
+
+#combined-input-flex {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+}
+
+.siamese-input-boxes {
+  display: block;
+  margin: 0px;
+  padding: 0px;
+  padding-left: 12px;
+  height: 64px;
+  border: 1px solid rgb(221,221,221);
+  /* border-top-left-radius: 12px;
+  border-top-right-radius: 12px; */
+}
+
+#siamese-top {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-bottom: none;
+}
+
+#siamese-bottom {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+#demo-user-button {
+  height: 48px;
+  width: 100%;
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  border-radius: 12px;
+  border: none;
+}
+
+#demo-user-button:hover {
+  cursor: pointer;
+}
+
+#login-button {
+  height: 48px;
+  width: 100%;
+  background-color: #FF385C;
+  color: white;
+  font-size: 16px;
+  border-radius: 12px;
+  border: none;
+  margin: 24px;
+}
+
+#login-button:hover {
+  cursor: pointer;
 }

@@ -123,7 +123,7 @@ fetch('/api/session', {
 it doesnt show. up on the main page, and it looks like its not created, ut. it is under the correct category, just.
 not intuitive
 
-2) on refresh we get logged out
+2) on refresh we get logged out FIXED!!
 
 3) no demo user button  # FIXED!!
 
@@ -140,5 +140,7 @@ not intuitive
 
 9) left a review as one user and was able to delete it as another user, was not able to delete it as the user
 who left the review.
+
+10) make that logout modal prettier!!
 
 */
