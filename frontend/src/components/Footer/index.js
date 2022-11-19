@@ -7,11 +7,11 @@ const Footer = () => {
         <div id="footer-content-left">
           <p>2022 Airbnb, Inc.</p>
           <span className="footer-spacing-dot">.</span>
-          <a href="https://airbnb.com/terms/privacy_policy" className="footer-links">Privacy</a>
+          <div href="https://airbnb.com/terms/privacy_policy" className="footer-links">Privacy</div>
           <span className="footer-spacing-dot">.</span>
-          <a href="https://airbnb.com/terms" className="footer-links">Terms</a>
+          <div href="https://airbnb.com/terms" className="footer-links">Terms</div>
           <span className="footer-spacing-dot">.</span>
-          <a href="https://airbnb.com/sitemaps/v2" className="footer-links">Sitemap</a>
+          <div href="https://airbnb.com/sitemaps/v2" className="footer-links">Sitemap</div>
           <span className="footer-spacing-dot">.</span>
           <button id="destinations">Destinations</button>
         </div>

@@ -54,7 +54,7 @@ export default function LoginForm({ onClose, render }) {
         <div id="outer-modal-div-flex">
           <div id="div-flex-upper-sliver">
             <button id="the-closer" onClick={() => closeModal()}>X</button>
-            <div id="login-signup">Login or sign up</div>
+            <div id="login-signup">Login</div>
           </div>
           <div id="lower-portion">
             <form id="form-flex" onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>

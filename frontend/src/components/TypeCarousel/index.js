@@ -14,11 +14,8 @@ const TypeCarousel = () => {
   const [showLeft, setShowLeft] = useState('hidden');
   const [showRight, setShowRight] = useState('visible');
   const [active, setActive] = useState(false);
-  // const carousel = document.getElementById('carousel');
-  // const currentPadding = carousel.style.paddingLeft;
-  // console.log('P-Left', currentPadding);
+  const [prevType, setPrevType] = useState('');
 
-  // console.log('P-Left', currentPadding);
 
   const history = useHistory();
 
@@ -29,9 +26,37 @@ const TypeCarousel = () => {
   }, []);
 
   useEffect(() => {
+    let activeType = document.getElementById(spotType); // carousel-button-container
+    console.log('ACTIVE TYPE: ', activeType);
+    activeType.style.borderBottom = "2px solid black";
+    // activeType.style.borderTop = "2px solid black";
+    let buttonCarousel = activeType.children[0];
+    buttonCarousel.style.color = "black"
+    let randDiv = buttonCarousel.children[0];
+    let imgCarousel = randDiv.children[0];
+    imgCarousel.style.opacity = "1";
+
+    console.log('PREV TYPE: ', prevType);
+    if (prevType) {
+      let prevActiveType = document.getElementById(prevType);
+      prevActiveType.style.borderBottom = "1px solid lightgrey";
+    }
+    console.log('BUTTON CHILDREN: ', imgCarousel);
     console.log('SPOT TYPE: ', spotType);
     history.push('/');
   }, [spotType]);
+
+  const switchType = (e) => {
+    let tempType = spotType;
+    // console.log('tempTYPE: ', tempType);
+    // console.log('TARGET VALUE: ', e.target.id);
+    setSpotType(e.target.id);
+    setPrevType(tempType);
+  }
+
+  const comingSoon = () => {
+    history.push('/coming');
+  }
 
   const swipeRight = () => {
     carousel = document.getElementById('carousel');
@@ -110,7 +135,7 @@ const TypeCarousel = () => {
       <div id="carousel">
         {types.map(type => (
           <div id={type.name} className="carousel-button-container" key={type.name}>
-            <button id={type.name} type="button" className="carousel-button" onClick={(e) => setSpotType(e.target.id)}>
+            <button id={type.name} type="button" className="carousel-button" onClick={(e) => switchType(e)}>
               <div id={type.name} className="maybe" style={{ width: "fit-content", display: "flex", height: "48px", flexDirection: "column", justifyContent: "space-between", alignItems: "center"}}>
                 <img id={type.name} className="thumbnail"  src={type.url} style={{ display: "block", width: "24px", height: "24px", color: "#717171"}}></img>
                 <span id={type.name} style={{display: "block"}}>{type.name}</span>
@@ -124,7 +149,7 @@ const TypeCarousel = () => {
           <button id="swipe-right-button" onClick={swipeRight}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false" style={{display: "block", fill: "none", height: "12px", width: "12px", stroke: "currentcolor", strokeWidth: "5.33333", overflow: "visible"}}><g fill="none"><path d="m12 4 11.2928932 11.2928932c.3905243.3905243.3905243 1.0236893 0 1.4142136l-11.2928932 11.2928932" /></g></svg>
         </button>
-        <button id="filter-button">
+        <button id="filter-button" onClick={comingSoon}>
           <div>
             <svg id="filter-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" style={{display: "block", height: "14px", width: "14px", fill: "currentColor"}} aria-hidden="true" role="presentation" focusable="false"><path d="M5 8c1.306 0 2.418.835 2.83 2H14v2H7.829A3.001 3.001 0 1 1 5 8zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6-8a3 3 0 1 1-2.829 4H2V4h6.17A3.001 3.001 0 0 1 11 2zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" /></svg>
           </div>

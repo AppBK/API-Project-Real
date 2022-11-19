@@ -5,7 +5,6 @@ const SPOTS_GET_ALL_INFO = 'spots/GETALL';
 const SPOTS_GET_CATEGORY = 'spots/SPOTS_GET_CATEGORY';
 const SPOTS_DELETE = 'spots/SPOTS_DELETE';
 const SPOTS_EDIT = 'spots/SPOTS_EDIT';
-const SPOTS_ADD_IMAGE = 'spots/SPOTS_ADD_IMAGE';
 const SPOTS_CREATE = 'spots/CREATE';
 
 // Action Creators
@@ -140,12 +139,6 @@ export default function spotReducer(state = {}, action) {
       newState.spots[action.spot.id] = action.spot;
 
       console.log('IN GET INFO: ', action.spot);
-
-      return newState;
-    }
-    case SPOTS_ADD_IMAGE: {
-      const newState = {...state};
-      newState[action.spotId].SpotImages[action.image.id] = action.image;
 
       return newState;
     }

@@ -17,6 +17,8 @@
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
+  width: 100%;
+  padding-right: 60px;
 }
 
 .footer-spacing-dot {
@@ -68,21 +70,18 @@
   display: flex;
   border: none;
   background-color: transparent;
-  cursor: pointer;
 }
 
 #currency-button {
   display: flex;
   border: none;
   background-color: transparent;
-  cursor: pointer;
 }
 
 #support-button {
   display: flex;
   border: none;
   background-color: transparent;
-  cursor: pointer;
 }
 
 /* #access-button:hover {

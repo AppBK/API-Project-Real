@@ -121,13 +121,13 @@ fetch('/api/session', {
 
 1) home page is nto all. spots, it acutually defaultsto the first category, so. if you create a spotin another category,
 it doesnt show. up on the main page, and it looks like its not created, ut. it is under the correct category, just.
-not intuitive
+not intuitive #FIXED?
 
 2) on refresh we get logged out FIXED!!
 
 3) no demo user button  # FIXED!!
 
-4) make category iterable drop down, had to figure out how to create a spot.
+4) make category iterable drop down, had to figure out how to create a spot. #FIXED!!
 
 5) is there a way to show all spots? or I can only see the spot I created on the category i put it on.
 

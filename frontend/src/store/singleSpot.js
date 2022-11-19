@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 // Actions
 const SPOT_GET_ALL_INFO = 'spots/GET_ALL_INFO';
 const SPOTS_EDIT = 'spots/SPOTS_EDIT';
+const SPOTS_ADD_IMAGE = 'spots/SPOTS_ADD_IMAGE';
 
 // Action Creators
 export const actionGetAllSpotInfo = (spot) => {
@@ -16,6 +17,14 @@ export const actionSpotEdit = (spot) => {
   return {
     type: SPOTS_EDIT,
     spot
+  }
+}
+
+export const actionSpotAddImage = (image, spotId) => {
+  return {
+    type: SPOTS_ADD_IMAGE,
+    image,
+    spotId
   }
 }
 
@@ -44,6 +53,25 @@ export const thunkSpotEdit = (spotId, spot) => async (dispatch) => {
 
     dispatch(actionSpotEdit(spot));
     return spot;
+  }
+}
+
+export const thunkSpotAddImage = (spotId, url, prev) => async (dispatch) => {
+  const preview = prev === 'true' ? true : false;
+
+  const response = csrfFetch(`/api/spots/${spotId}/images`, {
+    method: 'POST',
+    body: JSON.stringify({
+      url,
+      preview
+    })
+  });
+
+  if (response.ok) {
+    const img = await response.json();
+
+    dispatch(actionSpotAddImage(img, spotId));
+    return response;
   }
 }
 
@@ -89,6 +117,13 @@ export default function singleSpotReducer(state = {}, action) {
       newState[action.spot.id] = newSpot;
 
       return newSpot;
+    }
+    case SPOTS_ADD_IMAGE: {
+      const newState = { ...state };
+      newState[action.spotId].SpotImages.unshift(action.image);
+      console.log('FROM SPOT REDUCER, IMAGES ARRAY: ', newState[action.spotId].SpotImages);
+
+      return newState;
     }
     default: {
       return state;

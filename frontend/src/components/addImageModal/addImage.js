@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { RouterContext } from "../../context/RouterContext";
-import { thunkSpotAddImage } from '../../store/spot';
+import { thunkSpotAddImage } from '../../store/singleSpot';
 import { useDispatch } from 'react-redux';
 
 const AddImage = () => {
@@ -17,7 +17,8 @@ const AddImage = () => {
 
   // }, [urlValue, previewValue]);
 
-  async function addImage() {
+  async function addImage(e) {
+    e.preventDefault();
     const response = await dispatch(thunkSpotAddImage(spotId, urlValue, previewValue));
 
     setShowAddImage(false);
@@ -36,7 +37,7 @@ const AddImage = () => {
         <button onClick={() => setShowAddImage(false)} id="close-add-image">X</button>
       {/* </div> */}
       <div id="flex-modal">
-      <form>
+      <form onSubmit={addImage}>
         <label for="url-input">
             URL:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <input type="text" name="url-input" placeholder="url" value={urlValue} onChange={(e) => setUrlValue(e.target.value)}></input>
@@ -46,7 +47,7 @@ const AddImage = () => {
             <input type="text" name="preview-input" placeholder="true or false" value={previewValue} onChange={(e) => setPreviewValue(e.target.value)}></input>
         </label>
         <div id="button-holder">
-          <button id="add-image-submit" onClick={() => addImage()}>Submit</button>
+          <button id="add-image-submit" type="submit">Submit</button>
         </div>
       </form>
       </div>

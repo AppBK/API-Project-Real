@@ -11,7 +11,9 @@ export default function CreateASpotModal() {
 
   return (
     <div id='generic'>
-      <button id="edit-modal-create-button" className="spotButtons" onClick={() => setShowCreateSpot(true)}>Become a Host</button>
+      <button id="edit-modal-create-button"  onClick={() => setShowCreateSpot(true)}
+        // style={{backgroundColor: "transparent", color: "black", fontSize: "14px", marginTop: "16px", border: "none", marginRight: "32px", display: "block"}}
+      >Become a Host</button>
       {showCreateSpot && (
         <Modal onClose={() => setShowCreateSpot(false)}>
           <CreateASpot />
@@ -20,3 +22,18 @@ export default function CreateASpotModal() {
     </div>
   );
 }
+
+
+/*
+#edit-modal-create-button {
+  background: transparent;
+  color: black;
+  font-size: 14px;
+  margin-top: 16px;
+}
+
+#edit-modal-create-button:hover {
+  cursor: pointer;
+  background-color: rgb(221,221,221);
+}
+*/
