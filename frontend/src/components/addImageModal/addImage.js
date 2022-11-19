@@ -4,9 +4,11 @@ import { RouterContext } from "../../context/RouterContext";
 import { thunkSpotAddImage } from '../../store/singleSpot';
 import { useDispatch } from 'react-redux';
 
+console.log('THUNK IMAGE: ', thunkSpotAddImage);
+
 const AddImage = () => {
-  const [urlValue, setUrlValue] = useState();
-  const [previewValue, setPreviewValue] = useState();
+  const [urlValue, setUrlValue] = useState('');
+  const [previewValue, setPreviewValue] = useState('');
   const { showAddImage, setShowAddImage } = useContext(RouterContext);
   const { spotId } = useParams();
 
@@ -37,12 +39,12 @@ const AddImage = () => {
         <button onClick={() => setShowAddImage(false)} id="close-add-image">X</button>
       {/* </div> */}
       <div id="flex-modal">
-      <form onSubmit={addImage}>
-        <label for="url-input">
+      <form onSubmit={(e) => addImage(e)}>
+        <label htmlFor="url-input">
             URL:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <input type="text" name="url-input" placeholder="url" value={urlValue} onChange={(e) => setUrlValue(e.target.value)}></input>
         </label>
-        <label for="preview-input">
+        <label htmlFor="preview-input">
           Preview:&nbsp;&nbsp;
             <input type="text" name="preview-input" placeholder="true or false" value={previewValue} onChange={(e) => setPreviewValue(e.target.value)}></input>
         </label>

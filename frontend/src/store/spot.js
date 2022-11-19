@@ -22,13 +22,13 @@ export const actionSpotEdit = (spot) => {
   }
 }
 
-export const actionSpotAddImage = (image, spotId) => {
-  return {
-    type: SPOTS_ADD_IMAGE,
-    image,
-    spotId
-  }
-}
+// export const actionSpotAddImage = (image, spotId) => {
+//   return {
+//     type: SPOTS_ADD_IMAGE,
+//     image,
+//     spotId
+//   }
+// }
 
 export const actionSpotDelete = (spotId) => {
   return {
@@ -77,24 +77,24 @@ export const thunkSpotEdit = (spotId, spot) => async (dispatch) => {
   }
 }
 
-export const thunkSpotAddImage = (spotId, url, prev) => async (dispatch) => {
-  const preview = prev === 'true' ? true : false;
+// export const thunkSpotAddImage = (spotId, url, prev) => async (dispatch) => {
+//   const preview = prev === 'true' ? true : false;
 
-  const response = csrfFetch(`/api/spots/${spotId}/images`, {
-    method: 'POST',
-    body: JSON.stringify({
-      url,
-      preview
-    })
-  });
+//   const response = csrfFetch(`/api/spots/${spotId}/images`, {
+//     method: 'POST',
+//     body: JSON.stringify({
+//       url,
+//       preview
+//     })
+//   });
 
-  if (response.ok) {
-    const img = await response.json();
+//   if (response.ok) {
+//     const img = await response.json();
 
-    dispatch(actionSpotAddImage(img, spotId));
-    return response;
-  }
-}
+//     dispatch(actionSpotAddImage(img, spotId));
+//     return response;
+//   }
+// }
 
 export const thunkSpotDelete = (spotId) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}`, {

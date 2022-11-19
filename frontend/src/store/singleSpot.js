@@ -59,7 +59,9 @@ export const thunkSpotEdit = (spotId, spot) => async (dispatch) => {
 export const thunkSpotAddImage = (spotId, url, prev) => async (dispatch) => {
   const preview = prev === 'true' ? true : false;
 
-  const response = csrfFetch(`/api/spots/${spotId}/images`, {
+  console.log('FROM IMAGE THUNK');
+
+  const response = await csrfFetch(`/api/spots/${spotId}/images`, {
     method: 'POST',
     body: JSON.stringify({
       url,

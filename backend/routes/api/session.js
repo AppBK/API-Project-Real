@@ -132,7 +132,7 @@ not intuitive #FIXED?
 5) is there a way to show all spots? or I can only see the spot I created on the category i put it on.
 
 6) when yo uadd an image, it doesnt dymanically update created a spot and when I click on the spot from the home page the spot detail page breaks.
-
+#FIXED!!
 
 7) on edit,  able to submit a blank form and there is no error handling and it breaks the app
 
