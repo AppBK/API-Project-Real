@@ -559,7 +559,7 @@ router.get('/', async (req, res) => {
   console.log('WHERE: ', where);
 
   if (!page || page < 1 || page > 10) page = 1;
-  if (!size || size < 1 || size > 20) size = 21;
+  if (!size || size < 1 || size > 20) size = 25;
 
   let offset = size * (page - 1);
 

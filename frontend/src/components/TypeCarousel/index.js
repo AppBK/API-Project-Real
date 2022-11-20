@@ -9,12 +9,11 @@ let carousel;
 let currentMargin;
 
 const TypeCarousel = () => {
-  const { spotType, setSpotType } = useContext(RouterContext);
+  const { spotType, setSpotType, prevType, setPrevType } = useContext(RouterContext);
   const [marginLeft, setMarginLeft] = useState("0px");
   const [showLeft, setShowLeft] = useState('hidden');
   const [showRight, setShowRight] = useState('visible');
   const [active, setActive] = useState(false);
-  const [prevType, setPrevType] = useState('');
 
 
   const history = useHistory();
@@ -26,6 +25,9 @@ const TypeCarousel = () => {
   }, []);
 
   useEffect(() => {
+
+    if (spotType === prevType) return;
+    console.log('SPOT TYPE: ', spotType);
     let activeType = document.getElementById(spotType); // carousel-button-container
     console.log('ACTIVE TYPE: ', activeType);
     activeType.style.borderBottom = "2px solid black";
@@ -40,6 +42,11 @@ const TypeCarousel = () => {
     if (prevType) {
       let prevActiveType = document.getElementById(prevType);
       prevActiveType.style.borderBottom = "1px solid lightgrey";
+      let childOne = prevActiveType.children[0];
+      childOne.style.color = "#717171";
+      let childTwo = childOne.children[0];
+      let childThree = childTwo.children[0];
+      childThree.style.opacity = "0.6";
     }
     console.log('BUTTON CHILDREN: ', imgCarousel);
     console.log('SPOT TYPE: ', spotType);

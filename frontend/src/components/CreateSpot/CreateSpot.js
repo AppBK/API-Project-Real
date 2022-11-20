@@ -9,7 +9,7 @@ import './CreateSpot.css';
 
 
 export default function CreateASpot() {
-  const { showCreateSpot, setShowCreateSpot, showModal, setShowModal } = useContext(RouterContext);
+  const { showCreateSpot, setShowCreateSpot, showModal, setShowModal, spotType, setSpotType, prevType, setPrevType } = useContext(RouterContext);
   const { spotId } = useParams();
   console.log('spotId: ', spotId);
 
@@ -23,7 +23,7 @@ export default function CreateASpot() {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [edited, setEdited] = useState(showCreateSpot);
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState(spotType);
   const [errors, setErrors] = useState([]);
 
   const history = useHistory();
@@ -39,6 +39,34 @@ export default function CreateASpot() {
     setShowModal(false);
     // history.push(currentURL);
   }
+
+  const switchType = (e) => {
+    let tempType = spotType;
+    // console.log('tempTYPE: ', tempType);
+    // console.log('TARGET VALUE: ', e.target.id);
+    setSpotType(e.target.id);
+    setPrevType(tempType);
+  }
+
+  // useEffect(() => {
+  //   let activeType = document.getElementById(spotType); // carousel-button-container
+  //   console.log('ACTIVE TYPE: ', activeType);
+  //   activeType.style.borderBottom = "2px solid black";
+  //   // activeType.style.borderTop = "2px solid black";
+  //   let buttonCarousel = activeType.children[0];
+  //   buttonCarousel.style.color = "black"
+  //   let randDiv = buttonCarousel.children[0];
+  //   let imgCarousel = randDiv.children[0];
+  //   imgCarousel.style.opacity = "1";
+
+  //   console.log('PREV TYPE: ', prevType);
+  //   if (prevType) {
+  //     let prevActiveType = document.getElementById(prevType);
+  //     prevActiveType.style.borderBottom = "1px solid lightgrey";
+  //   }
+  //   console.log('BUTTON CHILDREN: ', imgCarousel);
+  //   console.log('SPOT TYPE: ', spotType);
+  // }, [spotType]);
 
   useEffect(() => {
     const err = [];
@@ -76,8 +104,11 @@ export default function CreateASpot() {
     const newSpot = await dispatch(thunkSpotCreate(spot));
 
     // It will!!!
+    let tempType = spotType;
+
     setShowCreateSpot(false);
-    history.push(`/spots/${newSpot.id}`);
+    setPrevType(tempType);
+    setSpotType(category);
   };
 
 // .spotButtons
@@ -93,7 +124,7 @@ export default function CreateASpot() {
           <div id="login-signup">Create a spot</div>
         </div>
         <div id="lower-portion">
-              <form id="form-flex" onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+              <form id="form-flex" onSubmit={(e) => handleSubmit(e)} style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
                 <ul>
                   {errors.map((error, idx) => (
                     <li key={idx} className="error-list-items">{error}</li>
@@ -109,8 +140,8 @@ export default function CreateASpot() {
                   <input className="siamese-input-boxes" type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required></input>
                   <input className="siamese-input-boxes" type="text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} required></input>
                   <input className="siamese-input-boxes" type="number" placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)}></input>
-                  <select id="siamese-bottom" className="siamese-input-boxes" required>
-                    <option defaultValue disabled="disabled" value={category} onChange={(e) => setCategory(e.target.value)}>Category</option>
+                  <select id="siamese-bottom" className="siamese-input-boxes" value={category} onChange={(e) => setCategory(e.target.value)} required>
+                    <option disabled="disabled">Category</option>
                     <option>BeachFront</option>
                     <option>Cabins</option>
                     <option>OMG!</option>

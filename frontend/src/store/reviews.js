@@ -5,6 +5,7 @@ import { thunkGetAllSpotInfo } from './singleSpot';
 const REVIEWS_READ = 'reviews/REVIEWS_READ';
 const REVIEW_CREATE = 'reviews/REVIEW_CREATE';
 const REVIEW_DELETE = 'reviews/REVIEW_DELETE';
+const REVIEW_DELETE_ALL_FOR_SPOT = 'reviews/REVIEW_DELETE_ALL_FOR_SPOT'
 
 
 // Action Creators
@@ -30,6 +31,12 @@ export const actionReviewDelete = (spotId, reviewId) => {
   }
 }
 
+export const actionDeleteAllReviewsForSpot = (spotId) => {
+  return {
+    type: REVIEW_DELETE_ALL_FOR_SPOT,
+    spotId
+  }
+}
 
 // Thunks
 export const thunkReviewsRead = (spotId) => async (dispatch) => {
@@ -114,6 +121,12 @@ const reviewsReducer = (state = { Reviews: {}}, action) => {
           console.log('AFTER DELETE: ', newState.Reviews[action.spotId])
         }
       }
+
+      return newState;
+    }
+    case REVIEW_DELETE_ALL_FOR_SPOT: {
+      const newState = {...state};
+      delete newState.Reviews[action.spotId];
 
       return newState;
     }

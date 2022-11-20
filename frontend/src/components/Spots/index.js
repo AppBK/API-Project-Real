@@ -26,7 +26,7 @@ const Spots = ({ isLoaded }) => {
   useEffect(() => {
     // Get All Spots after initial render
     dispatch(thunkGetAllSpots(spotType));
-  }, []);
+  }, [spotType]);
 
   useEffect(() => {
     console.log('SPOTS: ', spots)

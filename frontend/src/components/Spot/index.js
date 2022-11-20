@@ -57,10 +57,13 @@ const Spot = ({ isLoaded }) => {
     }
   }
 
-  if (!spot.SpotImages.length) {
+  // NOTE: Does not touch store...
+  if (spot.SpotImages.length < 5) {
+    let length = spot.SpotImages.length;
+    let filler = 5 - length;
     const puppy = 'https://cdn.royalcanin-weshare-online.io/UCImMmgBaxEApS7LuQnZ/v2/eukanuba-market-image-puppy-beagle?w=5596&h=2317&rect=574,77,1850,1045&auto=compress,enhance';
     const img = { url: puppy, preview: true};
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < filler; i++) {
       spot.SpotImages.push(img);
     }
   }

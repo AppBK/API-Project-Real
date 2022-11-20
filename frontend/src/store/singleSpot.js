@@ -4,6 +4,8 @@ import { csrfFetch } from "./csrf";
 const SPOT_GET_ALL_INFO = 'spots/GET_ALL_INFO';
 const SPOTS_EDIT = 'spots/SPOTS_EDIT';
 const SPOTS_ADD_IMAGE = 'spots/SPOTS_ADD_IMAGE';
+const SPOTS_CLEAR_STORE = 'spots/SPOTS_CLEAR_STORE';
+const SPOT_DELETE = 'spots/SPOT_DELETE';
 
 // Action Creators
 export const actionGetAllSpotInfo = (spot) => {
@@ -24,6 +26,19 @@ export const actionSpotAddImage = (image, spotId) => {
   return {
     type: SPOTS_ADD_IMAGE,
     image,
+    spotId
+  }
+}
+
+export const actionClearStore = () => {
+  return {
+    type: SPOTS_CLEAR_STORE,
+  }
+}
+
+export const actionSingleSpotDelete = (spotId) => {
+  return {
+    type: SPOT_DELETE,
     spotId
   }
 }
@@ -124,6 +139,16 @@ export default function singleSpotReducer(state = {}, action) {
       const newState = { ...state };
       newState[action.spotId].SpotImages.unshift(action.image);
       console.log('FROM SPOT REDUCER, IMAGES ARRAY: ', newState[action.spotId].SpotImages);
+
+      return newState;
+    }
+    case SPOTS_CLEAR_STORE: {
+      return {};
+    }
+    case SPOT_DELETE: {
+      console.log('INSIDE SINGLE SPOT DELETE: ', action.spotId);
+      const newState = {...state};
+      delete newState[action.spotId];
 
       return newState;
     }

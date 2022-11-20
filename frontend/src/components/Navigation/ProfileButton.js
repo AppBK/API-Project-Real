@@ -5,10 +5,15 @@ import LogoutModal from '../LogoutModal';
 import { RouterContext } from '../../context/RouterContext';
 import { thunkLogoutUser } from '../../store/session';
 import { useSelector } from 'react-redux';
+import { actionClearStore } from '../../store/singleSpot';
+import { actionSpotsDump } from '../../store/spot';
+import { useHistory } from 'react-router-dom';
+
 
 function ProfileButton({ user }) {
   const { showModal, setShowModal } = useContext(RouterContext);
   const dispatch = useDispatch();
+  const history = useHistory();
   const [showMenu, setShowMenu] = useState(false);
   const currentUser = useSelector(state => state.session.user);
 
@@ -33,7 +38,10 @@ function ProfileButton({ user }) {
   const logout = (e) => {
     e.preventDefault();
     dispatch(thunkLogoutUser(currentUser));
+    // dispatch(actionClearStore());
+    // dispatch(actionSpotsDump());
     setShowModal(false);
+    // history.push('/');
   };
 
   return (

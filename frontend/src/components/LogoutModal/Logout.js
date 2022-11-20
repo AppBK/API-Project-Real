@@ -25,4 +25,12 @@ export default Logout;
   <li className="user-menu-li">
     <button onClick={logout}>Log Out</button>
   </li>
+
+  const logout = (e) => {
+    e.preventDefault();
+    dispatch(thunkLogoutUser(currentUser));
+    setShowModal(false);
+  };
+
+
 </ul> */}

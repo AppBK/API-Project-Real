@@ -1,4 +1,6 @@
 import { csrfFetch } from './csrf';
+import { actionSingleSpotDelete } from './singleSpot';
+import { actionDeleteAllReviewsForSpot } from './reviews';
 
 // Actions
 const SPOTS_GET_ALL_INFO = 'spots/GETALL';
@@ -6,6 +8,7 @@ const SPOTS_GET_CATEGORY = 'spots/SPOTS_GET_CATEGORY';
 const SPOTS_DELETE = 'spots/SPOTS_DELETE';
 const SPOTS_EDIT = 'spots/SPOTS_EDIT';
 const SPOTS_CREATE = 'spots/CREATE';
+const SPOTS_DUMP = 'spots/SPOTS_DUMP';
 
 // Action Creators
 export const actionSpotsGetCategory = (spots) => {
@@ -41,6 +44,12 @@ export const actionSpotCreate = (spot) => {
   return {
     type: SPOTS_CREATE,
     spot
+  }
+}
+
+export const actionSpotsDump = () => {
+  return {
+    type: SPOTS_DUMP,
   }
 }
 
@@ -103,6 +112,8 @@ export const thunkSpotDelete = (spotId) => async (dispatch) => {
 
   if (response.ok) {
     dispatch(actionSpotDelete(spotId));
+    dispatch(actionSingleSpotDelete(spotId));
+    dispatch(actionDeleteAllReviewsForSpot(spotId));
     return response;
   }
 }
@@ -161,6 +172,9 @@ export default function spotReducer(state = {}, action) {
       newState[action.spot.id] = action.spot;
 
       return newState;
+    }
+    case SPOTS_DUMP: {
+      return {};
     }
     default: {
       return state;
