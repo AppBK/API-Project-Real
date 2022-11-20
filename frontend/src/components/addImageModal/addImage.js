@@ -10,7 +10,7 @@ const AddImage = () => {
   const [urlValue, setUrlValue] = useState('');
   const [previewValue, setPreviewValue] = useState('');
   const [errors, setError] = useState([]);
-  const { showAddImage, setShowAddImage } = useContext(RouterContext);
+  const { showAddImage, setShowAddImage, setShowModal } = useContext(RouterContext);
   const { spotId } = useParams();
 
   const history = useHistory();
