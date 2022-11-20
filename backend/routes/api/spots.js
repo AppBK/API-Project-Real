@@ -385,7 +385,7 @@ router.get('/:spotId/images', [restoreUser, requireAuth], async (req, res) => {
 });
 
 // Get all Reviews by a Spot's id
-router.get('/:spotId/reviews', [restoreUser, requireAuth], async (req, res) => {
+router.get('/:spotId/reviews', [restoreUser], async (req, res) => {
   const reviews = await Review.findAll({ where: { spotId: req.params.spotId } });
 
   console.log('GOT REVIEWS!!');

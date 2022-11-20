@@ -45,7 +45,9 @@ const Spot = ({ isLoaded }) => {
   }
 
   useEffect(() => {
-    dispatch(thunkGetAllSpotInfo(spotId));
+    if (!spot) {
+      dispatch(thunkGetAllSpotInfo(spotId));
+    }
   }, [dispatch]);
 
   if (!spot) return null;

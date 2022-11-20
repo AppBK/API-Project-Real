@@ -60,10 +60,6 @@
   cursor: pointer;
 }
 
-#generic {
-  margin-top: -16px;
-}
-
 /* #generic:hover {
   background-color: rgb(221,221,221);
   border-radius: 16px;
@@ -158,8 +154,6 @@
   padding-left: 12px;
   height: 64px;
   border: 1px solid rgb(221, 221, 221);
-  /* border-top-left-radius: 12px;
-  border-top-right-radius: 12px; */
 }
 
 #siamese-top {
@@ -173,9 +167,6 @@
   border-bottom-right-radius: 12px;
 }
 
-.siamese-middle {
-
-}
 
 #demo-user-button {
   height: 48px;

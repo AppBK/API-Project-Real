@@ -10,7 +10,7 @@ export default function CreateASpotModal() {
   const { showCreateSpot, setShowCreateSpot } = useContext(RouterContext);
 
   return (
-    <div id='generic'>
+    <div>
       <button id="edit-modal-create-button"  onClick={() => setShowCreateSpot(true)}
         // style={{backgroundColor: "transparent", color: "black", fontSize: "14px", marginTop: "16px", border: "none", marginRight: "32px", display: "block"}}
       >Become a Host</button>

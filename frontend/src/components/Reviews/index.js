@@ -77,7 +77,7 @@ export default function Reviews({ spot, isLoaded, isAuthorized }) {
       </div>
     </div>
     <div id="create-review-div">
-        <CreateReviewModal spot={spot}/>
+      <CreateReviewModal spot={spot} isLoaded={isLoaded}/>
     </div>
     </>
   );
