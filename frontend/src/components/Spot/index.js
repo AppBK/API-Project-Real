@@ -110,13 +110,13 @@ const Spot = ({ isLoaded }) => {
           <AddImageModal />
         </div>
         <div>
-          <EditSpotModal />
+          <EditSpotModal spot={spot}/>
         </div>
         <div>
           <button className="spotButtons" onClick={deleteSpot}>Delete</button>
         </div>
       </div>)}
-      <Reviews spot={spot} isLoaded={isLoaded} isAuthorized={isAuthorized}/>
+      <Reviews spot={spot} isLoaded={isLoaded} isAuthorized={isAuthorized} user={user}/>
     </div>
   );
 }

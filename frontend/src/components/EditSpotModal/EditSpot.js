@@ -7,19 +7,19 @@ import { useDispatch } from 'react-redux';
 import { thunkSpotEdit } from '../../store/singleSpot';
 
 
-export default function EditSpot() {
+export default function EditSpot({ spot }) {
   const { showEditSpot, setShowEditSpot, setShowModal } = useContext(RouterContext);
   const { spotId } = useParams();
 
-  const [name, setName] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [country, setCountry] = useState('');
-  const [lat, setLat] = useState('');
-  const [lng, setLng] = useState('');
-  const [address, setAddress] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState('');
+  const [name, setName] = useState(spot.name);
+  const [city, setCity] = useState(spot.city);
+  const [state, setState] = useState(spot.state);
+  const [country, setCountry] = useState(spot.country);
+  const [lat, setLat] = useState(spot.lat);
+  const [lng, setLng] = useState(spot.lng);
+  const [address, setAddress] = useState(spot.address);
+  const [description, setDescription] = useState(spot.description);
+  const [price, setPrice] = useState(spot.price);
   const [edited, setEdited] = useState(showEditSpot);
   const [errors, setErrors] = useState([]);
 

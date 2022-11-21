@@ -14,7 +14,7 @@ export default function CreateReviewModal({ spot, isLoaded }) {
   return (
     <>
     {session.user && (
-    <div id='generic'>
+    <div id="do-you-even-lift">
       <button id="review-modal-button" className="spotButtons" onClick={() => setShowCreateReview(true)}>Review</button>
       {showCreateReview && (
         <Modal onClose={() => setShowModal(false)}>
@@ -25,3 +25,5 @@ export default function CreateReviewModal({ spot, isLoaded }) {
   </>
   );
 }
+
+

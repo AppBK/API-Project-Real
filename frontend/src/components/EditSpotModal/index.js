@@ -5,7 +5,7 @@ import { RouterContext } from '../../context/RouterContext';
 import '../../context/Modal.css';
 import EditSpot from './EditSpot';
 
-export default function EditSpotModal() {
+export default function EditSpotModal({ spot }) {
   const { showEditSpot, setShowEditSpot, setShowModal } = useContext(RouterContext);
 
   return (
@@ -13,7 +13,7 @@ export default function EditSpotModal() {
       <button className="spotButtons" onClick={() => setShowEditSpot(true)}>Edit</button>
       {showEditSpot && (
         <Modal onClose={() => setShowModal(false)}>
-          <EditSpot />
+          <EditSpot spot={spot}/>
         </Modal>
       )}
     </div>

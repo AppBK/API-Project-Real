@@ -89,7 +89,7 @@
 }
 
 #add-image {
-  margin-left: 160px;
+  margin-left: 140px;
 }
 
 #add-image-button {
@@ -101,4 +101,8 @@
   border-radius: 12px;
   border: none;
   margin: 32px;
+}
+
+#add-image-button:hover {
+  cursor: pointer;
 }

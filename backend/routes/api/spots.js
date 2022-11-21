@@ -31,9 +31,13 @@ router.post('/:spotId/reviews', [restoreUser, requireAuth], async (req, res) => 
     res.statusCode = 403;
     return res.json({
       "message": "User already has a review for this spot",
-      "statusCode": 403
+      "statusCode": 403,
+      "errors": "User already has a review for this spot"
     });
-  }
+    // const error = new Error("User already has a review for this spot");
+    // error.status = 403;
+    // throw error;
+   }
 
   const { review, stars } = req.body;
 
