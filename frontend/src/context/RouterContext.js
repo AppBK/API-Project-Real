@@ -13,6 +13,7 @@ export const RouterProvider = props => {
   const [showEditReview, setShowEditReview] = useState(false);
   const [prevType, setPrevType] = useState('');
   const [dumpStore, setDumpStore] = useState(true);
+  const [showSignupForm, setShowSignupForm] = useState(false);
 
   useEffect(() => {
     console.log('SPOT TYPE FROM PROVIDER: ', spotType);
@@ -30,6 +31,7 @@ export const RouterProvider = props => {
       showEditReview, setShowEditReview,
       prevType, setPrevType,
       dumpStore, setDumpStore,
+      showSignupForm, setShowSignupForm,
     }}>
       {props.children}
     </RouterContext.Provider>

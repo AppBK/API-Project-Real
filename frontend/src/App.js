@@ -50,9 +50,6 @@ function App() {
         <Route path="/spots/:spotId">
           <Spot isLoaded={isLoaded}/>
         </Route>
-        <Route path="/signup">
-          <SignupForm isLoaded={isLoaded}/>
-        </Route>
         <Route path="/coming">
           <ComingSoon />
         </Route>

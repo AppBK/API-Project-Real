@@ -6,6 +6,7 @@ import LoginFormModal from '../LoginFormModal';
 import { useState, useContext, useEffect } from 'react';
 import { RouterContext } from '../../context/RouterContext';
 import CreateASpotModal from '../CreateSpot';
+import SignupFormModal from '../SignupForm';
 
 export default function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
@@ -44,7 +45,7 @@ export default function Navigation({ isLoaded }) {
         </li> */}
         <LoginFormModal render={() => setRender(true)}/>
         <li className="user-menu-li pointer">
-          <NavLink id="signup-center-console" to="/signup" className="navlink"><div id="login-border"></div>&nbsp;&nbsp;&nbsp;&nbsp;    Sign Up</NavLink>
+          <SignupFormModal id="signup-center-console" to="/signup" className="navlink"><div id="login-border"></div>&nbsp;&nbsp;&nbsp;&nbsp;    Sign Up</SignupFormModal>
         </li>
       </>
     );

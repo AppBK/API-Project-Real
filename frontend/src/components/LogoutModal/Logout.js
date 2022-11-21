@@ -12,7 +12,7 @@ const Logout = ({ onClose, user, logout }) => {
       <div>User: {user.username}</div>
       <div>Email: {user.email}</div>
       </div>
-      <div id="logout-button-div"><button onClick={logout}>Log Out</button></div>
+      <div id="logout-button-div"><button id="logout-button" onClick={logout}>Log Out</button></div>
     </div>
   );
 }

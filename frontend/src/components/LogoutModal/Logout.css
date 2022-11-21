@@ -23,3 +23,17 @@
 #logout-creds-cont {
   color: rgb(120,120,120);
 }
+
+#logout-button {
+  background-color: #FF385C;
+  border: none;
+  border-radius: 16px;
+  color: white;
+  width: 80px;
+  height: 30px;
+  font-size: 12px;
+}
+
+#logout-button:hover {
+  cursor: pointer;
+}
