@@ -56,7 +56,10 @@ export default function SignupForm() {
     dispatch(thunkSignupUser(body))
       .catch(async (res) => {
         const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
+        if (data && data.errors) {
+          errors.push(data.errors);
+          alert(data.errors)
+        }
       });
 
     if (errors.length === 0) {
