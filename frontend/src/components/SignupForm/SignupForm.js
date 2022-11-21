@@ -25,7 +25,6 @@ export default function SignupForm() {
 
   const sessionUser = useSelector((state) => state.session.user);
 
-  if (sessionUser) return (<Redirect to="/" />);
 
   useEffect(() => {
     const err = [];
@@ -39,6 +38,8 @@ export default function SignupForm() {
 
     setErrors(err);
   },[username, email, password, confirmPassword, firstName, lastName]);
+
+  if (sessionUser) return (<Redirect to="/" />);
 
   const onSubmit = (e) => {
     e.preventDefault();
