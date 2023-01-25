@@ -7,19 +7,21 @@
   position: absolute;
 }
 */
-#edit-modal-create-button {
+#edit-modal-create-spot-button {
   background-color: transparent;
   color: black;
   font-size: 14px;
-  margin-top: 16px;
-  margin-right: 8px;
+  /* margin-top: 16px; */
+  margin-right: 12px;
   border: none;
   border-radius: 60px;
-  width: 160px;
-  height: 40px;
+  width: 180px;
+  height: 48px;
 }
 
-#edit-modal-create-button:hover {
+/* edit-modal-create-button */
+
+#edit-modal-create-spot-button:hover {
   cursor: pointer;
   background-color: rgb(247,247,247);
 }
@@ -211,4 +213,10 @@
   color: red;
   list-style: none;
   margin-left: -32px;
+}
+
+#your-home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

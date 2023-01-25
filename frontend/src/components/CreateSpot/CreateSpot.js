@@ -288,3 +288,6 @@ export default function CreateASpot() {
     //     </form>
     //   </div>
     // </div>
+
+
+    // https://images.mubicdn.net/images/cast_member/5030/cache-6050-1526604798/image-w856.jpg?size=256x

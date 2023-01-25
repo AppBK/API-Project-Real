@@ -10,10 +10,10 @@ export default function CreateASpotModal() {
   const { showCreateSpot, setShowCreateSpot } = useContext(RouterContext);
 
   return (
-    <div>
-      <button id="edit-modal-create-button"  onClick={() => setShowCreateSpot(true)}
+    <div id="your-home">
+      <button id="edit-modal-create-spot-button"  onClick={() => setShowCreateSpot(true)}
         // style={{backgroundColor: "transparent", color: "black", fontSize: "14px", marginTop: "16px", border: "none", marginRight: "32px", display: "block"}}
-      >Become a Host</button>
+      >Splangybnb your home</button>
       {showCreateSpot && (
         <Modal onClose={() => setShowCreateSpot(false)}>
           <CreateASpot />

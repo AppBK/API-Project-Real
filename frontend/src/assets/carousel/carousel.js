@@ -106,4 +106,32 @@ export const types = [
     url: "https://a0.muscache.com/pictures/8a43b8c6-7eb4-421c-b3a9-1bd9fcb26622.jpg",
     name: "Creative spaces"
   },
+  {
+    url: "https://a0.muscache.com/pictures/6b639c8d-cf9b-41fb-91a0-91af9d7677cc.jpg",
+    name: "Golfing"
+  },
+  {
+    url: "https://a0.muscache.com/pictures/8b44f770-7156-4c7b-b4d3-d92549c8652f.jpg",
+    name: "Arctic"
+  },
+  {
+    url: "https://a0.muscache.com/pictures/ca25c7f3-0d1f-432b-9efa-b9f5dc6d8770.jpg",
+    name: "Camping"
+  },
+  {
+    url: "https://a0.muscache.com/pictures/8e507f16-4943-4be9-b707-59bd38d56309.jpg",
+    name: "Islands"
+  },
+  {
+    url: "https://a0.muscache.com/pictures/ed8b9e47-609b-44c2-9768-33e6a22eccb2.jpg",
+    name: "Iconic cities"
+  },
+  {
+    url: "https://a0.muscache.com/pictures/c027ff1a-b89c-4331-ae04-f8dee1cdc287.jpg",
+    name: "Houseboats"
+  },
+  {
+    url: "https://a0.muscache.com/pictures/f0c5ca0f-5aa0-4fe5-b38d-654264bacddf.jpg",
+    name: "Play"
+  },
 ];

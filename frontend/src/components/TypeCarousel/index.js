@@ -10,10 +10,10 @@ let currentMargin;
 
 const TypeCarousel = () => {
   const { spotType, setSpotType, prevType, setPrevType } = useContext(RouterContext);
-  const [marginLeft, setMarginLeft] = useState("0px");
-  const [showLeft, setShowLeft] = useState('hidden');
-  const [showRight, setShowRight] = useState('visible');
-  const [active, setActive] = useState(false);
+  // const [marginLeft, setMarginLeft] = useState("0px");
+  // const [showLeft, setShowLeft] = useState('hidden');
+  // const [showRight, setShowRight] = useState('visible');
+  // const [active, setActive] = useState(false);
 
 
   const history = useHistory();
@@ -31,7 +31,6 @@ const TypeCarousel = () => {
     let activeType = document.getElementById(spotType); // carousel-button-container
     console.log('ACTIVE TYPE: ', activeType);
     activeType.style.borderBottom = "2px solid black";
-    // activeType.style.borderTop = "2px solid black";
     let buttonCarousel = activeType.children[0];
     buttonCarousel.style.color = "black"
     let randDiv = buttonCarousel.children[0];
@@ -55,8 +54,6 @@ const TypeCarousel = () => {
 
   const switchType = (e) => {
     let tempType = spotType;
-    // console.log('tempTYPE: ', tempType);
-    // console.log('TARGET VALUE: ', e.target.id);
     setSpotType(e.target.id);
     setPrevType(tempType);
   }
@@ -145,7 +142,7 @@ const TypeCarousel = () => {
             <button id={type.name} type="button" className="carousel-button" onClick={(e) => switchType(e)}>
               <div id={type.name} className="maybe" style={{ width: "fit-content", display: "flex", height: "48px", flexDirection: "column", justifyContent: "space-between", alignItems: "center"}}>
                 <img id={type.name} className="thumbnail"  src={type.url} style={{ display: "block", width: "24px", height: "24px", color: "#717171"}}></img>
-                <span id={type.name} style={{display: "block"}}>{type.name}</span>
+                <span id={type.name} style={{display: "block"}} className="type-name">{type.name}</span>
               </div>
             </button>
           </div>
@@ -171,4 +168,4 @@ const TypeCarousel = () => {
 export default TypeCarousel;
 
 
-<img class="i1wps9q8 dir dir-ltr" src="https://a0.muscache.com/pictures/732edad8-3ae0-49a8-a451-29a8010dcc0c.jpg" alt="" width="24" height="24"></img>
+//<img class="i1wps9q8 dir dir-ltr" src="https://a0.muscache.com/pictures/732edad8-3ae0-49a8-a451-29a8010dcc0c.jpg" alt="" width="24" height="24"></img>

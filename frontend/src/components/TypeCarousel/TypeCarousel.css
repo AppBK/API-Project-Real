@@ -161,14 +161,15 @@
   border-bottom: 2px solid rgb(213,213,213);
 }
 
-/* .carousel-button:active {
+.carousel-button-container:hover .carousel-button .maybe .thumbnail {
   color: black;
-  border-bottom: 2px solid rgb(213, 213, 213);
+  opacity: 1;
 }
 
-.thumbnail:active {
+.carousel-button-container:hover .type-name {
+  color: black;
   opacity: 1;
-} */
+}
 
 .thumbnail {
   opacity: 0.6;
@@ -178,10 +179,6 @@
   opacity: 1;
 }
 
-/* .carousel-button > .thumbnail:hover {
-    opacity: 1;
+/*
 
-
-
-    :active, :focus
-} */
+*/
