@@ -1,17 +1,26 @@
 import { useState, useEffect, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import { Modal } from '../../context/Modal';
 import { RouterContext } from '../../context/RouterContext';
 import '../../context/Modal.css';
 import CreateASpot from './CreateSpot';
 import './CreateSpot.css';
 
+
 export default function CreateASpotModal() {
+  const history = useHistory();
+
+  function splangyIt() {
+    history.push('/splangyit');
+  }
+
+  // () => setShowCreateSpot(true)
+
   const { showCreateSpot, setShowCreateSpot } = useContext(RouterContext);
 
   return (
     <div id="your-home">
-      <button id="edit-modal-create-spot-button"  onClick={() => setShowCreateSpot(true)}
+      <button id="edit-modal-create-spot-button"  onClick={() => splangyIt()}
         // style={{backgroundColor: "transparent", color: "black", fontSize: "14px", marginTop: "16px", border: "none", marginRight: "32px", display: "block"}}
       >Splangybnb your home</button>
       {showCreateSpot && (

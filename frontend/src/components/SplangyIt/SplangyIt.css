@@ -1,0 +1,110 @@
+#splangy-it-outermost {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+#splangyit-main-content {
+  width: 80%;
+  max-width: 1280px;
+  margin: 0px auto;
+}
+
+#estimate-map-div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+#estimate-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+#pink-it {
+  font-size: 48px;
+  font-weight: bold;
+  color: #ff385c;
+}
+
+#could-earn {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+#big-gains {
+  font-size: 75px;
+  font-weight: bold;
+}
+
+#bold-nights-button {
+  font-weight: bold;
+  text-decoration: underline;
+  font-size: 15px;
+}
+
+#bold-nights-button:hover {
+  cursor: pointer;
+}
+
+#days-bar {
+  margin-top: 48px;
+  position: relative;
+  width: 406px;
+  height: 40px;
+}
+
+#grey-bar {
+  border: 2px solid #DDDDDD;
+  border-radius: 2px;
+  width: 100%;
+  height: 0px;
+}
+
+#grey-bar:hover {
+  cursor: pointer;
+}
+
+#black-bar {
+  position: relative;
+  top: -4px;
+  border: 2px solid black;
+  border-radius: 2px;
+  width: 0px;
+}
+
+#black-balled {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: black;
+  position: absolute;
+  right: -22px;
+  top: -12px;
+}
+
+#black-balled:hover {
+  cursor: pointer;
+}
+
+#black-balled:active {
+  width: 30px;
+  height: 30px;
+  top: -15px;
+  right: -27px;
+}
+
+#map-container {
+  border-radius: 8px;
+  width: 50%;
+}
+
+#map {
+  border-radius: 24px;
+  display: block;
+}

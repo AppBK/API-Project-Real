@@ -10,6 +10,8 @@ import Spots from './components/Spots';
 import Spot from './components/Spot';
 import { actionUserAdd } from './store/session';
 import ComingSoon from './components/ComingSoon';
+import Test from './components/Test/Test';
+import SplangyIt from './components/SplangyIt/SplangyIt';
 
 
 let validation;
@@ -40,15 +42,19 @@ function App() {
 
   return isLoaded && (
     <>
-      <Navigation isLoaded={isLoaded} />
-      <TypeCarousel isLoaded={isLoaded}/>
       {isLoaded && (
       <Switch>
         <Route exact path="/">
+          <Navigation isLoaded={isLoaded} />
+          <TypeCarousel isLoaded={isLoaded} />
           <Spots isLoaded={isLoaded}/>
         </Route>
         <Route path="/spots/:spotId">
+          <Navigation isLoaded={isLoaded} />
           <Spot isLoaded={isLoaded}/>
+        </Route>
+        <Route exact path="/splangyit">
+          <SplangyIt></SplangyIt>
         </Route>
         <Route path="/coming">
           <ComingSoon />
