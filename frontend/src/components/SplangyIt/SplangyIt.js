@@ -5,12 +5,8 @@ import './SplangyIt.css';
 
 
 // const AnyReactComponent = ({ text }) => (<div>{text}</div>);
-// require("dotenv").config();
 
-// 'AIzaSyDylMIT1Q4ay-sG8J_P5RJqiplKSg7YEqs'
-
-// const google_maps_api_key = process.env.GOOGLE_MAPS_API_KEY;
-// console.log(google_maps_api_key);
+const google_maps_api_key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 // const mapStyles = {
 //   width: '400px',
@@ -66,15 +62,9 @@ function SplangyIt() {
             <div></div>
           </div>
           <div id="map-container">
-            <iframe id="map" width="100%" height="610px" style={{ border: "0" }} loading="lazy" allowFullScreen src={`https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ9T_5iuTKj4ARe3GfygqMnbk&key=AIzaSyDylMIT1Q4ay-sG8J_P5RJqiplKSg7YEqs&zoom=11&center=${lat},${lng}`}></iframe>
+            <iframe id="map" width="100%" height="610px" style={{ border: "0" }} loading="lazy" allowFullScreen src={`https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ9T_5iuTKj4ARe3GfygqMnbk&key=${google_maps_api_key}&zoom=11&center=${lat},${lng}`}></iframe>
           </div>
         </div>
-        {/* <iframe id="google-map" width="640px" height="610px" style={{ border: "0", display: "block" }} loading="lazy" allowFullScreen src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ9T_5iuTKj4ARe3GfygqMnbk&key=AIzaSyDylMIT1Q4ay-sG8J_P5RJqiplKSg7YEqs&zoom=11"></iframe> */}
-        {/* <GoogleMapReact center={mapCenter} zoom={14} mapContainerStyle={mapStyles} bootstrapURLKeys={{ key: 'AIzaSyDylMIT1Q4ay-sG8J_P5RJqiplKSg7YEqs' }}>
-
-        </GoogleMapReact> */}
-        {/* <iframe width="640px" height="610px" style={{border:"0", display: "block"}} loading="lazy" allowFullScreen src={`https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ9T_5iuTKj4ARe3GfygqMnbk&key=AIzaSyDylMIT1Q4ay-sG8J_P5RJqiplKSg7YEqs&zoom=${zoomLevel}`}></iframe> */}
-        {/* <iframe width="640px" height="610px" style={{ border: "0" }} loading="lazy" allowFullScreen src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDylMIT1Q4ay-sG8J_P5RJqiplKSg7YEqs&q=airbnb&zoom=${zoomLevel}`}></iframe> */}
       </div>
     </div>
   )
