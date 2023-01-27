@@ -10,6 +10,9 @@ import * as sessionActions from './store/session';
 import ModalProvider from './context/Modal';
 import { RouterProvider } from './context/RouterContext';
 
+import { createRoot } from 'react-dom/client';
+const root = createRoot(document.getElementById('root'));
+
 const store = configureStore();
 
 if (process.env.NODE_ENV !== 'production') {
@@ -34,9 +37,9 @@ function Root() {
   )
 }
 
-ReactDOM.render(
+root.render(
   <React.StrictMode>
     <Root />
   </React.StrictMode>,
-  document.getElementById('root')
+  // document.getElementById('root')
 );
