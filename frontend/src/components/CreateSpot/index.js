@@ -10,9 +10,6 @@ import './CreateSpot.css';
 export default function CreateASpotModal() {
   const history = useHistory();
 
-  function splangyIt() {
-    history.push('/splangyit');
-  }
 
   // () => setShowCreateSpot(true)
 
@@ -20,7 +17,7 @@ export default function CreateASpotModal() {
 
   return (
     <div id="your-home">
-      <button id="edit-modal-create-spot-button"  onClick={() => splangyIt()}
+      <button id="edit-modal-create-button" onClick={() => setShowCreateSpot(true)}
         // style={{backgroundColor: "transparent", color: "black", fontSize: "14px", marginTop: "16px", border: "none", marginRight: "32px", display: "block"}}
       >Splangybnb your home</button>
       {showCreateSpot && (

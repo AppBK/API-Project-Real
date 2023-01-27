@@ -20,10 +20,6 @@ function SplangyIt() {
   // boku no: 37.24655751008692, -121.85225651671853
   // &center=37.24655751008692,-121.85225651671853
 
-  //const mapCenter = { lat: lat ? lat : 37.24655751008692, lng: lng ? lng : -121.85225651671853 };
-  // const mapCenter = `${lat},${lng}`;
-  // console.log('TESTING MAP CENTER: ', mapCenter);
-
   return (
     <div id="splangy-it-outermost">
       <div id="splangyit-main-content">
@@ -40,17 +36,12 @@ function SplangyIt() {
             <div></div>
           </div>
           <div id="map-container">
-            {/* <iframe id="map" width="100%" height="610px" style={{ border: "0" }} loading="lazy" allowFullScreen src={`https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ9T_5iuTKj4ARe3GfygqMnbk&key=${google_maps_api_key}&zoom=11&center=${lat},${lng}`}></iframe> */}
-            {/* <div id="map"></div> */}
             <Map id="map"></Map>
             {/* <div id="rounded-frame"></div>
             <div id="left-bottom-corner-cover"></div> */}
           </div>
         </div>
       </div>
-      {/* <script
-        src={`https://maps.googleapis.com/maps/api/js?key=${google_maps_api_key}&v=weekly&zoom=11&center=${lat},${lng}`} defer>
-      </script> */}
     </div>
   )
 }

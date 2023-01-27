@@ -45,8 +45,8 @@ function App() {
       {isLoaded && (
       <Switch>
         <Route exact path="/">
-          <Navigation isLoaded={isLoaded} />
           <TypeCarousel isLoaded={isLoaded} />
+          <Navigation isLoaded={isLoaded} />
           <Spots isLoaded={isLoaded}/>
         </Route>
         <Route path="/spots/:spotId">
@@ -57,6 +57,7 @@ function App() {
           <SplangyIt></SplangyIt>
         </Route>
         <Route path="/coming">
+          <Navigation isLoaded={isLoaded} />
           <ComingSoon />
         </Route>
       </Switch>

@@ -1,0 +1,43 @@
+#user-icon-button-modal {
+  width: 240px;
+  height: fit-content;
+  background-color: white;
+  position: absolute;
+  top: 54px;
+  right: 0px;
+  z-index: 8;
+  border-radius: 16px;
+  box-shadow: 0px 0px 8px 5px rgba(190, 189, 189, 0.2);
+
+  display: flex;
+  flex-direction: column;
+}
+
+#user-icon-modal-middle {
+  width: 100%;
+  height: fit-content;
+  border-bottom: 1px solid #DDDDDD;
+  color: #5c5c5c;
+  padding: 8px 0px;
+}
+
+#user-icon-modal-bottom {
+  width: 100%;
+  height: fit-content;
+  color: #5c5c5c;
+  padding: 8px 0px;
+}
+
+.user-icon-modal-buttons {
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+}
+
+.user-icon-modal-buttons:hover {
+  cursor: pointer;
+  background-color: #F7F7F7;
+}

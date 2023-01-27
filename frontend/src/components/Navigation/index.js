@@ -17,6 +17,10 @@ export default function Navigation({ isLoaded }) {
   const history = useHistory();
   // const navigate = useNavigate();
 
+  function splangyIt() {
+    history.push('/splangyit');
+  }
+
   const goHome = () => {
     setResetHome(!resetHome);
     history.push('/');
@@ -72,7 +76,13 @@ export default function Navigation({ isLoaded }) {
         </ul>
       </div>
       <div className="nav-right">
-        {sessionUser && (<CreateASpotModal/>)}
+        {sessionUser && (
+          <div>
+            <button id="edit-modal-create-spot-button" onClick={() => splangyIt()}
+            // style={{backgroundColor: "transparent", color: "black", fontSize: "14px", marginTop: "16px", border: "none", marginRight: "32px", display: "block"}}
+            >Splangybnb your home</button>
+          </div>
+        )}
         {/* // <div className="nav-right-left-box">
         //   <div className="become center-content pointer">
         //     <button id="become-link">Become a Host</button>
