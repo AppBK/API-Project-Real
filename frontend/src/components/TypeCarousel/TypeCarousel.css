@@ -20,6 +20,7 @@
 
 #carousel {
   display: flex;
+  transition: all 0.8s ease-in-out;
 }
 
 #fade-left {
@@ -142,10 +143,10 @@
   justify-content: center;
 }
 
-.carousel-button-container:focus {
+/* .carousel-button-container:focus {
   opacity: 1;
   color: black;
-}
+} */
 
 .carousel-button {
   border: 2px solid transparent;

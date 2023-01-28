@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { GoogleMap, useJsApiLoader, MarkerF, InfoWindow } from '@react-google-maps/api';
 
 const google_maps_api_key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+console.log('API KEY?: ', google_maps_api_key);
 
 const containerStyle = {
   width: '100%',
@@ -10,8 +11,8 @@ const containerStyle = {
 
 
 function MyComponent() {
-  const [lat, setLat] = useState(37.24655751008692);
-  const [lng, setLng] = useState(-121.85225651671853);
+  const [lat, setLat] = useState(0);
+  const [lng, setLng] = useState(0);
   const [activeMarker, setActiveMarker] = useState(null);
 
   const handleActiveMarker = (marker) => {
@@ -42,8 +43,8 @@ function MyComponent() {
   });
 
   const center = {
-    lat: lat ? lat : 37.24655751008692,
-    lng: lng ? lng : -121.85225651671853
+    lat: lat ? lat : 27.173891,
+    lng: lng ? lng : 78.042068
   };
 
   const { isLoaded } = useJsApiLoader({

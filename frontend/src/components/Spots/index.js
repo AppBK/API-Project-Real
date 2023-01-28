@@ -28,10 +28,6 @@ const Spots = ({ isLoaded }) => {
     dispatch(thunkGetAllSpots(spotType));
   }, [spotType]);
 
-  useEffect(() => {
-    console.log('SPOTS: ', spots)
-  }, [spotType]);
-
   if (!spots.length) return null;
 
   let currentSpots = spots.filter(spot => spot.category === spotType);
@@ -49,7 +45,7 @@ const Spots = ({ isLoaded }) => {
   return (
     <div id="spots">
       {currentSpots.map(spot => (
-        <button className="spot-selector" id={spot.id} onClick={clickTile} key={spot.id}>
+        <a className="spot-selector" id={spot.id} href={'/spots/' + spot.id} target="_blank" key={spot.id}>
         <div className="tile" key={spot.id}>
           <div className="preview-carousel">
             <img id={spot.id} className="preview-img" src={spot.previewImage}></img>
@@ -62,7 +58,7 @@ const Spots = ({ isLoaded }) => {
               <div className="preview-price">{monetary(spot.price)} <span className="preview-night">night</span></div>
           </div>
         </div>
-        </button>
+        </a>
       ))}
     </div>
   );

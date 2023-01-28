@@ -6,6 +6,7 @@ import './SplangyIt.css';
 // const AnyReactComponent = ({ text }) => (<div>{text}</div>);
 
 const google_maps_api_key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+console.log('API KEY?: ', google_maps_api_key);
 
 
 function SplangyIt() {

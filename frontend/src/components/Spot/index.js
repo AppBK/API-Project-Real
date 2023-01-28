@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { thunkGetAllSpotInfo } from "../../store/singleSpot";
 import { useEffect, useContext } from "react";
 import './Spot.css';
+import './main.css';
 import AddImageModal from "../addImageModal";
 import { thunkSpotDelete } from "../../store/spot";
 import EditSpotModal from "../EditSpotModal";
@@ -10,6 +11,7 @@ import { RouterContext } from "../../context/RouterContext";
 import Reviews from '../Reviews';
 import { thunkReviewsRead } from '../../store/reviews';
 import '../CreateReviewModal/CreateReview.css';
+import { Helmet } from "react-helmet";
 
 const Spot = ({ isLoaded }) => {
   // console.log('IS LOADED Spot: ', isLoaded);
@@ -79,6 +81,11 @@ const Spot = ({ isLoaded }) => {
   // style = {{ width: "100px", height: "100px" }
 
   return (
+    <>
+    <Helmet>
+      <title>Vacation Homes & Condo Rentals - Airbnb - Airbnb</title>
+      <link rel="shortcut icon" type="image/x-icon" href="./icons/favicon.ico" />
+    </Helmet>
     <div className="spot-page">
       <div id="inner-spot-cont">
         <div id="header-container">
@@ -118,6 +125,7 @@ const Spot = ({ isLoaded }) => {
       </div>)}
       <Reviews spot={spot} isLoaded={isLoaded} isAuthorized={isAuthorized} user={user}/>
     </div>
+    </>
   );
 }
 

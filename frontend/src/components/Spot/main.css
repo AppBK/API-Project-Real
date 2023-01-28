@@ -1,0 +1,14 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

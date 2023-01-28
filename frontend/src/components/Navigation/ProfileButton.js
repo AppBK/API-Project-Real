@@ -23,17 +23,6 @@ function ProfileButton({ user }) {
     setShowMenu(!showMenu);
   };
 
-  // useEffect(() => {
-  //   const closeMenu = () => {
-  //     setShowMenu(false);
-  //   }
-
-  //   document.addEventListener('click', closeMenu);
-
-  //   // return () => document.removeEventListener("click", closeMenu);
-  // }, []);
-
-
   // For user icon modal buttons
   const redirectToSplangyIt = () => {
     history.push('/splangyit');
@@ -47,7 +36,7 @@ function ProfileButton({ user }) {
     // dispatch(actionClearStore());
     // dispatch(actionSpotsDump());
     setShowModal(false);
-    // history.push('/');
+    history.push('/');
   };
 
   return (

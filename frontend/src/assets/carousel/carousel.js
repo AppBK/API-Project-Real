@@ -134,4 +134,16 @@ export const types = [
     url: "https://a0.muscache.com/pictures/f0c5ca0f-5aa0-4fe5-b38d-654264bacddf.jpg",
     name: "Play"
   },
+  {
+    url: "https://a0.muscache.com/pictures/4221e293-4770-4ea8-a4fa-9972158d4004.jpg",
+    name: "Caves"
+  },
+  {
+    url: "https://a0.muscache.com/pictures/4759a0a7-96a8-4dcd-9490-ed785af6df14.jpg",
+    name: "Yurts"
+  },
+  // {
+  //   url: "https://a0.muscache.com/pictures/a6dd2bae-5fd0-4b28-b123-206783b5de1d.jpg",
+  //   name: "Desert"
+  // },
 ];
