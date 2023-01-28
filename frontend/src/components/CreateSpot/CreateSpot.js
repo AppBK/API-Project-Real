@@ -291,3 +291,23 @@ export default function CreateASpot() {
 
 
     // https://images.mubicdn.net/images/cast_member/5030/cache-6050-1526604798/image-w856.jpg?size=256x
+
+
+
+
+  /*
+          ELEMENTS:
+
+          Built Home animation
+          1. <div class="_1tllc1q"><video class="_e2l2kr" autoplay="" crossorigin="anonymous" playsinline="" preload="auto" style="object-fit: cover;"><source src="https://stream.media.muscache.com/KeNKUpa01dRaT5g00SSBV95FqXYkqf01DJdzn01F1aT00vCI.mp4?v_q=high"></video><div class="_15xb09ct" style="transition-duration: 800ms;"><div class="_1h6n1zu" role="presentation" aria-hidden="true" style="display: inline-block; vertical-align: bottom; height: 100%; width: 100%; min-height: 1px;"><img class="_9ofhsl" aria-hidden="true" alt="" elementtiming="LCP-target" src="https://a0.muscache.com/4ea/air/v2/pictures/d7cb2e2b-f9b5-44e1-b510-44eaaf67889b.jpg" data-original-uri="https://a0.muscache.com/4ea/air/v2/pictures/d7cb2e2b-f9b5-44e1-b510-44eaaf67889b.jpg" style="object-fit: cover; vertical-align: bottom;"><div class="_15p4g025" style="background-image: url(&quot;https://a0.muscache.com/4ea/air/v2/pictures/d7cb2e2b-f9b5-44e1-b510-44eaaf67889b.jpg&quot;); background-size: cover;"></div></div></div></div>
+
+          Partially Built home
+          2. <div class="_1tllc1q"><video class="_e2l2kr" autoplay="" crossorigin="anonymous" playsinline="" preload="auto" style="object-fit: cover;"><source src="https://stream.media.muscache.com/zFaydEaihX6LP01x8TSCl76WHblb01Z01RrFELxyCXoNek.mp4?v_q=high"></video></div>
+          */
+
+
+/*
+Welcome video:
+
+<div class="_16s0wug"><div class="_1tllc1q"><video class="_e2l2kr" aria-label="Brian Chesky, CEO of Airbnb, welcomes new Hosts to Airbnb." crossorigin="anonymous" playsinline="" preload="auto" style="object-fit: cover;" src="blob:https://www.airbnb.com/b6cf9f6e-bfc2-4c13-b1f7-09df1be27d52"><source src="https://stream.media.muscache.com/aRvUnNwsZ4XCcjkXwSXwP1jcO7oZcLszmCZjN7pbG200.m3u8"></video><div class="_15xb09ct" style="transition-duration: 800ms;"><div class="_1h6n1zu" role="presentation" aria-hidden="true" style="display: inline-block; vertical-align: bottom; height: 100%; width: 100%; min-height: 1px;"><img class="_9ofhsl" aria-hidden="true" alt="" elementtiming="LCP-target" src="https://a0.muscache.com/pictures/772c41f0-0739-4f3b-8a22-9e1244d2050b.jpg" data-original-uri="https://a0.muscache.com/pictures/772c41f0-0739-4f3b-8a22-9e1244d2050b.jpg" style="object-fit: cover; vertical-align: bottom;"><div class="_15p4g025" style="background-image: url(&quot;https://a0.muscache.com/pictures/772c41f0-0739-4f3b-8a22-9e1244d2050b.jpg&quot;); background-size: cover;"></div></div></div><div class="c1x8gg1z dir dir-ltr"><button aria-label="Play again" type="button" class="c1tlddld dir dir-ltr"><span class="i1ejo1e6 dir dir-ltr"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style="display: block; height: 32px; width: 32px; fill: currentcolor;"><path d="M17 11h6.984C22.158 8.575 19.262 7 16 7 10.486 7 6 11.486 6 17s4.486 10 10 10c4.829 0 8.87-3.441 9.798-8h4.042c-.975 6.773-6.8 12-13.84 12-7.72 0-14-6.28-14-14S8.28 3 16 3a13.94 13.94 0 0 1 10 4.223V2h4v10c0 1.654-1.346 3-3 3H17v-4z"></path></svg></span></button></div></div></div>
+*/

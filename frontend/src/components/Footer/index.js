@@ -1,11 +1,13 @@
 import './Footer.css';
 
+const currentYear = new Date().getFullYear();
+
 const Footer = () => {
   return (
     <footer id="air-footer">
       <div id="footer-content-div">
         <div id="footer-content-left">
-          <p>2022 Airbnb, Inc.</p>
+          <p>{currentYear} Splangybnb, Inc.</p>
           <span className="footer-spacing-dot">.</span>
           <div href="https://airbnb.com/terms/privacy_policy" className="footer-links">Privacy</div>
           <span className="footer-spacing-dot">.</span>

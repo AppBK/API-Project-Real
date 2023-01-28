@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { GoogleMap, useJsApiLoader, MarkerF, InfoWindow } from '@react-google-maps/api';
+import './Map.css'
 
 const google_maps_api_key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
@@ -85,7 +86,7 @@ function MyComponent() {
     content: "It appears that you have Location Services disabled."
   };
 
-  const noLocationServices = <InfoWindow options={{ content: "It appears that you have Location Services disabled."}} position={center}><div style={{ color: "red" }}>It appears that you have Location Services disabled.</div></InfoWindow>
+  const noLocationServices = <InfoWindow position={center} ><div id="info-content">It appears that you have Location Services disabled.</div></InfoWindow>
   const centralMarkerId = 1;
   const centralMarker = <MarkerF key={centralMarkerId} position={center} onClick={() => handleActiveMarker(centralMarkerId)}>{!locationServicesEnabled ? noLocationServices : null }</MarkerF>
 
