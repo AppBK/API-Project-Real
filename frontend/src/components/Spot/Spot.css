@@ -148,3 +148,8 @@
   color: red;
   list-style: none;
 }
+
+#path-tester {
+  position: relative;
+  z-index: 300;
+}

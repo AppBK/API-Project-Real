@@ -13,6 +13,7 @@ import { thunkReviewsRead } from '../../store/reviews';
 import '../CreateReviewModal/CreateReview.css';
 import { Helmet } from "react-helmet";
 
+
 const Spot = ({ isLoaded }) => {
   // console.log('IS LOADED Spot: ', isLoaded);
   const history = useHistory();
@@ -22,6 +23,7 @@ const Spot = ({ isLoaded }) => {
 
   const { spotId } = useParams();
 
+  console.log('REACT_URL? ', process.env.PUBLIC_URL + '/icons/favicon.ico');
 
 
   const spots = useSelector(state => state.spotDetails);
@@ -83,8 +85,8 @@ const Spot = ({ isLoaded }) => {
   return (
     <>
     <Helmet>
-      <title>Vacation Homes & Condo Rentals - Airbnb - Airbnb</title>
-      <link rel="shortcut icon" type="image/x-icon" href="./icons/favicon.ico" />
+      <title>{spot.name}</title>
+      <link rel="shortcut icon" type="image/x-icon" href="/icons/favicon.ico" />
     </Helmet>
     <div className="spot-page">
       <div id="inner-spot-cont">
