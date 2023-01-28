@@ -38,8 +38,7 @@ function SplangyIt() {
           </div>
           <div id="map-container">
             <Map id="map"></Map>
-            {/* <div id="rounded-frame"></div>
-            <div id="left-bottom-corner-cover"></div> */}
+            <div id="map-left-border"></div>
           </div>
         </div>
       </div>

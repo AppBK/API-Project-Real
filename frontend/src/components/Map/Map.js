@@ -13,6 +13,7 @@ function MyComponent() {
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
   const [activeMarker, setActiveMarker] = useState(null);
+  const [locationServicesEnabled, setLocationServicesEnabled] = useState(true);
 
   const handleActiveMarker = (marker) => {
     if (marker === activeMarker) {
@@ -29,6 +30,7 @@ function MyComponent() {
 
   const onError = () => {
     console.log('NO SIRBE!!!');
+    setLocationServicesEnabled(false);
   }
 
   function getLocation() {
@@ -40,6 +42,12 @@ function MyComponent() {
   useEffect(() => {
     getLocation();
   });
+
+  // 37.24656605075018, -121.852181414779
+  // const center = {
+  //   lat: lat ? lat : 37.24656605075018,
+  //   lng: lng ? lng : -121.852181414779
+  // };
 
   const center = {
     lat: lat ? lat : 27.173891,
@@ -69,9 +77,17 @@ function MyComponent() {
   const markers = [
     {
       id: 1,
-      position: { lat: lat, lng: lng }
+      position: center
     }
   ];
+
+  const InfoWindowOptions = {
+    content: "It appears that you have Location Services disabled."
+  };
+
+  const noLocationServices = <InfoWindow options={{ content: "It appears that you have Location Services disabled."}} position={center}><div style={{ color: "red" }}>It appears that you have Location Services disabled.</div></InfoWindow>
+  const centralMarkerId = 1;
+  const centralMarker = <MarkerF key={centralMarkerId} position={center} onClick={() => handleActiveMarker(centralMarkerId)}>{!locationServicesEnabled ? noLocationServices : null }</MarkerF>
 
 
   return isLoaded ? (
@@ -84,14 +100,15 @@ function MyComponent() {
       onClick={() => setActiveMarker(null)}
     >
       { /* Child components, such as markers, info windows, etc. */}
-      {markers.map(({ id, position }) => (
+      {centralMarker}
+      {/* {markers.map(({ id, position }) => (
         <MarkerF
           key={id}
           position={position}
           onClick={() => handleActiveMarker(id)}
         >
         </MarkerF>
-      ))}
+      ))} */}
       <></>
     </GoogleMap>
   ) : <></>

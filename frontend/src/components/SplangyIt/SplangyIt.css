@@ -102,29 +102,20 @@
 #map-container {
   border-radius: 24px;
   width: 50%;
-  overflow: none;
+  overflow: hidden;
   position: relative;
   z-index: 4;
+  border: 16px solid white;
+  border-width: 16px;
+  border-radius: 32px;
 }
 
-#rounded-frame {
-  box-sizing: border-box;
-  border: 4px solid white;
-  border-radius: 24px;
+/* #map-left-border {
+  height: 100%;
+  width: 16px;
+  background-color: red;
   position: absolute;
   top: 0px;
-  left: 0px;
-  z-index: 4;
-  width: 100%;
-  height: 610px;
-}
-
-#left-bottom-corner-cover {
-  position: absolute;
-  bottom: -12px;
-  left: -12px;
-  width: 4%;
-  height: 4%;
-  background-color: white;
-  transform: rotate(45deg)
-}
+  left: -4px;
+  border-bottom-right-radius: 32px;
+} */
