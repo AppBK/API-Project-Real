@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { GoogleMap, useJsApiLoader, MarkerF, InfoWindow } from '@react-google-maps/api';
 
 const google_maps_api_key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-console.log('API KEY?: ', google_maps_api_key);
 
 const containerStyle = {
   width: '100%',
