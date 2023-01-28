@@ -10,9 +10,9 @@ let currentMargin;
 
 const TypeCarousel = () => {
   const { spotType, setSpotType, prevType, setPrevType } = useContext(RouterContext);
-  // const [marginLeft, setMarginLeft] = useState("0px");
-  // const [showLeft, setShowLeft] = useState('hidden');
-  // const [showRight, setShowRight] = useState('visible');
+  const [marginLeft, setMarginLeft] = useState("0px");
+  const [showLeft, setShowLeft] = useState('hidden');
+  const [showRight, setShowRight] = useState('visible');
   // const [active, setActive] = useState(false);
 
 
