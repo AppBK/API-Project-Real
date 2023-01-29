@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { RouterContext } from '../../context/RouterContext';
 import Map from '../Map/Map';
 import ReactSlider from 'react-slider';
 import './SplangyIt.css';
@@ -9,6 +10,10 @@ import './SplangyIt.css';
 const google_maps_api_key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 function SplangyIt() {
+  const [type, setType] = useState('Entire place');
+  const [bedrooms, setBedrooms] = useState(2);
+
+  const { userCity } = useContext(RouterContext);
 
   const sliderMin = 1;
   const sliderMax = 30;
@@ -31,6 +36,20 @@ function SplangyIt() {
                 max={sliderMax}
               />
             </div>
+            <button id="city-search-box">
+              <div id="like-it-is">
+                <div id="position-search">
+                  <img id="search-icon-pink" src="/createSpot/search-icon-pink.svg"></img>
+                </div>
+                <div id="position-info">
+                  <div id="display-city">{userCity}</div>
+                  <div id="position-listing-type">
+                    <div id="display-type">{type} &middot;</div>
+                    <div id="display-bedrooms">&nbsp;{bedrooms} bedrooms</div>
+                  </div>
+                </div>
+              </div>
+            </button>
           </div>
           <div id="map-container">
             <Map id="map"></Map>

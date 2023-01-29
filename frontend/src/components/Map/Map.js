@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
+import { RouterContext } from '../../context/RouterContext';
 import { GoogleMap, useJsApiLoader, MarkerF, InfoWindow } from '@react-google-maps/api';
 import './Map.css'
 
@@ -9,12 +10,47 @@ const containerStyle = {
   height: '610px'
 };
 
+// Las Vegas: 36.114647, -115.172813
+// Taj Mahal: 27.173891, 78.042068
+// Tokyo: 35.652832, 139.839478
+
+// Foreign formatted_address length:
+// Domestic formatted_address length: 4
 
 function MyComponent() {
-  const [lat, setLat] = useState(0);
-  const [lng, setLng] = useState(0);
+  const [lat, setLat] = useState(27.173891);
+  const [lng, setLng] = useState(78.042068);
   const [activeMarker, setActiveMarker] = useState(null);
   const [locationServicesEnabled, setLocationServicesEnabled] = useState(true);
+
+  const { userCity, setUserCity } = useContext(RouterContext);
+
+
+  function getCityName() {
+    const request = new XMLHttpRequest();
+
+    const method = 'GET';
+    const url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lng + '&sensor=true' + '&key=' + google_maps_api_key;
+    const async = true;
+
+    request.open(method, url, async);
+    request.onreadystatechange = function () {
+      if (request.readyState == 4 && request.status == 200) {
+        const data = JSON.parse(request.responseText);
+        const address = data.results[0];
+        const addressArray = address.formatted_address.split(',');
+
+        if (addressArray.length === 4) {
+          setUserCity(addressArray[1]);
+        } else {
+          setUserCity(addressArray[4]);
+        }
+        // console.log('ARRAY: ', address);
+      }
+    };
+    request.send();
+  }
+
 
   const handleActiveMarker = (marker) => {
     if (marker === activeMarker) {
@@ -27,11 +63,13 @@ function MyComponent() {
     console.log('LAT: ', position.coords.latitude)
     setLat(position.coords.latitude);
     setLng(position.coords.longitude);
+
+    getCityName();
   }
 
   const onError = () => {
-    console.log('NO SIRBE!!!');
     setLocationServicesEnabled(false);
+    getCityName();
   }
 
   function getLocation() {
@@ -42,7 +80,7 @@ function MyComponent() {
 
   useEffect(() => {
     getLocation();
-  });
+  }, []);
 
   // 37.24656605075018, -121.852181414779
   // const center = {
@@ -51,8 +89,8 @@ function MyComponent() {
   // };
 
   const center = {
-    lat: lat ? lat : 27.173891,
-    lng: lng ? lng : 78.042068
+    lat: lat,
+    lng: lng
   };
 
   const { isLoaded } = useJsApiLoader({
@@ -82,9 +120,6 @@ function MyComponent() {
     }
   ];
 
-  const InfoWindowOptions = {
-    content: "It appears that you have Location Services disabled."
-  };
 
   const noLocationServices = <InfoWindow position={center} ><div id="info-content">It appears that you have Location Services disabled.</div></InfoWindow>
   const centralMarkerId = 1;

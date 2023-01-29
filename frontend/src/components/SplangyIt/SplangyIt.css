@@ -45,6 +45,7 @@
 #big-gains {
   font-size: 75px;
   font-weight: bold;
+  margin: 20px;
 }
 
 #bold-nights-button {
@@ -105,6 +106,57 @@
   width: 30px;
   height: 30px;
   top: -2px;
+}
+
+#city-search-box {
+  width: 410px;
+  height: 64px;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  border: 1px solid #DDD;
+  border-radius: 36px;
+  background-color: white;
+  margin-top: 12px;
+}
+
+#city-search-box:hover {
+  cursor: pointer;
+}
+
+#search-icon-pink {
+  display: block;
+  width: 16px;
+  width: 16px;
+}
+
+#like-it-is {
+  display: flex;
+}
+
+#position-search {
+  width: 20px;
+  height: 64px;
+  display: flex;
+  margin: 0px 16px;
+}
+
+#position-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#position-listing-type {
+  font-weight: 400;
+  color: #717171;
+  display: flex;
+}
+
+#display-city {
+  text-align: left;
+  margin-bottom: 2px;
 }
 
 /* #map-left-border {

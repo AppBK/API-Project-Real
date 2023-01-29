@@ -14,10 +14,7 @@ export const RouterProvider = props => {
   const [prevType, setPrevType] = useState('');
   const [dumpStore, setDumpStore] = useState(true);
   const [showSignupForm, setShowSignupForm] = useState(false);
-
-  useEffect(() => {
-    console.log('SPOT TYPE FROM PROVIDER: ', spotType);
-  },[spotType]);
+  const [userCity, setUserCity] = useState('');
 
   return (
     <RouterContext.Provider value={{
@@ -32,6 +29,7 @@ export const RouterProvider = props => {
       prevType, setPrevType,
       dumpStore, setDumpStore,
       showSignupForm, setShowSignupForm,
+      userCity, setUserCity,
     }}>
       {props.children}
     </RouterContext.Provider>
