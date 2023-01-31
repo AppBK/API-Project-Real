@@ -67,8 +67,37 @@ function SplangyIt() {
     floater.innerHTML = `<div>${currentNights + 1}&nbsp;</div><div>nights</div>`
   }
 
+  const closeModal = () => {
+    const blackout = document.getElementById('blackout');
+    const tellUsModal = document.getElementById('tell-us-modal');
+    blackout.style.visibility = 'hidden';
+    tellUsModal.style.visibility = 'hidden';
+  }
+
+  const openModal = () => {
+    const blackout = document.getElementById('blackout');
+    const tellUsModal = document.getElementById('tell-us-modal');
+    blackout.style.visibility = 'visible';
+    tellUsModal.style.visibility = 'visible';
+    // tellUsModal.style.transition = 'all 2s ease-in-out';
+  }
+
+
+
   return (
     <div id="splangy-it-outermost">
+      <div id="blackout" onClick={closeModal}>
+      </div>
+      <div id="tell-us-modal" style={{ opacity: "1" }}>
+        <div id="modal-inside-wrapper">
+          <div id="modal-header">
+            <div id="close-modal-background" onClick={closeModal}>
+              <img id="close-modal" src="/createSpot/closeModal.svg"></img>
+            </div>
+            <div>Tell us about your place</div>
+          </div>
+        </div>
+      </div>
       <div id="splangy-it-header">
         <div onClick={goHome} id="splangy-it-gohome">
           <img id="splangyit-icon-pink" src="/createSpot/airbnb-logo-pink.svg"></img>
@@ -95,12 +124,11 @@ function SplangyIt() {
                 thumbClassName='days-slider-thumb'
                 min={sliderMin}
                 max={sliderMax}
-                defaultValue={locationServicesEnabled}
                 value={currentSlider}
                 onChange={(e) => setSliderPos(e)}
               />
             </div>
-            <button id="city-search-box">
+            <button id="city-search-box" onClick={openModal}>
               <div id="like-it-is">
                 <div id="position-search">
                   <img id="search-icon-pink" src="/createSpot/search-icon-pink.svg"></img>
@@ -114,7 +142,7 @@ function SplangyIt() {
                 </div>
               </div>
             </button>
-            {locationServicesEnabled && (<div id="need-more-info"><div className="more-info-content">Looks like we'll need some more info to provide you with an accurate quote.</div><div className="more-info-content" id="more-info-pink">Please use button below to get started.</div></div>)}
+            {!locationServicesEnabled && (<div id="need-more-info"><div className="more-info-content">Looks like we'll need some more info to provide you with an accurate quote.</div><div className="more-info-content" id="more-info-pink">Please use button below to get started.</div></div>)}
           </div>
           <div id="map-container">
             <Map id="map"></Map>
@@ -132,4 +160,10 @@ export default SplangyIt;
 
 /*
 <div class="_1tllc1q"><video class="_e2l2kr" crossorigin="anonymous" playsinline="" preload="auto" style="object-fit: cover;" autoplay=""><source src="https://stream.media.muscache.com/zFaydEaihX6LP01x8TSCl76WHblb01Z01RrFELxyCXoNek.mp4?v_q=high"></video></div>
+*/
+
+
+
+/*
+<div role="dialog" tabindex="-1" class="gm-style-iw gm-style-iw-c" style="padding-right: 0px; padding-bottom: 0px; max-width: 498px; max-height: 479px; min-width: 0px;"><div class="gm-style-iw-d" style="overflow: scroll; max-height: 461px;"></div><button draggable="false" aria-label="Close" title="Close" type="button" class="gm-ui-hover-effect" style="background: none; display: block; border: 0px; margin: 0px; padding: 0px; text-transform: none; appearance: none; position: absolute; cursor: pointer; user-select: none; top: -6px; right: -6px; width: 30px; height: 30px;"><span style="-webkit-mask-image: url(&quot;data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M19%206.41L17.59%205%2012%2010.59%206.41%205%205%206.41%2010.59%2012%205%2017.59%206.41%2019%2012%2013.41%2017.59%2019%2019%2017.59%2013.41%2012z%22/%3E%3Cpath%20d%3D%22M0%200h24v24H0z%22%20fill%3D%22none%22/%3E%3C/svg%3E&quot;); pointer-events: none; display: block; width: 14px; height: 14px; margin: 8px;"></span></button></div>
 */

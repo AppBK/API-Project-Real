@@ -17,6 +17,9 @@ const containerStyle = {
 // Foreign formatted_address length:
 // Domestic formatted_address length: 4
 
+
+
+
 function MyComponent() {
   const [lat, setLat] = useState(27.173891);
   const [lng, setLng] = useState(78.042068);
@@ -119,10 +122,11 @@ function MyComponent() {
     }
   ];
 
+  // {!locationServicesEnabled ? noLocationServices : null}
+  let noLocationServices = <InfoWindow position={center}><div id="info-content">It appears that you have Location Services disabled.</div></InfoWindow>
+  let centralMarkerId = 1;
+  let centralMarker = <MarkerF id="default-marker" key={centralMarkerId} position={center} onClick={() => handleActiveMarker(centralMarkerId)}>{!locationServicesEnabled ? noLocationServices : null}</MarkerF>
 
-  const noLocationServices = <InfoWindow position={center}><div id="info-content">It appears that you have Location Services disabled.</div></InfoWindow>
-  const centralMarkerId = 1;
-  const centralMarker = <MarkerF key={centralMarkerId} position={center} onClick={() => handleActiveMarker(centralMarkerId)}>{!locationServicesEnabled ? noLocationServices : null}</MarkerF>
 
 
   return isLoaded ? (
