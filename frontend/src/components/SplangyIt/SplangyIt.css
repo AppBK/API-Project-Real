@@ -3,6 +3,53 @@
   --track-color: #ddd;
 }
 
+@keyframes slideup {
+  from {
+    scrollbar-width: none;
+    top: 100%;
+  }
+
+  to {
+    top: calc(50% - 300px);
+  }
+}
+
+@keyframes slidedown {
+  from {
+    top: calc(50% - 300px);
+    visibility: visible;
+  }
+
+  to {
+    top: 100%;
+    visibility: hidden;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    visibility: visible;
+  }
+
+  to {
+    opacity: 0.5;
+    visibility: visible;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 0.5;
+    visibility: visible;
+  }
+
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
 #splangy-it-outermost {
   display: flex;
   flex-direction: column;
@@ -332,10 +379,12 @@
 }
 
 #tell-us-modal {
+  /* animation-duration: 2s;
+  animation-name: slideup; */
   width: 480px;
   height: 600px;
   background-color: white;
-  position: fixed;
+  position: absolute;
   top: calc(50% - 300px);
   left: calc(50% - 240px);
   z-index: 12;

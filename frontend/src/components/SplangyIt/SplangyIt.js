@@ -70,6 +70,12 @@ function SplangyIt() {
   const closeModal = () => {
     const blackout = document.getElementById('blackout');
     const tellUsModal = document.getElementById('tell-us-modal');
+    // blackout.style.visibility = 'hidden';
+    // tellUsModal.style.visibility = 'hidden';
+    blackout.style.animationDuration = '0.5s';
+    blackout.style.animationName = 'fade-out';
+    tellUsModal.style.animationDuration = '0.5s';
+    tellUsModal.style.animationName = 'slidedown';
     blackout.style.visibility = 'hidden';
     tellUsModal.style.visibility = 'hidden';
   }
@@ -77,8 +83,12 @@ function SplangyIt() {
   const openModal = () => {
     const blackout = document.getElementById('blackout');
     const tellUsModal = document.getElementById('tell-us-modal');
+    blackout.style.animationDuration = '0.5s';
+    blackout.style.animationName = 'fade-in';
     blackout.style.visibility = 'visible';
     tellUsModal.style.visibility = 'visible';
+    tellUsModal.style.animationDuration = '0.5s';
+    tellUsModal.style.animationName = 'slideup';
     // tellUsModal.style.transition = 'all 2s ease-in-out';
   }
 
