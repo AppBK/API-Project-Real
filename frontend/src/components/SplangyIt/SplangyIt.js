@@ -79,7 +79,10 @@ function SplangyIt() {
     tellUsModal.style.animationName = 'slidedown';
     blackout.style.visibility = 'hidden';
     tellUsModal.style.visibility = 'hidden';
-    body.style.overflow = "auto"; // Enable the scrollbar once more!
+
+    setTimeout(() => {
+      body.style.overflow = "auto"; // Enable the scrollbar once more!
+    }, 600);
   }
 
   const openModal = () => {
