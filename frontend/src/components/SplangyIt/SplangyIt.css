@@ -5,14 +5,27 @@
 
 #splangy-it-outermost {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   width: 100%;
   height: 100vh;
+  font-weight: bold;
+}
+
+#splangy-it-header {
+  width: 90%;
+  max-width: 1240px;
+  height: 48px;
+  margin: 0px auto;
+  margin-top: 16px;
+  margin-bottom: 76px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #splangyit-main-content {
-  width: 80%;
+  width: 90%;
   max-width: 1280px;
   margin: 0px auto;
 }
@@ -21,14 +34,42 @@
   width: 100%;
   height: 100%;
   display: flex;
+  padding: 0px;
 }
 
 #estimate-container {
+  position: relative;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 50%;
+}
+
+#need-more-info {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 5;
+  width: 100%;
+  height: calc(100% - 200px);
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+}
+
+.more-info-content {
+  max-width: 410px;
+  text-align: center;
+}
+
+#more-info-pink {
+  color: #ff385c;
+  margin-top: 24px;
 }
 
 #pink-it {
@@ -69,6 +110,7 @@
   cursor: pointer;
 }
 
+
 #map-container {
   border-radius: 24px;
   width: 50%;
@@ -100,12 +142,50 @@
   height: 24px;
   border-radius: 100%;
   outline: none;
+  position: relative;
+}
+
+#nights-floater-black {
+  width: 120px;
+  height: 42px;
+  position: absolute;
+  top: -76px;
+  left: -46px;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 24px;
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
+  background-color: black;
+  visibility: hidden;
+}
+
+#nights-floater-white {
+  width: 1200px;
+  height: 42px;
+  position: relative;
+  top: -77px;
+  left: -500px;
+  z-index: 3;
+  background-color: white;
+  visibility: hidden;
 }
 
 .days-slider-thumb:active {
   width: 30px;
   height: 30px;
   top: -2px;
+}
+
+.days-slider-thumb:active #nights-floater-black {
+  visibility: visible;
+}
+
+.days-slider-thumb:active #nights-floater-white {
+  visibility: visible;
 }
 
 #city-search-box {
@@ -157,6 +237,82 @@
 #display-city {
   text-align: left;
   margin-bottom: 2px;
+}
+
+#ready-setup {
+  display: flex;
+  align-items: center;
+}
+
+#splangybnb-setup {
+  width: 200px;
+  height: 48px;
+  min-width: 200px !important;
+  background-size: 200% 200% !important;
+  border: none;
+  border-radius: 6px;
+  opacity: 1 !important;
+  transition: opacity 1.25s ease 0s !important;
+  background-image: radial-gradient(circle at center center, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#splangybnb-setup:hover {
+  cursor: pointer;
+}
+
+#add-spot-img {
+  display: block;
+  margin-right: 4px;
+}
+
+#setup-label {
+  color: white;
+  font-size: 18px;
+}
+
+#ready-margin {
+  margin-right: 24px;
+  font-size: 16px;
+}
+
+#splangyit-icon-pink {
+  width: 32px;
+  height: 32px;
+}
+
+#splangy-it-gohome:hover {
+  cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+  #estimate-map-div {
+    flex-direction: column;
+  }
+
+  #estimate-container {
+    width: 100%;
+  }
+
+  #map-container {
+    width: 100%;
+    height: 400px;
+    margin-left: -16px;
+  }
+
+  #days-bar {
+    width: 100%;
+  }
+
+  #city-search-box {
+    width: 100%;
+  }
+
+  #need-more-info {
+    height: calc(100% - 70px);
+  }
 }
 
 /* #map-left-border {

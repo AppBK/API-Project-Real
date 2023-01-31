@@ -15,6 +15,7 @@ export const RouterProvider = props => {
   const [dumpStore, setDumpStore] = useState(true);
   const [showSignupForm, setShowSignupForm] = useState(false);
   const [userCity, setUserCity] = useState('');
+  const [locationServicesEnabled, setLocationServicesEnabled] = useState(true);
 
   return (
     <RouterContext.Provider value={{
@@ -30,6 +31,7 @@ export const RouterProvider = props => {
       dumpStore, setDumpStore,
       showSignupForm, setShowSignupForm,
       userCity, setUserCity,
+      locationServicesEnabled, setLocationServicesEnabled,
     }}>
       {props.children}
     </RouterContext.Provider>

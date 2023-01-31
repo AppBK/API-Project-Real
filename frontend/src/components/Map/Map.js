@@ -21,9 +21,8 @@ function MyComponent() {
   const [lat, setLat] = useState(27.173891);
   const [lng, setLng] = useState(78.042068);
   const [activeMarker, setActiveMarker] = useState(null);
-  const [locationServicesEnabled, setLocationServicesEnabled] = useState(true);
 
-  const { userCity, setUserCity } = useContext(RouterContext);
+  const { userCity, setUserCity, locationServicesEnabled, setLocationServicesEnabled } = useContext(RouterContext);
 
 
   function getCityName() {
@@ -121,9 +120,9 @@ function MyComponent() {
   ];
 
 
-  const noLocationServices = <InfoWindow position={center} ><div id="info-content">It appears that you have Location Services disabled.</div></InfoWindow>
+  const noLocationServices = <InfoWindow position={center}><div id="info-content">It appears that you have Location Services disabled.</div></InfoWindow>
   const centralMarkerId = 1;
-  const centralMarker = <MarkerF key={centralMarkerId} position={center} onClick={() => handleActiveMarker(centralMarkerId)}>{!locationServicesEnabled ? noLocationServices : null }</MarkerF>
+  const centralMarker = <MarkerF key={centralMarkerId} position={center} onClick={() => handleActiveMarker(centralMarkerId)}>{!locationServicesEnabled ? noLocationServices : null}</MarkerF>
 
 
   return isLoaded ? (
