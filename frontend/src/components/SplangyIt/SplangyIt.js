@@ -12,6 +12,9 @@ let floater = document.createElement('div');
 floater.id = "nights-floater-black";
 let floater2 = document.createElement('div');
 floater2.id = "nights-floater-white"
+
+let body = document.querySelector('body');
+
 const google_maps_api_key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 function SplangyIt() {
@@ -70,17 +73,17 @@ function SplangyIt() {
   const closeModal = () => {
     const blackout = document.getElementById('blackout');
     const tellUsModal = document.getElementById('tell-us-modal');
-    // blackout.style.visibility = 'hidden';
-    // tellUsModal.style.visibility = 'hidden';
     blackout.style.animationDuration = '0.5s';
     blackout.style.animationName = 'fade-out';
     tellUsModal.style.animationDuration = '0.5s';
     tellUsModal.style.animationName = 'slidedown';
     blackout.style.visibility = 'hidden';
     tellUsModal.style.visibility = 'hidden';
+    body.style.overflow = "auto"; // Enable the scrollbar once more!
   }
 
   const openModal = () => {
+    body.style.overflow = "hidden"; // This removes the scrollbar while the modal is visible
     const blackout = document.getElementById('blackout');
     const tellUsModal = document.getElementById('tell-us-modal');
     blackout.style.animationDuration = '0.5s';
@@ -89,7 +92,6 @@ function SplangyIt() {
     tellUsModal.style.visibility = 'visible';
     tellUsModal.style.animationDuration = '0.5s';
     tellUsModal.style.animationName = 'slideup';
-    // tellUsModal.style.transition = 'all 2s ease-in-out';
   }
 
 
@@ -105,6 +107,13 @@ function SplangyIt() {
               <img id="close-modal" src="/createSpot/closeModal.svg"></img>
             </div>
             <div>Tell us about your place</div>
+          </div>
+          <div id="modal-rest">
+            <div id="address-input-div">
+              <div id="address-label">Address</div>
+              <input id="address-input" type="text" placeholder={userCity}></input>
+              <div id="pin-div"><img src="/createSpot/pin-icon-black.svg" style={{ width: '16px', height: '16px' }}></img></div>
+            </div>
           </div>
         </div>
       </div>
