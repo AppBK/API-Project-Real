@@ -80,6 +80,7 @@ function SplangyIt() {
     blackout.style.visibility = 'hidden';
     tellUsModal.style.visibility = 'hidden';
 
+    // setTimeout prevents the scrollbar from awkwardly popping onto the screen when the animation ends
     setTimeout(() => {
       body.style.overflow = "auto"; // Enable the scrollbar once more!
     }, 600);

@@ -16,7 +16,7 @@ const containerStyle = {
 
 // Foreign formatted_address length:
 // Domestic formatted_address length: 4
-
+const libraries = ["places"];
 
 
 
@@ -97,7 +97,8 @@ function MyComponent() {
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: google_maps_api_key
+    googleMapsApiKey: google_maps_api_key,
+    libraries: libraries
   })
 
   const [map, setMap] = React.useState(null);
@@ -126,20 +127,44 @@ function MyComponent() {
   let noLocationServices = <InfoWindow position={center}><div id="info-content">It appears that you have Location Services disabled.</div></InfoWindow>
   let centralMarkerId = 1;
   let centralMarker = <MarkerF id="default-marker" key={centralMarkerId} position={center} onClick={() => handleActiveMarker(centralMarkerId)}>{!locationServicesEnabled ? noLocationServices : null}</MarkerF>
+  let renderMap = <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={12} onLoad={onLoad} onUnmount={onUnmount} onClick={() => setActiveMarker(null)}>{centralMarker}</GoogleMap>
 
+  let searchBar;
+  let request;
+  if (window.google) {
+    console.log('MAKING SEARCH BAR?');
+
+    request = {
+      query: 'Taj Mahal',
+      fields: ['name', 'geometry'],
+    };
+
+    searchBar = new window.google.maps.places.PlacesService(renderMap.instance);
+
+    searchBar.findPlaceFromQuery(request, function (results, status) {
+      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+        for (let i = 0; i < results.length; i++) {
+          createMarker(results[i]);
+        }
+        renderMap.setCenter(results[0].geometry.location);
+      }
+    });
+  }
 
 
   return isLoaded ? (
-    <GoogleMap
+    <>
+    {renderMap}
+   {/* <GoogleMap
       mapContainerStyle={containerStyle}
-      center={center}
-      zoom={12}
-      onLoad={onLoad}
-      onUnmount={onUnmount}
-      onClick={() => setActiveMarker(null)}
-    >
+       center={center}
+       zoom={12}
+       onLoad={onLoad}
+       onUnmount={onUnmount}
+       onClick={() => setActiveMarker(null)}
+     > */}
       { /* Child components, such as markers, info windows, etc. */}
-      {centralMarker}
+      {/* {centralMarker} */}
       {/* {markers.map(({ id, position }) => (
         <MarkerF
           key={id}
@@ -148,8 +173,9 @@ function MyComponent() {
         >
         </MarkerF>
       ))} */}
-      <></>
-    </GoogleMap>
+      {/* <></> */}
+    {/* </GoogleMap> */}
+    </>
   ) : <></>
 }
 

@@ -1,5 +1,12 @@
 node_modules/
+ignore/
 
 .env
 .DS_Store
 
+webpack.config.js
+
+frontend/node_modules/
+backend/node_modules/
+
+package-lock.json

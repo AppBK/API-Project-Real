@@ -165,7 +165,7 @@
   position: relative;
   z-index: 4;
   border: 16px solid white;
-  border-width: 16px;
+  /* border-width: 16px; */
   border-radius: 32px;
 }
 
