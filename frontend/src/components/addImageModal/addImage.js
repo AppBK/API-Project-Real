@@ -4,8 +4,6 @@ import { RouterContext } from "../../context/RouterContext";
 import { thunkSpotAddImage } from '../../store/singleSpot';
 import { useDispatch } from 'react-redux';
 
-console.log('THUNK IMAGE: ', thunkSpotAddImage);
-
 const AddImage = () => {
   const [urlValue, setUrlValue] = useState('');
   const [previewValue, setPreviewValue] = useState('');
@@ -20,7 +18,6 @@ const AddImage = () => {
   async function addImage(e) {
     e.preventDefault();
 
-    console.log('PREVIEW VALUE: ', previewValue);
 
     if (previewValue !== 'false' && previewValue !== 'true') {
       setError(['Preview value must be a boolean (true or false)']);

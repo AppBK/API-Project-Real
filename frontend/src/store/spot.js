@@ -128,7 +128,6 @@ export const thunkSpotCreate = (spot) => async (dispatch) => {
 
   if (response.ok) {
     const newSpot = await response.json();
-    console.log('A new spot?', newSpot);
 
     dispatch(actionSpotCreate(newSpot));
 
@@ -149,8 +148,6 @@ export default function spotReducer(state = {}, action) {
       const newState = {...state};
       newState.spots[action.spot.id] = action.spot;
 
-      console.log('IN GET INFO: ', action.spot);
-
       return newState;
     }
     case SPOTS_DELETE: {
@@ -162,7 +159,6 @@ export default function spotReducer(state = {}, action) {
     case SPOTS_EDIT: {
       const newState = {...state};
 
-      console.log('EDITNIG A SPOT: ', action.spot);
       newState[action.spot.id] = action.spot;
 
       return newState;

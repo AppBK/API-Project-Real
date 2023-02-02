@@ -129,7 +129,6 @@ export default function singleSpotReducer(state = {}, action) {
       newSpot[action.spot.id].createdAt = action.spot.createdAt;
       newSpot[action.spot.id].updatedAt = action.spot.updatedAt;
 
-      console.log('NEW SPOT FROM EDIT: ', newSpot);
 
       newState[action.spot.id] = newSpot;
 
@@ -138,15 +137,12 @@ export default function singleSpotReducer(state = {}, action) {
     case SPOTS_ADD_IMAGE: {
       const newState = { ...state };
       newState[action.spotId].SpotImages.unshift(action.image);
-      console.log('FROM SPOT REDUCER, IMAGES ARRAY: ', newState[action.spotId].SpotImages);
-
       return newState;
     }
     case SPOTS_CLEAR_STORE: {
       return {};
     }
     case SPOT_DELETE: {
-      console.log('INSIDE SINGLE SPOT DELETE: ', action.spotId);
       const newState = {...state};
       delete newState[action.spotId];
 

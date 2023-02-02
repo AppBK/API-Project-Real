@@ -1,9 +1,10 @@
-import { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { RouterContext } from '../../context/RouterContext';
-import Map from '../Map/Map';
 import ReactSlider from 'react-slider';
 import './SplangyIt.css';
+import { monetary } from '../../util/utils';
+import { StandaloneSearchBox, GoogleMap, useJsApiLoader, MarkerF, InfoWindow } from '@react-google-maps/api';
 
 
 // const AnyReactComponent = ({ text }) => (<div>{text}</div>);
@@ -17,14 +18,30 @@ let body = document.querySelector('body');
 
 const google_maps_api_key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
+const containerStyle = {
+  width: '100%',
+  height: '610px'
+};
+
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+
+const libraries = ["places", "geometry"];
+
 function SplangyIt() {
-  const { userCity, locationServicesEnabled, setLocationServicesEnabled } = useContext(RouterContext);
+  const { userCity, setUserCity, locationServicesEnabled, setLocationServicesEnabled } = useContext(RouterContext);
   const [type, setType] = useState('Entire place');
   const [bedrooms, setBedrooms] = useState(2);
   const [currentSlider, setCurrentSlider] = useState(7);
   const [currentNights, setCurrentNights] = useState(7);
   const [pricePerNight, setPricePerNight] = useState(100);
   const [mapLoaded, setMapLoaded] = useState(locationServicesEnabled);
+  const [activeMarker, setActiveMarker] = useState(null);
+  const [searchResult, setSearchResult] = useState('');
+  const [lat, setLat] = useState(27.173891);
+  const [lng, setLng] = useState(78.042068);
 
 
   const history = useHistory();
@@ -32,26 +49,10 @@ function SplangyIt() {
   const sliderMin = 1;
   const sliderMax = 30;
 
-  // const daysThumb = () => {
-  //   const thumb = document.getElementsByClassName('days-slider-thumb')[0];
-  //   console.log('DAYS THUMB: ', thumb.ariaValueNow);
-  // }
 
-  // daysThumb();
-  useEffect(() => {
-    // We'll grab the element that is the Thumbnail of the slider on initial mount so we don't make this call over and over...
-    thumb = document.getElementsByClassName('days-slider-thumb')[0];
-
-    if (thumb.children.length === 0) {
-      floater.innerHTML = `<div>${currentNights}&nbsp;</div><div>nights</div>`;
-      thumb.append(floater);
-      thumb.append(floater2)
-    }
-  }, []);
 
   useEffect(() => {
     setMapLoaded(locationServicesEnabled);
-    console.log('LOCATION', locationServicesEnabled);
   }, [locationServicesEnabled])
 
   const goHome = () => {
@@ -98,9 +99,146 @@ function SplangyIt() {
     tellUsModal.style.animationName = 'slideup';
   }
 
+  // Setup the SearchBar and GoogleMap
+
+  function getCityName() {
+    const request = new XMLHttpRequest();
+
+    const method = 'GET';
+    const url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lng + '&sensor=true' + '&key=' + google_maps_api_key;
+    const async = true;
+
+    request.open(method, url, async);
+    request.onreadystatechange = function () {
+      if (request.readyState == 4 && request.status == 200) {
+        const data = JSON.parse(request.responseText);
+        const address = data.results[0];
+        const addressArray = address.formatted_address.split(',');
+
+        if (addressArray.length === 4) {
+          setUserCity(addressArray[1]);
+        } else {
+          setUserCity(addressArray[4]);
+        }
+      }
+    };
+    request.send();
+  }
 
 
-  return (
+  const handleActiveMarker = (marker) => {
+    if (marker === activeMarker) {
+      return;
+    }
+    setActiveMarker(marker);
+  };
+
+  const onSuccess = (position) => {
+    console.log('LAT: ', position.coords.latitude)
+    setLat(position.coords.latitude);
+    setLng(position.coords.longitude);
+
+    getCityName();
+  }
+
+  const onError = () => {
+    setLocationServicesEnabled(false);
+    getCityName();
+  }
+
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    }
+  }
+
+
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: google_maps_api_key,
+    libraries: libraries
+  })
+
+  useEffect(() => {
+    getLocation();
+  }, []);
+
+  useEffect(() => {
+    if (lat && lng) {
+      setLocationServicesEnabled(true);
+    }
+  }, [lat]);
+
+  const [map, setMap] = React.useState(null);
+
+  const onLoad = React.useCallback(function callback(map) {
+    map.setZoom(12);
+
+    setMap(map);
+  }, [])
+
+  const onUnmount = React.useCallback(function callback(map) {
+    setMap(null)
+  }, [])
+
+
+  function onLoadAutoComplete(autocomplete) {
+    setSearchResult(autocomplete);
+  }
+
+  function onPlaceChanged() {
+    let place = searchResult.getPlaces()[0];
+
+    let tempLat;
+    let tempLng;
+    if (place) {
+      tempLat = place.geometry.location.lat();
+      tempLng = place.geometry.location.lng();
+    }
+
+    if (tempLat && tempLng) {
+      setLat(tempLat);
+      setLng(tempLng);
+    }
+
+    if (place.formatted_address) setUserCity(place.formatted_address);
+  }
+
+  const center = {
+    lat: lat,
+    lng: lng
+  };
+
+
+
+  let searchBar = <StandaloneSearchBox onPlacesChanged={onPlaceChanged} onLoad={onLoadAutoComplete}><input id="address-input" type="text" placeholder={userCity}></input></StandaloneSearchBox>
+  let centralMarkerId = 1;
+  let centralMarker = <MarkerF id="default-marker" key={centralMarkerId} position={center} onClick={() => handleActiveMarker(centralMarkerId)}></MarkerF>
+  let renderMap = <GoogleMap id="my-map" mapContainerStyle={containerStyle} center={center} zoom={12} onLoad={onLoad} onUnmount={onUnmount} onClick={() => setActiveMarker(null)}>{centralMarker}</GoogleMap>
+
+  const initThumb = () => {
+    thumb = document.getElementsByClassName('days-slider-thumb-0')[0];
+
+    if (thumb) {
+      if (thumb.children.length === 0) {
+        floater.innerHTML = `<div>${currentNights}&nbsp;</div><div>nights</div>`;
+        thumb.append(floater);
+        thumb.append(floater2);
+      }
+    } else {
+      setTimeout(() => {
+        initThumb();
+      }, 200);
+    }
+  }
+
+  useEffect(() => {
+    // We'll grab the element that is the Thumbnail of the slider on initial mount so we don't make this call over and over...
+    initThumb();
+  }, []);
+
+
+  return isLoaded ? (
     <div id="splangy-it-outermost">
       <div id="blackout" onClick={closeModal}>
       </div>
@@ -115,7 +253,7 @@ function SplangyIt() {
           <div id="modal-rest">
             <div id="address-input-div">
               <div id="address-label">Address</div>
-              <input id="address-input" type="text" placeholder={userCity}></input>
+              {searchBar}
               <div id="pin-div"><img src="/createSpot/pin-icon-black.svg" style={{ width: '16px', height: '16px' }}></img></div>
             </div>
           </div>
@@ -138,7 +276,7 @@ function SplangyIt() {
           <div id="estimate-container">
             <div id="pink-it">Splangybnb it.</div>
             <div id="could-earn">You could earn</div>
-            <div id="big-gains">${currentNights * pricePerNight}</div>
+            <div id="big-gains">{monetary(currentNights * pricePerNight)}</div>
             <div id="nights"><span id="bold-nights-button">{currentNights} nights</span> at an estimated ${pricePerNight} a night</div>
             <div id="days-bar">
               <ReactSlider
@@ -168,25 +306,12 @@ function SplangyIt() {
             {!locationServicesEnabled && (<div id="need-more-info"><div className="more-info-content">Looks like we'll need some more info to provide you with an accurate quote.</div><div className="more-info-content" id="more-info-pink">Please use button below to get started.</div></div>)}
           </div>
           <div id="map-container">
-            <Map id="map"></Map>
+            {renderMap}
           </div>
         </div>
       </div>
     </div>
-  )
+  ) : <></>
 }
 
 export default SplangyIt;
-
-// https://www.google.com/maps/place/5676+Calmor+Ct,+San+Jose,+CA+95123/@37.2464038,-121.8544076,17z/data=!4m13!1m7!3m6!1s0x808e3183120b17b3:0x6e5a53926aa34582!2s5676+Calmor+Ct,+San+Jose,+CA+95123!3b1!8m2!3d37.2464038!4d-121.8522136!3m4!1s0x808e3183120b17b3:0x6e5a53926aa34582!8m2!3d37.2464038!4d-121.8522136
-// &callback=${window.initMap}
-
-/*
-<div class="_1tllc1q"><video class="_e2l2kr" crossorigin="anonymous" playsinline="" preload="auto" style="object-fit: cover;" autoplay=""><source src="https://stream.media.muscache.com/zFaydEaihX6LP01x8TSCl76WHblb01Z01RrFELxyCXoNek.mp4?v_q=high"></video></div>
-*/
-
-
-
-/*
-<div role="dialog" tabindex="-1" class="gm-style-iw gm-style-iw-c" style="padding-right: 0px; padding-bottom: 0px; max-width: 498px; max-height: 479px; min-width: 0px;"><div class="gm-style-iw-d" style="overflow: scroll; max-height: 461px;"></div><button draggable="false" aria-label="Close" title="Close" type="button" class="gm-ui-hover-effect" style="background: none; display: block; border: 0px; margin: 0px; padding: 0px; text-transform: none; appearance: none; position: absolute; cursor: pointer; user-select: none; top: -6px; right: -6px; width: 30px; height: 30px;"><span style="-webkit-mask-image: url(&quot;data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M19%206.41L17.59%205%2012%2010.59%206.41%205%205%206.41%2010.59%2012%205%2017.59%206.41%2019%2012%2013.41%2017.59%2019%2019%2017.59%2013.41%2012z%22/%3E%3Cpath%20d%3D%22M0%200h24v24H0z%22%20fill%3D%22none%22/%3E%3C/svg%3E&quot;); pointer-events: none; display: block; width: 14px; height: 14px; margin: 8px;"></span></button></div>
-*/

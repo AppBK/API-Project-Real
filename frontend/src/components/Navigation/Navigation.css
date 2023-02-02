@@ -209,3 +209,9 @@
 #search-button-actual:hover {
   cursor: pointer;
 }
+
+@media (max-width: 960px) {
+  .center-console-container {
+    visibility: hidden;
+  }
+}
