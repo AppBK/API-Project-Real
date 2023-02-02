@@ -60,6 +60,9 @@ function App() {
           <Navigation isLoaded={isLoaded} />
           <ComingSoon />
         </Route>
+        <Route path="/tester">
+          <Test></Test>
+        </Route>
       </Switch>
       )}
       <Footer />

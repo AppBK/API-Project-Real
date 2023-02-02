@@ -9,6 +9,7 @@ import { restoreCSRF, csrfFetch } from './store/csrf.js';
 import * as sessionActions from './store/session';
 import ModalProvider from './context/Modal';
 import { RouterProvider } from './context/RouterContext';
+import { HelmetProvider } from 'react-helmet-async';
 
 import { createRoot } from 'react-dom/client';
 const root = createRoot(document.getElementById('root'));
@@ -25,15 +26,17 @@ if (process.env.NODE_ENV !== 'production') {
 
 function Root() {
   return (
-    <RouterProvider>
-      <Provider store={store}>
-        <ModalProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </ModalProvider>
-      </Provider>
-    </RouterProvider>
+    <HelmetProvider>
+      <RouterProvider>
+        <Provider store={store}>
+          <ModalProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </ModalProvider>
+        </Provider>
+      </RouterProvider>
+    </HelmetProvider>
   )
 }
 

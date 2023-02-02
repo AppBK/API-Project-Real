@@ -1,18 +1,14 @@
 //Initialize and add the map
 function initMap() {
-  //The location of Uluru
+  // The location of Uluru
   console.log('INIT MAP!!')
   const uluru = { lat: -25.344, lng: 131.031 };
   // The map, centered at Uluru
 
     if (window.google && window.google.maps) {
       console.log('FOUND GOOGLE OBJECT')
-      let mapContainer = document.getElementById("map");
-      // console.log('MAP CONTAINER', mapContainer);
-      // const root = document.getElementById('root');
-      // const mapContainer = document.createElement('div');
-      // mapContainer.id = "map";
-      // root.appendChild(mapContainer);
+      const mapContainer = document.getElementById("map");
+      console.log('MAP CONTAINER', mapContainer);
 
       const map = new window.google.maps.Map(mapContainer, {
         zoom: 4,
