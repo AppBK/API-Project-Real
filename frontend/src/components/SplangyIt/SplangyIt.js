@@ -334,8 +334,145 @@ function SplangyIt() {
       {/* </div> */}
       <div id="air-cover">
         <div>
-          <img src="/createSpot/aircover.webp"></img>
+          <img id="aircover-logo" src="/createSpot/aircover.webp"></img>
         </div>
+        <div id="top-to-bottom">Splangybnb it with top-to-bottom protection</div>
+
+          <div id="cover-header">
+            <div className="left-header"></div>
+            <div className="left-col">Splangybnb</div>
+            <div className="rightmost-col">Competitors</div>
+          </div>
+
+          <div className="top-row">
+            <div className="left-header">Guest identity verification</div>
+            <div className="left-col">
+              <svg className="cover-icons" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", fill: "none", height: "24px", width: "24px", stroke: "#00A506", strokeWidth: "5.333333333333333", overflow: "visible", ariaLabel: "Airbnb included", role: "img", focusable: "false" }}><path fill="none" d="m4 16.5 8 8 16-16"></path></svg>
+            </div>
+            <div className="rightmost-col">
+              <svg className="cover-icons" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", fill: "none", height: "24px", width: "24px", stroke: "#00A506", strokeWidth: "5.333333333333333", overflow: "visible", ariaLabel: "Airbnb included", role: "img", focusable: "false" }}><path fill="none" d="m4 16.5 8 8 16-16"></path></svg>
+            </div>
+          </div>
+          <div className="second-row">
+            <div className="second-content">
+              Our comprehensive verification system checks details such as name, address, government ID and more to confirm the identity of guests who book on Splangybnb.
+            </div>
+          </div>
+
+        <div className="top-row">
+          <div className="left-header">Reservation screening</div>
+          <div className="left-col">
+            <svg className="cover-icons" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", fill: "none", height: "24px", width: "24px", stroke: "#00A506", strokeWidth: "5.333333333333333", overflow: "visible", ariaLabel: "Airbnb included", role: "img", focusable: "false" }}><path fill="none" d="m4 16.5 8 8 16-16"></path></svg>
+          </div>
+          <div className="rightmost-col">
+            <svg className="cover-icons" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", fill: "none", height: "24px", width: "24px", stroke: "#E12C32", strokeWidth: "5.333333333333333", overflow: "visible" }} aria-label="Competitors not included" role="img" focusable="false"><path d="m6 6 20 20"></path><path d="m26 6-20 20"></path></svg>
+          </div>
+        </div>
+        <div className="second-row">
+          <div className="second-content">
+            Our proprietary technology analyzes hundreds of factors in each reservation and blocks certain bookings that show a high risk for disruptive parties and property damage.
+          </div>
+        </div>
+
+        <div className="top-row">
+          <div className="left-header">$3M damage protection</div>
+          <div className="left-col">
+            <svg className="cover-icons" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", fill: "none", height: "24px", width: "24px", stroke: "#00A506", strokeWidth: "5.333333333333333", overflow: "visible", ariaLabel: "Airbnb included", role: "img", focusable: "false" }}><path fill="none" d="m4 16.5 8 8 16-16"></path></svg>
+          </div>
+          <div className="rightmost-col">
+            <svg className="cover-icons" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", fill: "none", height: "24px", width: "24px", stroke: "#E12C32", strokeWidth: "5.333333333333333", overflow: "visible" }} aria-label="Competitors not included" role="img" focusable="false"><path d="m6 6 20 20"></path><path d="m26 6-20 20"></path></svg>
+          </div>
+        </div>
+        <div className="second-row">
+          <div className="second-content">
+            Airbnb reimburses you for damage caused by guests to your home and belongings and includes these specialized protections:
+          </div>
+        </div>
+
+        <div className="top-row add-border">
+          <div className="left-header single-row">Art & valuables</div>
+          <div className="left-col">
+            <svg className="cover-icons" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", fill: "none", height: "24px", width: "24px", stroke: "#00A506", strokeWidth: "5.333333333333333", overflow: "visible", ariaLabel: "Airbnb included", role: "img", focusable: "false" }}><path fill="none" d="m4 16.5 8 8 16-16"></path></svg>
+          </div>
+          <div className="rightmost-col">
+            <svg className="cover-icons" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", fill: "none", height: "24px", width: "24px", stroke: "#E12C32", strokeWidth: "5.333333333333333", overflow: "visible" }} aria-label="Competitors not included" role="img" focusable="false"><path d="m6 6 20 20"></path><path d="m26 6-20 20"></path></svg>
+          </div>
+        </div>
+
+        <div className="top-row add-border">
+          <div className="left-header single-row">Auto & boat</div>
+          <div className="left-col">
+            <svg className="cover-icons" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", fill: "none", height: "24px", width: "24px", stroke: "#00A506", strokeWidth: "5.333333333333333", overflow: "visible", ariaLabel: "Airbnb included", role: "img", focusable: "false" }}><path fill="none" d="m4 16.5 8 8 16-16"></path></svg>
+          </div>
+          <div className="rightmost-col">
+            <svg className="cover-icons" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", fill: "none", height: "24px", width: "24px", stroke: "#E12C32", strokeWidth: "5.333333333333333", overflow: "visible" }} aria-label="Competitors not included" role="img" focusable="false"><path d="m6 6 20 20"></path><path d="m26 6-20 20"></path></svg>
+          </div>
+        </div>
+
+        <div className="top-row add-border">
+          <div className="left-header single-row">Pet damage</div>
+          <div className="left-col">
+            <svg className="cover-icons" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", fill: "none", height: "24px", width: "24px", stroke: "#00A506", strokeWidth: "5.333333333333333", overflow: "visible", ariaLabel: "Airbnb included", role: "img", focusable: "false" }}><path fill="none" d="m4 16.5 8 8 16-16"></path></svg>
+          </div>
+          <div className="rightmost-col">
+            <svg className="cover-icons" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", fill: "none", height: "24px", width: "24px", stroke: "#E12C32", strokeWidth: "5.333333333333333", overflow: "visible" }} aria-label="Competitors not included" role="img" focusable="false"><path d="m6 6 20 20"></path><path d="m26 6-20 20"></path></svg>
+          </div>
+        </div>
+
+        <div className="top-row add-border">
+          <div className="left-header single-row">Income loss</div>
+          <div className="left-col">
+            <svg className="cover-icons" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", fill: "none", height: "24px", width: "24px", stroke: "#00A506", strokeWidth: "5.333333333333333", overflow: "visible", ariaLabel: "Airbnb included", role: "img", focusable: "false" }}><path fill="none" d="m4 16.5 8 8 16-16"></path></svg>
+          </div>
+          <div className="rightmost-col">
+            <svg className="cover-icons" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", fill: "none", height: "24px", width: "24px", stroke: "#E12C32", strokeWidth: "5.333333333333333", overflow: "visible" }} aria-label="Competitors not included" role="img" focusable="false"><path d="m6 6 20 20"></path><path d="m26 6-20 20"></path></svg>
+          </div>
+        </div>
+
+        <div className="top-row add-border">
+          <div className="left-header single-row">Deep cleaning</div>
+          <div className="left-col">
+            <svg className="cover-icons" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", fill: "none", height: "24px", width: "24px", stroke: "#00A506", strokeWidth: "5.333333333333333", overflow: "visible", ariaLabel: "Airbnb included", role: "img", focusable: "false" }}><path fill="none" d="m4 16.5 8 8 16-16"></path></svg>
+          </div>
+          <div className="rightmost-col">
+            <svg className="cover-icons" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", fill: "none", height: "24px", width: "24px", stroke: "#E12C32", strokeWidth: "5.333333333333333", overflow: "visible" }} aria-label="Competitors not included" role="img" focusable="false"><path d="m6 6 20 20"></path><path d="m26 6-20 20"></path></svg>
+          </div>
+        </div>
+
+
+        <div className="top-row">
+          <div className="left-header">$1M liability insurance</div>
+          <div className="left-col">
+            <svg className="cover-icons" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", fill: "none", height: "24px", width: "24px", stroke: "#00A506", strokeWidth: "5.333333333333333", overflow: "visible", ariaLabel: "Airbnb included", role: "img", focusable: "false" }}><path fill="none" d="m4 16.5 8 8 16-16"></path></svg>
+          </div>
+          <div className="rightmost-col">
+            <svg className="cover-icons" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", fill: "none", height: "24px", width: "24px", stroke: "#E12C32", strokeWidth: "5.333333333333333", overflow: "visible" }} aria-label="Competitors not included" role="img" focusable="false"><path d="m6 6 20 20"></path><path d="m26 6-20 20"></path></svg>
+          </div>
+        </div>
+        <div className="second-row">
+          <div className="second-content">
+            You're protected in the rare event that a guest gets hurt or their belongings are damaged or stolen.
+          </div>
+        </div>
+
+        <div className="top-row">
+          <div className="left-header">24-hour safety line</div>
+          <div className="left-col">
+            <svg className="cover-icons" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", fill: "none", height: "24px", width: "24px", stroke: "#00A506", strokeWidth: "5.333333333333333", overflow: "visible", ariaLabel: "Airbnb included", role: "img", focusable: "false" }}><path fill="none" d="m4 16.5 8 8 16-16"></path></svg>
+          </div>
+          <div className="rightmost-col">
+            <svg className="cover-icons" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", fill: "none", height: "24px", width: "24px", stroke: "#E12C32", strokeWidth: "5.333333333333333", overflow: "visible" }} aria-label="Competitors not included" role="img" focusable="false"><path d="m6 6 20 20"></path><path d="m26 6-20 20"></path></svg>
+          </div>
+        </div>
+        <div className="second-row no-border">
+          <div className="second-content">
+            If you ever feel unsafe, our app provides one-tap access to specially-trained safety agents, day or night.
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <img id="footer-pad" src="/createSpot/aircover.webp"></img>
       </div>
     </div>
   ) : <></>

@@ -561,6 +561,171 @@
   }
 }
 
+#aircover-logo {
+  width: 180px;
+}
+
+#footer-pad {
+  width: 24px;
+}
+
+#air-cover {
+  width: 80%;
+  margin: 0px auto;
+  margin-bottom: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#top-to-bottom {
+  font-size: 48px;
+}
+
+#cover-header {
+  width: 100%;
+  min-width: 804px;
+  max-width: 804px;
+  height: 51px;
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr;
+  border-bottom: 2px solid #DDD;
+  color: #2c2c2c;
+  margin-top: 48px;
+}
+
+.left-header {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.rightmost-col {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  font-size: 22px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.left-col {
+  font-size: 22px;
+  font-weight: 400;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  text-align: center;
+}
+
+.top-row {
+  width: 100%;
+  min-width: 804px;
+  max-width: 804px;
+  height: 51px;
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr;
+  font-size: 22px;
+  font-weight: 400;
+  justify-self: center;
+  margin-top: 24px;
+}
+
+.cover-icons {
+  margin: 0 auto;
+}
+
+.second-row {
+  width: 100%;
+  min-width: 804px;
+  max-width: 804px;
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr;
+  border-bottom: 2px solid #DDD;
+  padding-bottom: 24px;
+}
+
+.second-content {
+  font-size: 16px;
+  font-weight: 400;
+  color: #717171;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.single-row {
+  font-size: 18px;
+  color: #222;
+  opacity: 0.8;
+}
+
+.add-border {
+  border-bottom: 2px solid #DDD;
+}
+
+.no-border {
+  border-bottom: none;
+}
+
+@media (max-width: 1200px) {
+    #top-to-bottom {
+        font-size: 40px;
+      }
+}
+
+
+@media (max-width: 1130px) {
+  #air-cover {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  #cover-header {
+    min-width: 0px;
+    max-width: 2000px;
+  }
+
+  .top-row {
+    width: 100%;
+    min-width: 0px;
+    max-width: 2000px;
+    padding-left: 16px;
+  }
+
+  .second-row {
+    width: 100%;
+    min-width: 0px;
+    max-width: 2000px;
+    padding-left: 16px;
+  }
+
+  .second-content {
+    grid-column-end: 6;
+  }
+}
+
+@media (max-width: 800px) {
+  #top-to-bottom {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 650px) {
+  #top-to-bottom {
+      font-size: 23px;
+    }
+}
+
+@media (max-width: 960px) {
+  #air-cover {
+    margin-bottom: 100px;
+  }
+}
+
+@media (max-width: 800px) {
+  .left-col, .rightmost-col {
+    font-size: 14px;
+  }
+}
+
 /* #map-left-border {
   height: 100%;
   width: 16px;
