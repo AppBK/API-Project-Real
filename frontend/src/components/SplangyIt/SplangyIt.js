@@ -310,6 +310,33 @@ function SplangyIt() {
           </div>
         </div>
       </div>
+      {/* <div id="easy-setup-outer"> */}
+        <div id="easy-setup">
+          <div id="easy-setup-title">Splangybnb it easily with Splangybnb Setup</div>
+          <div id="webp-cont">
+            <img id="easy-webp" src="/createSpot/splangy-easy.webp" style={{ maxWidth: '1280px' }}></img>
+          </div>
+          <div id="easy-setup-details">
+            <div className="detailBoxes">
+              <div className="detailBoxHeading">One-to-one guidance from a Superhost</div>
+              <div className="detailBoxContent">We’ll match you with a Superhost in your area, who’ll guide you from your first question to your first guest—by phone, video call, or chat.</div>
+            </div>
+            <div className="detailBoxes">
+              <div className="detailBoxHeading">An experienced guest for your first booking</div>
+              <div className="detailBoxContent">For your first booking, you can choose to welcome an experienced guest who has at least three stays and a good track record on Airbnb.</div>
+            </div>
+            <div className="detailBoxes">
+              <div className="detailBoxHeading">Specialized support from Splangybnb</div>
+              <div className="detailBoxContent">New Hosts get one-tap access to specially trained Community Support agents who can help with everything from account issues to billing support.</div>
+            </div>
+          </div>
+        </div>
+      {/* </div> */}
+      <div id="air-cover">
+        <div>
+          <img src="/createSpot/aircover.webp"></img>
+        </div>
+      </div>
     </div>
   ) : <></>
 }
