@@ -12,14 +12,18 @@ export default function CreateASpotModal() {
 
 
   // () => setShowCreateSpot(true)
+  // id="edit-modal-create-button"
 
   const { showCreateSpot, setShowCreateSpot } = useContext(RouterContext);
 
   return (
-    <div id="your-home">
-      <button id="edit-modal-create-button" onClick={() => setShowCreateSpot(true)}
+    <div >
+      <button id="splangybnb-setup" onClick={() => setShowCreateSpot(true)}
         // style={{backgroundColor: "transparent", color: "black", fontSize: "14px", marginTop: "16px", border: "none", marginRight: "32px", display: "block"}}
-      >Splangybnb your home</button>
+      >
+        <img id="add-spot-img" src="/createSpot/add-spot-icon.svg"></img>
+        <div id="setup-label">Splangybnb Setup</div>
+      </button>
       {showCreateSpot && (
         <Modal onClose={() => setShowCreateSpot(false)}>
           <CreateASpot />

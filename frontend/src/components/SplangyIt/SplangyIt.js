@@ -5,7 +5,7 @@ import ReactSlider from 'react-slider';
 import './SplangyIt.css';
 import { monetary } from '../../util/utils';
 import { StandaloneSearchBox, GoogleMap, useJsApiLoader, MarkerF, InfoWindow } from '@react-google-maps/api';
-
+import CreateASpotModal from '../CreateSpot';
 
 // const AnyReactComponent = ({ text }) => (<div>{text}</div>);
 let thumb;
@@ -42,6 +42,9 @@ function SplangyIt() {
   const [searchResult, setSearchResult] = useState('');
   const [lat, setLat] = useState(27.173891);
   const [lng, setLng] = useState(78.042068);
+  const [prevSelection, setPrevSelection] = useState('');
+  const [noRooms, setNoRooms] = useState('');
+  const [numRooms, setNumRooms] = useState(2);
 
 
   const history = useHistory();
@@ -232,10 +235,78 @@ function SplangyIt() {
     }
   }
 
+  const initTypeButton = () => {
+    const entire = document.getElementById("entire");
+
+    if (entire) {
+      setPrevSelection(entire);
+    } else {
+      setTimeout(() => {
+        initTypeButton();
+      });
+    }
+  }
+
   useEffect(() => {
     // We'll grab the element that is the Thumbnail of the slider on initial mount so we don't make this call over and over...
     initThumb();
+    initTypeButton();
   }, []);
+
+  const typePicker = (e) => {
+    e.preventDefault();
+
+    const selected = document.getElementById(e.target.id);
+    // console.log(prevSelection.id);
+
+    if (selected.id === prevSelection.id) {
+      return null;
+    } else {
+      selected.ariaChecked = "true";
+      prevSelection.ariaChecked = "false";
+      setPrevSelection(selected);
+
+      if (selected.id === "private") {
+        const bedSection = document.getElementById("bedrooms-section");
+        bedSection.ariaChecked = "true";
+        setType("Private");
+        setBedrooms(1);
+      } else {
+        const bedSection = document.getElementById("bedrooms-section");
+        bedSection.ariaChecked = "false";
+        setType("Entire place");
+      }
+    }
+  }
+
+  const increaseRooms = () => {
+    if (bedrooms === 8) return null;
+
+    setBedrooms(bedrooms + 1);
+
+    if (bedrooms > 2) {
+      setPricePerNight(pricePerNight + (bedrooms * 35));
+    } else {
+      if (bedrooms > 2) {
+        setPricePerNight(100);
+      }
+    }
+  }
+
+  const decreaseRooms = () => {
+    if (bedrooms === 0) return null;
+
+    setBedrooms(bedrooms - 1);
+
+
+    if (bedrooms > 2) {
+      setPricePerNight(pricePerNight + (bedrooms * 35))
+    } else {
+      if (bedrooms > 2) {
+        setPricePerNight(100);
+      }
+    }
+  }
 
 
   return isLoaded ? (
@@ -251,11 +322,29 @@ function SplangyIt() {
             <div>Tell us about your place</div>
           </div>
           <div id="modal-rest">
-            <div id="address-input-div">
-              <div id="address-label">Address</div>
+            <div className="address-input-div">
+              <div id="address-label">Address or area</div>
               {searchBar}
               <div id="pin-div"><img src="/createSpot/pin-icon-black.svg" style={{ width: '16px', height: '16px' }}></img></div>
             </div>
+            <div className="address-input-div">
+              <div id="type-label">Type of space</div>
+              <div role="radiogroup" id="radio-container">
+                <button id="entire" className="place-type" aria-checked="true" type="button" role="radio" onClick={(e) => typePicker(e)}>Entire place</button>
+                <button id="private" className="place-type" aria-checked="false" type="button" role="radio" onClick={(e) => typePicker(e)}>Private room</button>
+              </div>
+            </div>
+            <div id="bedrooms-section" aria-section="false">
+              <div id="bedrooms-title">Bedrooms</div>
+              <div id="bedroom-buttons-div">
+                <button id="minus-button" className="bedroom-buttons" style={{ opacity: bedrooms < 1 ? "0.1" : "1", cursor: bedrooms < 1 ? "not-allowed" : "pointer"}} onClick={decreaseRooms}><div>-</div></button>
+                <div>{bedrooms}</div>
+                <button className="bedroom-buttons" style={{ opacity: bedrooms >= 8 ? "0.1" : "1", cursor: bedrooms >= 8 ? "not-allowed" : "pointer" }} onClick={increaseRooms}>+</button>
+              </div>
+            </div>
+          </div>
+          <div id="bottommost-div">
+            <button id="update-estimate-button" onClick={closeModal}>Update your estimate</button>
           </div>
         </div>
       </div>
@@ -265,10 +354,11 @@ function SplangyIt() {
         </div>
         <div id="ready-setup">
           <div id="ready-margin">Ready to Splangybnb it?</div>
-          <button id="splangybnb-setup">
-            <img id="add-spot-img" src="/createSpot/add-spot-icon.svg"></img>
-            <div id="setup-label">Splangybnb Setup</div>
-          </button>
+           {/* <button id="splangybnb-setup">
+                <img id="add-spot-img" src="/createSpot/add-spot-icon.svg"></img>
+                <div id="setup-label">Splangybnb Setup</div>
+          </button> */}
+          <CreateASpotModal></CreateASpotModal>
         </div>
       </div>
       <div id="splangyit-main-content">
@@ -298,7 +388,7 @@ function SplangyIt() {
                   <div id="display-city">{userCity}</div>
                   <div id="position-listing-type">
                     <div id="display-type">{type} &middot;</div>
-                    <div id="display-bedrooms">&nbsp;{bedrooms} bedrooms</div>
+                    <div id="display-bedrooms">&nbsp;{bedrooms} {bedrooms === 1 ? "bedroom" : "bedrooms"}</div>
                   </div>
                 </div>
               </div>
@@ -310,7 +400,7 @@ function SplangyIt() {
           </div>
         </div>
       </div>
-      {/* <div id="easy-setup-outer"> */}
+      <div id="easy-setup-outer">
         <div id="easy-setup">
           <div id="easy-setup-title">Splangybnb it easily with Splangybnb Setup</div>
           <div id="webp-cont">
@@ -319,7 +409,7 @@ function SplangyIt() {
           <div id="easy-setup-details">
             <div className="detailBoxes">
               <div className="detailBoxHeading">One-to-one guidance from a Superhost</div>
-              <div className="detailBoxContent">We’ll match you with a Superhost in your area, who’ll guide you from your first question to your first guest—by phone, video call, or chat.</div>
+              <div className="detailBoxContent">We'll match you with a Superhost in your area, who’ll guide you from your first question to your first guest—by phone, video call, or chat.</div>
             </div>
             <div className="detailBoxes">
               <div className="detailBoxHeading">An experienced guest for your first booking</div>
@@ -331,7 +421,7 @@ function SplangyIt() {
             </div>
           </div>
         </div>
-      {/* </div> */}
+      </div>
       <div id="air-cover">
         <div>
           <img id="aircover-logo" src="/createSpot/aircover.webp"></img>

@@ -381,7 +381,7 @@
   /* animation-duration: 2s;
   animation-name: slideup; */
   width: 480px;
-  height: 600px;
+  height: fit-content;
   background-color: white;
   position: absolute;
   top: calc(50% - 300px);
@@ -446,7 +446,7 @@
   border-bottom: 1px solid #DDD;
 }
 
-#address-input-div {
+.address-input-div {
   width: 100%;
   border-bottom: 1px solid #DDD;
   margin-bottom: 16px;
@@ -725,6 +725,111 @@
     font-size: 14px;
   }
 }
+
+#radio-container {
+  box-sizing: content-box;
+  width: 432px;
+  height: 34px;
+  display: flex;
+  justify-content: center;
+  padding: 4px;
+  background-color: #EAEAEA;
+  border-radius: 36px;
+  margin-top: 24px;
+  margin-bottom: 36px;
+}
+
+.place-type {
+  width: 50%;
+  height: 100%;
+  border: none;
+  border-radius: 36px;
+  background-color: #EAEAEA;
+}
+
+.place-type:hover {
+  cursor: pointer;
+}
+
+.place-type[aria-checked="true"] {
+  background-color: white;
+}
+
+#bedrooms-section {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  margin-top: 10px;
+}
+
+#bedrooms-section[aria-checked="true"] {
+  opacity: 0.1;
+  cursor: not-allowed;
+}
+
+#bedroom-buttons-div {
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.bedroom-buttons {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #AFAFAF;
+  color: #717171;
+  background-color: white;
+  border-radius: 50%;
+  font-size: 20px;
+  margin: 16px;
+}
+
+#minus-button {
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+  font-size: 26px;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 4px;
+}
+
+#bedrooms-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#bottommost-div {
+  box-sizing: border-box;
+  width: 480px;
+  height: 81px;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#type-label {
+  margin-top: 24px;
+}
+
+#update-estimate-button {
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  background-color: black;
+  color: white;
+  height: 48px;
+  font-size: 16px;
+}
+
+#update-estimate-button:hover {
+  cursor: pointer;
+}
+
 
 /* #map-left-border {
   height: 100%;
