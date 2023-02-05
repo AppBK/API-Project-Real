@@ -284,13 +284,15 @@ function SplangyIt() {
 
     setBedrooms(bedrooms + 1);
 
-    if (bedrooms > 2) {
-      setPricePerNight(pricePerNight + (bedrooms * 35));
-    } else {
-      if (bedrooms > 2) {
-        setPricePerNight(100);
-      }
-    }
+    console.log('BEDROOMS: ', bedrooms)
+
+    // if (bedrooms > 1) {
+    //   setPricePerNight(100 + ((bedrooms - 2) * 35));
+    // } else {
+    //   if (bedrooms <= 1) {
+    //     setPricePerNight(100);
+    //   }
+    // }
   }
 
   const decreaseRooms = () => {
@@ -299,14 +301,24 @@ function SplangyIt() {
     setBedrooms(bedrooms - 1);
 
 
+    // if (bedrooms > 1) {
+    //   setPricePerNight(100 + ((bedrooms - 2) * 35));
+    // } else {
+    //   if (bedrooms <= 1) {
+    //     setPricePerNight(100);
+    //   }
+    // }
+  }
+
+  useEffect(() => {
     if (bedrooms > 2) {
-      setPricePerNight(pricePerNight + (bedrooms * 35))
+      setPricePerNight(100 + ((bedrooms - 2) * 35));
     } else {
-      if (bedrooms > 2) {
+      if (bedrooms <= 2) {
         setPricePerNight(100);
       }
     }
-  }
+  }, [bedrooms]);
 
 
   return isLoaded ? (
