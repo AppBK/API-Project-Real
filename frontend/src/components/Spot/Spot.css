@@ -7,8 +7,9 @@
     position: absolute;
     z-index: 1;
     width: 100%;
+    height: fit-content;
     overflow: hidden;
-    top: 172px;
+    top: 100px;
     padding: 0px;
     padding-bottom: 120px;
 
@@ -152,4 +153,150 @@
 #path-tester {
   position: relative;
   z-index: 300;
+}
+
+#booking-outer {
+  width: 100%;
+  border-top: 1px solid #DDD;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 64px;
+}
+
+#booking-form {
+  width: 373px;
+  height: fit-content;
+  border: 1px solid #DDD;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+  border-radius: 12px;
+  margin-top: 24px;
+  padding: 24px;
+}
+
+#booking-reviews {
+  display: flex;
+  height: fit-content;
+  align-items: center;
+}
+
+#price-review-div {
+  display: flex;
+  justify-content: space-between;
+}
+
+#price-night-div {
+  display: flex;
+  height: fit-content;
+  align-items: flex-end;
+}
+
+#night-div {
+  position: relative;
+  color: #222222;
+  font-size: 16px;
+  margin-left: 4px;
+  opacity: 0.8;
+  top: -1px;
+}
+
+#booking-price-div {
+  font-size: 22px;
+}
+
+#outer-form-inputs {
+  display: flex;
+  width: 100%;
+  margin-top: 16px;
+  border: 1px solid #B0B0B0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.booking-inputs {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  height: 56px;
+  border: none;
+  padding: 12px;
+}
+
+.booking-inputs:focus {
+  outline: none;
+}
+
+.booking-input-divs {
+  width: 50%;
+  position: relative;
+  height: 56px;
+}
+
+.booking-input-labels {
+  position: absolute;
+  font-size: 10px;
+  font-weight: bold;
+  left: 12px;
+  top: 12px;
+}
+
+#booking-input-left {
+  border-right: 0.5px solid #B0B0B0;
+}
+
+#booking-input-right {
+  border-left: 0.5px solid #B0B0B0;
+}
+
+#booking-submit-button {
+  background-image: radial-gradient(circle at center, #FF385C 0%, #E61E4D 27.5%, #E31C5F 40%, #D70466 57.5%, #BD1E59 75%, #BD1E59 100%) !important;
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: 12px;
+  margin-top: 16px;
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
+}
+
+#booking-submit-button:hover {
+  cursor: pointer;
+}
+
+#below-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #DDD;
+}
+
+#booking-total {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#booking-total-total {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 24px;
+}
+
+.booking-errors {
+  font-size: 12px;
+  color: red;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.booking-input-labels {
+  font-weight: bold;
 }

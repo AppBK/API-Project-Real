@@ -283,31 +283,12 @@ function SplangyIt() {
     if (bedrooms === 8) return null;
 
     setBedrooms(bedrooms + 1);
-
-    console.log('BEDROOMS: ', bedrooms)
-
-    // if (bedrooms > 1) {
-    //   setPricePerNight(100 + ((bedrooms - 2) * 35));
-    // } else {
-    //   if (bedrooms <= 1) {
-    //     setPricePerNight(100);
-    //   }
-    // }
   }
 
   const decreaseRooms = () => {
     if (bedrooms === 0) return null;
 
     setBedrooms(bedrooms - 1);
-
-
-    // if (bedrooms > 1) {
-    //   setPricePerNight(100 + ((bedrooms - 2) * 35));
-    // } else {
-    //   if (bedrooms <= 1) {
-    //     setPricePerNight(100);
-    //   }
-    // }
   }
 
   useEffect(() => {

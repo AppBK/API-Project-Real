@@ -1,7 +1,7 @@
 import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { thunkGetAllSpotInfo } from "../../store/singleSpot";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import './Spot.css';
 import './main.css';
 import AddImageModal from "../addImageModal";
@@ -12,35 +12,67 @@ import Reviews from '../Reviews';
 import { thunkReviewsRead } from '../../store/reviews';
 import '../CreateReviewModal/CreateReview.css';
 import { Helmet } from "react-helmet";
+import { monetary } from "../../util/utils";
+import { diffDates } from "../../util/utils";
+
+function formatDate(date) {
+  var d = new Date(date),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
+
+  if (month.length < 2)
+    month = '0' + month;
+  if (day.length < 2)
+    day = '0' + day;
+
+  return [year, month, day].join('-');
+}
+
+
+const initDates = () => {
+  const start = new Date();
+  let end = new Date();
+  end.setDate(end.getDate() + 5);
+
+  const startString = formatDate(start); // returns date string in yyyy-mm-dd format!!
+  const endString = formatDate(end);
+
+  return [startString, endString];
+}
+
+const setNights = (d1, d2) => {
+  const MS_PER_DAY = (24 * 60 * 60 * 1000);
+  const date1 = new Date(d1);
+  const date2 = new Date(d2);
+  const diff = date2 - date1;
+
+  if (diff < 0) {
+    return 0;
+  }
+  const numDays = Math.round(Math.abs((diff / MS_PER_DAY)));
+
+  return numDays;
+}
 
 
 const Spot = ({ isLoaded }) => {
   // console.log('IS LOADED Spot: ', isLoaded);
+
+  const dates = initDates();
   const history = useHistory();
   const dispatch = useDispatch();
   const { showEditSpot } = useContext(RouterContext);
   const user = useSelector(state => state.session);
+  const [days, setDays] = useState(5);
+  const [startDate, setStartDate] = useState(dates[0]);
+  const [endDate, setEndDate] = useState(dates[1]);
+  const [errors, setErrors] = useState([]);
 
   const { spotId } = useParams();
 
-  console.log('REACT_URL? ', process.env.PUBLIC_URL + '/icons/favicon.ico');
-
-
   const spots = useSelector(state => state.spotDetails);
   let spot = spots[+spotId];
-
-  // console.log('RENDERING A SPOT: ', spots);
-
-  // let spotReviews = useSelector(state => state.reviews.Reviews[spotId]);
-
-  // if (!spotReviews) {
-  //   dispatch(thunkReviewsRead(spotId));
-  // }
-
-  // spotReviews = useSelector(state => state.reviews.Reviews[spotId]);
-
-  // let validatedReviews;
-  // if (!spotReviews) validatedReviews = {}
 
   function deleteSpot() {
     dispatch(thunkSpotDelete(spotId));
@@ -62,6 +94,54 @@ const Spot = ({ isLoaded }) => {
       isAuthorized = true;
     }
   }
+
+  // const calculateNights = () => {
+  //   if (startDate > endDate) {
+  //     errors.push('Start date cannot be later than end date');
+  //     return () => setDays(days);
+  //   } else {
+  //     return () => setDays(setNights(startDate, endDate));
+  //   }
+  // }
+
+  const inBoundsStart = (e) => {
+    e.preventDefault();
+
+    const temp = e.target.value > endDate ? startDate : e.target.value;
+
+    if (temp === startDate) setErrors([...errors, 'Start date must be earlier than end date.']);
+    else {
+      const err = [];
+      for (let i = 0; i < errors.length; i++) {
+        if (errors[i] === 'Start date must be earlier than end date.') continue;
+        err.push(errors[i]);
+      }
+      setErrors(err);
+    }
+
+    setDays(setNights(e.target.value, endDate));
+    setStartDate(e.target.value);
+  }
+
+  const inBoundsEnd = (e) => {
+    e.preventDefault();
+
+    const temp = e.target.value < startDate ? endDate : e.target.value;
+
+    if (temp === endDate) setErrors([...errors, 'End date must be later than start date.']);
+    else {
+      const err = [];
+      for (let i = 0; i < errors.length; i++) {
+        if (errors[i] === 'End date must be later than start date.') continue;
+        err.push(errors[i]);
+      }
+      setErrors(err);
+    }
+
+    setDays(setNights(startDate, e.target.value));
+    setEndDate(e.target.value);
+  }
+
 
   // NOTE: Does not touch store...
   if (spot.SpotImages.length < 5) {
@@ -126,6 +206,46 @@ const Spot = ({ isLoaded }) => {
         </div>
       </div>)}
       <Reviews spot={spot} isLoaded={isLoaded} isAuthorized={isAuthorized} user={user}/>
+        <div id="booking-outer">
+          <div id="booking-form">
+            {errors.map(error => (
+              <div className="booking-errors">{error}</div>
+            ))}
+            <div id="price-review-div">
+              <div id="price-night-div">
+                <div id="booking-price-div">{monetary(spot.price)}</div>
+                <div id="night-div">night</div>
+              </div>
+              <div id="booking-reviews">
+                <div id="star-div">{spot.numReviews ? withReviews : withoutReviews}</div><div id="rating-div">{spot.avgStarRating}</div><div className="dot-spacer-div">{dotSpacer}</div><div id="reviews-div">{spot.numReviews ? spot.numReviews + ' reviews' : null}</div>
+              </div>
+            </div>
+            <form>
+              <div id="outer-form-inputs">
+                <div id="booking-input-left" className="booking-input-divs">
+                  <label className="booking-input-labels" htmlFor="checkin">CHECK-IN</label>
+                  <input className="booking-inputs" type="date" name="checkin" placeholder="Add date" value={startDate} onChange={(e) => inBoundsStart(e)}></input>
+                </div>
+                <div id="booking-input-right" className="booking-input-divs">
+                  <label className="booking-input-labels" htmlFor="checkout">CHECKOUT</label>
+                  <input className="booking-inputs" type="date" name="checkout" placeholder="Add date" value={endDate} onChange={(e) => inBoundsEnd(e)}></input>
+                </div>
+              </div>
+              <button id="booking-submit-button" type="submit">Reserve</button>
+            </form>
+            <div id="below-form">
+              <div style={{ color: "#656565", margin: "16px" }}>You won't be charged yet</div>
+              <div id="booking-total">
+                <div>${spot.price} x {days} nights</div>
+                <div>{monetary(spot.price * days)}</div>
+              </div>
+            </div>
+            <div id="booking-total-total">
+              <div>Total before taxes</div>
+              <div>{monetary(spot.price * days)}</div>
+            </div>
+          </div>
+        </div>
     </div>
     </>
   );

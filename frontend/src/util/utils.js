@@ -45,3 +45,15 @@ export const monetary = (price) => {
 
   return '$' + output;
 }
+
+export const diffDates = (d1, d2) => {
+  const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+  let date1 = new Date(d1);
+  let date2 = new Date(d2);
+
+  let diff = Math.abs(date2 - date1);
+  let diffDays = Math.ceil(diff / _MS_PER_DAY);
+
+  return diffDays;
+}
