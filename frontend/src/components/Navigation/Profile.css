@@ -13,6 +13,14 @@
   flex-direction: column;
 }
 
+#user-icon-modal-top {
+  width: 100%;
+  height: fit-content;
+  border-bottom: 1px solid #DDDDDD;
+  color: #5c5c5c;
+  padding: 8px 0px;
+}
+
 #user-icon-modal-middle {
   width: 100%;
   height: fit-content;

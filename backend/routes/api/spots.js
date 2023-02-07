@@ -12,6 +12,7 @@ const router = express.Router();
 router.post('/:spotId/reviews', [restoreUser, requireAuth], async (req, res) => {
   let spot = await Spot.findByPk(req.params.spotId);
 
+
   if (spot) {
     spot = spot.dataValues;
   } else {
@@ -86,6 +87,7 @@ router.post('/:spotId/reviews', [restoreUser, requireAuth], async (req, res) => 
 router.post('/:spotId/bookings', [restoreUser, requireAuth], async (req, res) => {
   let spot = await Spot.findByPk(req.params.spotId);
 
+
   if (spot) {
     // Get the raw data values of the object
     spot = spot.dataValues;
@@ -98,6 +100,7 @@ router.post('/:spotId/bookings', [restoreUser, requireAuth], async (req, res) =>
   }
 
   const { startDate, endDate } = req.body;
+  console.log('WHAT WE SENT: ', startDate, endDate)
 
   // Validate dates
   if (endDate <= startDate) {
@@ -118,25 +121,23 @@ router.post('/:spotId/bookings', [restoreUser, requireAuth], async (req, res) =>
     // Get raw data object of bookings
     for (let i = 0; i < currentBookings.length; i++) {
       currentBookings[i] = currentBookings[i].dataValues;
+      // console.log('CURRENT: ', currentBookings[i].startDate, currentBookings[i].endDate)
 
       // Validate start and end dates against all current bookings for that spot
       if (startDate >= currentBookings[i].startDate && startDate <= currentBookings[i].endDate) {
+        console.log('OOOOOOOOOOOOOOOOOOOOOOOOPS')
         res.statusCode = 403;
         return res.json({
           "message": "Sorry, this spot is already booked for the specified dates",
           "statusCode": 403,
-          "errors": {
-            "startDate": "Start date conflicts with an existing booking",
-          }
+          "error": "Start date conflicts with an existing booking",
         });
       } else if (endDate >= currentBookings[i].startDate && startDate <= currentBookings[i].endDate) {
         res.statusCode = 403;
         return res.json({
           "message": "Sorry, this spot is already booked for the specified dates",
           "statusCode": 403,
-          "errors": {
-            "endDate": "End date conflicts with an existing booking"
-          }
+          "error": "End date conflicts with an existing booking"
         });
       }
     }

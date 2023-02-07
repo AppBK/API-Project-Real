@@ -2,6 +2,7 @@ const express = require('express');
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { Spot, SpotImage, Review, ReviewImage, User, Booking, Sequelize } = require('../../db/models');
 const { handleValidationErrors } = require('../../utils/validation');
+const { verify } = require('jsonwebtoken');
 
 const router = express.Router();
 
@@ -145,7 +146,7 @@ router.delete('/:bookingId', [restoreUser, requireAuth], async (req, res) => {
 
 ///////////////////////// GET //////////////////////////////////////////////
 
-// Get all of the Current User's Bookings
+// Get all of the Current User's Bookings. URL: /api/bookings/current
 router.get('/current', [restoreUser, requireAuth], async (req, res) => {
   let bookings = await Booking.findAll({ where: { userId: req.user.id } });
 

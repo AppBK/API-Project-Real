@@ -34,6 +34,7 @@ export default function Navigation({ isLoaded }) {
     console.log('Got a re-render!');
   },[showModal, resetHome]);
 
+
   let loggedInMenu;
   let sessionLinks;
   if (sessionUser) {
@@ -58,6 +59,7 @@ export default function Navigation({ isLoaded }) {
   const testMaps = () => {
     history.push('/tester');
   }
+
 
   return (
     <div className="nav-container">
@@ -95,4 +97,3 @@ export default function Navigation({ isLoaded }) {
     </div>
   );
 }
-

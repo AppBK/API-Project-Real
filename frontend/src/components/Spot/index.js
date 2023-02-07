@@ -14,6 +14,7 @@ import '../CreateReviewModal/CreateReview.css';
 import { Helmet } from "react-helmet";
 import { monetary } from "../../util/utils";
 import { diffDates } from "../../util/utils";
+import { thunkCreateBooking } from "../../store/bookings";
 
 function formatDate(date) {
   var d = new Date(date),
@@ -104,21 +105,45 @@ const Spot = ({ isLoaded }) => {
   //   }
   // }
 
+  const submitBooking = async (e) => {
+    e.preventDefault();
+
+    if (startDate > endDate || errors.length > 0) return null;
+
+    const booking = {
+      startDate,
+      endDate
+    }
+
+    const data = await dispatch(thunkCreateBooking(booking, spot.id))
+    .then(res => res.json())
+    .catch(err => {
+      try {
+        return err.json();
+      } catch (e) {
+        return null;
+      }
+    });
+
+    if (data) {
+      console.log('DATA: ', data);
+      if (data.error) {
+        setErrors([...errors, data.error]);
+      }
+    } else {
+      history.push('/trips');
+    }
+  }
+
   const inBoundsStart = (e) => {
     e.preventDefault();
 
+    const tempErr = [];
     const temp = e.target.value > endDate ? startDate : e.target.value;
 
-    if (temp === startDate) setErrors([...errors, 'Start date must be earlier than end date.']);
-    else {
-      const err = [];
-      for (let i = 0; i < errors.length; i++) {
-        if (errors[i] === 'Start date must be earlier than end date.') continue;
-        err.push(errors[i]);
-      }
-      setErrors(err);
-    }
+    if (temp === startDate) tempErr.push('Start date must be earlier than end date.');
 
+    setErrors(tempErr);
     setDays(setNights(e.target.value, endDate));
     setStartDate(e.target.value);
   }
@@ -126,18 +151,12 @@ const Spot = ({ isLoaded }) => {
   const inBoundsEnd = (e) => {
     e.preventDefault();
 
+    const tempErr = [];
     const temp = e.target.value < startDate ? endDate : e.target.value;
 
-    if (temp === endDate) setErrors([...errors, 'End date must be later than start date.']);
-    else {
-      const err = [];
-      for (let i = 0; i < errors.length; i++) {
-        if (errors[i] === 'End date must be later than start date.') continue;
-        err.push(errors[i]);
-      }
-      setErrors(err);
-    }
+    if (temp === endDate) tempErr.push('Start date must be earlier than end date.');
 
+    setErrors(tempErr);
     setDays(setNights(startDate, e.target.value));
     setEndDate(e.target.value);
   }
@@ -161,6 +180,7 @@ const Spot = ({ isLoaded }) => {
   </svg>)
 
   // style = {{ width: "100px", height: "100px" }
+
 
   return (
     <>
@@ -220,7 +240,7 @@ const Spot = ({ isLoaded }) => {
                 <div id="star-div">{spot.numReviews ? withReviews : withoutReviews}</div><div id="rating-div">{spot.avgStarRating}</div><div className="dot-spacer-div">{dotSpacer}</div><div id="reviews-div">{spot.numReviews ? spot.numReviews + ' reviews' : null}</div>
               </div>
             </div>
-            <form>
+            <form onSubmit={submitBooking}>
               <div id="outer-form-inputs">
                 <div id="booking-input-left" className="booking-input-divs">
                   <label className="booking-input-labels" htmlFor="checkin">CHECK-IN</label>

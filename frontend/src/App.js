@@ -12,6 +12,7 @@ import { actionUserAdd } from './store/session';
 import ComingSoon from './components/ComingSoon';
 import Test from './components/Test/Test';
 import SplangyIt from './components/SplangyIt/SplangyIt';
+import Trip from './components/Trips/Trips';
 
 
 let validation;
@@ -62,6 +63,10 @@ function App() {
         </Route>
         <Route path="/tester">
           <Test></Test>
+        </Route>
+        <Route path="/trips">
+          <Navigation isLoaded={isLoaded} />
+          <Trip></Trip>
         </Route>
       </Switch>
       )}

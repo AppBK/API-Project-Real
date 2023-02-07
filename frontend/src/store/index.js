@@ -4,6 +4,7 @@ import sessionReducer, { thunkUserLogin } from './session';
 import spotReducer from './spot';
 import singleSpotReducer from './singleSpot';
 import reviewsReducer from './reviews';
+import bookingsReducer from './bookings';
 
 // Reducers
 const rootReducer= combineReducers({
@@ -11,6 +12,7 @@ const rootReducer= combineReducers({
   spots: spotReducer,
   spotDetails: singleSpotReducer,
   reviews: reviewsReducer,
+  bookings: bookingsReducer,
 });
 
 // Enhancers

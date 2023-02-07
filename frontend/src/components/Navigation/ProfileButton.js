@@ -18,8 +18,9 @@ function ProfileButton({ user }) {
   const [showMenu, setShowMenu] = useState(false);
   const currentUser = useSelector(state => state.session.user);
 
-  const openMenu = () => {
-    console.log('SETTING SHOW MODAL')
+  const openMenu = (e) => {
+    e.preventDefault();
+
     setShowMenu(!showMenu);
   };
 
@@ -39,9 +40,19 @@ function ProfileButton({ user }) {
     history.push('/');
   };
 
+  // window.addEventListener('click', function (e) {
+  //   e.preventDefault();
+  //   console.log('WINDOW')
+  //   setShowMenu(false);
+  // }, true);
+
+  const goTrips = () => {
+    history.push('/trips');
+  }
+
   return (
     <>
-      <div className="user-icon-button pointer" onClick={openMenu}>
+      <div id="user-icon-dom" className="user-icon-button pointer" onClick={(e) => openMenu(e)}>
         <div className="list-icon-div">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false" style={{display: "block", fill: "none", height: "16px", width: "16px", stroke: "currentcolor", strokeWidth: "3", overflow: "visible"}}><g fill="none" fillRule="nonzero"><path d="m2 16h28" /><path d="m2 24h28" /><path d="m2 8h28" /></g></svg>
         </div>
@@ -50,6 +61,9 @@ function ProfileButton({ user }) {
         </div>
         {showMenu && (
         <div id="user-icon-button-modal">
+          <div id="user-icon-modal-top">
+            <div className="user-icon-modal-buttons" onClick={goTrips}><div>Trips</div></div>
+          </div>
           <div id="user-icon-modal-middle">
             <div className="user-icon-modal-buttons" onClick={redirectToSplangyIt}><div>Splangybnb your home</div></div>
           </div>

@@ -1,0 +1,24 @@
+#trip-outermost {
+  position: relative;
+  width: 100%;
+  top: 100px;
+}
+
+#trip-inner {
+  width: 88%;
+  margin: 0px auto;
+}
+
+#trip-title-div {
+  font-size: 32px;
+  font-weight: bold;
+  width: 100%;
+  border-bottom: 1px solid #DDD;
+  margin-top: 16px;
+  padding-bottom: 24px;
+}
+
+#trip-catalogue {
+  width: 100%;
+  border-bottom: 1px solid #DDD;
+}
