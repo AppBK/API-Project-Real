@@ -17,13 +17,14 @@ const router = express.Router();
 router.put('/:bookingId', [restoreUser, requireAuth], async (req, res) => {
   // console.log('bookingId: ',  req.params.bookingId);
   let booking = await Booking.findByPk(req.params.bookingId);
+  console.log('BOOKING ID UPDATE: ', booking.id);
 
   if (booking) {
     booking = booking.toJSON();
   } else {
     res.statusCode = 404;
     return res.json({
-      "message": "Booking couldn't be found",
+      "error": "Booking couldn't be found",
       "statusCode": 404
     });
   }
@@ -32,7 +33,13 @@ router.put('/:bookingId', [restoreUser, requireAuth], async (req, res) => {
   let currentDate = new Date();
   let year = currentDate.getUTCFullYear();
   let month = currentDate.getUTCMonth() + 1;
+  if (Number(month) < 10) {
+    month = '0' + month;
+  }
   let day = currentDate.getUTCDate();
+  if (Number(day) < 10) {
+    day = '0' + day;
+  }
 
   currentDate = `${year}-${month}-${day}`;
 
@@ -40,7 +47,7 @@ router.put('/:bookingId', [restoreUser, requireAuth], async (req, res) => {
   if (booking.endDate < currentDate) {
     res.statusCode = 403;
     return res.json({
-      "message": "Past bookings can't be modified",
+      "error": "Past bookings can't be modified",
       "statusCode": 403
     });
   }
@@ -71,23 +78,17 @@ router.put('/:bookingId', [restoreUser, requireAuth], async (req, res) => {
       currentBookings[i] = currentBookings[i].dataValues;
 
       // Validate start and end dates against bookings for that spot
-      if (startDate >= currentBookings[i].startDate && startDate <= currentBookings[i].endDate) {
+      if (startDate >= currentBookings[i].startDate && startDate <= currentBookings[i].endDate && currentBookings[i].id !== booking.id) {
         res.statusCode = 403;
         return res.json({
           "message": "Sorry, this spot is already booked for the specified dates",
-          "statusCode": 403,
-          "errors": {
-            "startDate": "Start date conflicts with an existing booking",
-          }
+          "error": "Start date conflicts with an existing booking",
         });
-      } else if (endDate >= currentBookings[i].startDate && startDate <= currentBookings[i].endDate) {
+      } else if (endDate >= currentBookings[i].startDate && endDate <= currentBookings[i].endDate && currentBookings[i].id !== booking.id) {
         res.statusCode = 403;
         return res.json({
           "message": "Sorry, this spot is already booked for the specified dates",
-          "statusCode": 403,
-          "errors": {
-            "endDate": "End date conflicts with an existing booking"
-          }
+          "error": "End date conflicts with an existing booking"
         });
       }
     }
@@ -110,12 +111,13 @@ router.put('/:bookingId', [restoreUser, requireAuth], async (req, res) => {
 router.delete('/:bookingId', [restoreUser, requireAuth], async (req, res) => {
   let booking = await Booking.findByPk(req.params.bookingId);
 
+
   if (booking) {
     booking = booking.toJSON();
   } else {
     res.statusCode = 404;
     return res.json({
-      "message": "Booking couldn't be found",
+      "error": "Booking couldn't be found",
       "statusCode": 404
     });
   }
@@ -126,12 +128,20 @@ router.delete('/:bookingId', [restoreUser, requireAuth], async (req, res) => {
   let month = currentDate.getUTCMonth() + 1;
   let day = currentDate.getUTCDate();
 
+  if (Number(month) < 10) {
+    month = '0' + month;
+  }
+
+  if (Number(day) < 10) {
+    day = '0' + day;
+  }
+
   currentDate = `${year}-${month}-${day}`;
 
   if (booking.startDate < currentDate) {
     res.statusCode = 403;
     return res.json({
-      "message": "Bookings that have been started can't be deleted",
+      "error": "Bookings that have been started can't be deleted",
       "statusCode": 403
     });
   }

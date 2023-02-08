@@ -20,5 +20,46 @@
 
 #trip-catalogue {
   width: 100%;
+  max-width: 1280px;
+  display: flex;
+  flex-wrap: wrap;
   border-bottom: 1px solid #DDD;
+  padding-top: 16px;
+}
+
+.your-bookings {
+  display: flex;
+  padding-bottom: 16px;
+  width: 384px;
+}
+
+#edit-booking-modal-background {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  opacity: 0.15;
+  visibility: hidden;
+}
+
+.edit-delete-cont {
+  display: flex;
+}
+
+.edit-delete {
+  margin-right: 8px;
+  border: none;
+  border-radius: 8px;
+  background-color: #FF385C;
+  color: white;
+}
+
+.edit-delete:hover {
+  cursor: pointer;
 }

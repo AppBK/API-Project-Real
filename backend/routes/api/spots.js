@@ -35,9 +35,6 @@ router.post('/:spotId/reviews', [restoreUser, requireAuth], async (req, res) => 
       "statusCode": 403,
       "errors": "User already has a review for this spot"
     });
-    // const error = new Error("User already has a review for this spot");
-    // error.status = 403;
-    // throw error;
    }
 
   const { review, stars } = req.body;
@@ -125,7 +122,6 @@ router.post('/:spotId/bookings', [restoreUser, requireAuth], async (req, res) =>
 
       // Validate start and end dates against all current bookings for that spot
       if (startDate >= currentBookings[i].startDate && startDate <= currentBookings[i].endDate) {
-        console.log('OOOOOOOOOOOOOOOOOOOOOOOOPS')
         res.statusCode = 403;
         return res.json({
           "message": "Sorry, this spot is already booked for the specified dates",

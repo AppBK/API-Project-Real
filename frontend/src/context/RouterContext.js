@@ -16,6 +16,7 @@ export const RouterProvider = props => {
   const [showSignupForm, setShowSignupForm] = useState(false);
   const [userCity, setUserCity] = useState('');
   const [locationServicesEnabled, setLocationServicesEnabled] = useState(true);
+  const [modalId, setModalId] = useState('');
 
   return (
     <RouterContext.Provider value={{
@@ -32,6 +33,7 @@ export const RouterProvider = props => {
       showSignupForm, setShowSignupForm,
       userCity, setUserCity,
       locationServicesEnabled, setLocationServicesEnabled,
+      modalId, setModalId,
     }}>
       {props.children}
     </RouterContext.Provider>

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { monetary } from '../../util/utils';
 import { useHistory } from 'react-router-dom';
 import { actionSpotsGetInfo, thunkGetAllSpotInfo } from '../../store/spot';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 const Spots = ({ isLoaded }) => {
   const { spotType, setSpotType, spotsRetrieved, setSpotsRetrieved } = useContext(RouterContext);

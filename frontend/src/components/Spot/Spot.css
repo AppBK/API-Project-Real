@@ -21,6 +21,11 @@
   padding-bottom: 32px;
 }
 
+#header-container {
+  max-width: 1280px;
+  margin: 0px auto;
+}
+
 #header-bottom {
   display: flex;
   align-items: center;
@@ -63,9 +68,12 @@
 
 #preview-images {
   width: 100%;
+  max-width: 1280px;
   height: 500px;
   background-color: white;
   margin-top: 20px;
+  margin-right: auto;
+  margin-left: auto;
   border-radius: 16px;
   display: grid;
   grid-gap: 8px;
@@ -104,6 +112,7 @@
   border-top: 2px solid rgb(221,221,221);
   border-bottom: 2px solid rgb(221,221,221);
   width: 86%;
+  max-width: 1280px;
   display: flex;
   padding: 8px;
   justify-content: space-evenly
@@ -156,13 +165,16 @@
 }
 
 #booking-outer {
-  width: 100%;
+  width: 86%;
+  height: fit-content;
+  max-width: 1280px;
+  margin: 0px auto;
   border-top: 1px solid #DDD;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 64px;
+  position: relative;
 }
 
 #booking-form {
@@ -299,4 +311,64 @@
 
 .booking-input-labels {
   font-weight: bold;
+}
+
+.highlight-conts {
+  display: flex;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#bookings-left-col {
+  width: 60%;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+#bookings-right-col {
+  width: 40%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.highlight-icons {
+  margin-right: 16px;
+}
+
+#highlights {
+  border-top: 1px solid #DDD;
+  border-bottom: 1px solid #DDD;
+  width: 100%;
+  padding: 32px 0px;
+}
+
+#aircover {
+  color: #222;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 32px 0px;
+  border-bottom: 1px solid #DDD;
+}
+
+#aircover-icon-div {
+  margin-bottom: 16px;
+}
+
+#aircover-content {
+  opacity: 0.8;
+}
+
+@media (max-width: 1260px) {
+  #booking-outer {
+    flex-direction: column;
+  }
+
+  #bookings-right-col {
+    flex-direction: column;
+    align-items: center;
+    margin: 0px auto;
+  }
 }

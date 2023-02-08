@@ -11,9 +11,8 @@ import { RouterContext } from "../../context/RouterContext";
 import Reviews from '../Reviews';
 import { thunkReviewsRead } from '../../store/reviews';
 import '../CreateReviewModal/CreateReview.css';
-import { Helmet } from "react-helmet";
-import { monetary } from "../../util/utils";
-import { diffDates } from "../../util/utils";
+import { Helmet } from "react-helmet-async";
+import { monetary, diffDates } from "../../util/utils";
 import { thunkCreateBooking } from "../../store/bookings";
 
 function formatDate(date) {
@@ -227,6 +226,23 @@ const Spot = ({ isLoaded }) => {
       </div>)}
       <Reviews spot={spot} isLoaded={isLoaded} isAuthorized={isAuthorized} user={user}/>
         <div id="booking-outer">
+          <div id="bookings-left-col">
+            <div id="highlights">
+              <div className="highlight-conts">
+                <div className="highlight-icons">
+                  <img src="/createSpot/highlights/cancellation.svg" style={{ width: "24px", height: "24px" }}></img>
+                </div>
+                <div>Free cancellation for 48 hours.</div>
+              </div>
+            </div>
+            <div id="aircover">
+              <div id="aircover-icon-div">
+                <img src="/createSpot/aircover_no_host.webp" style={{ width: "123px", height: "26px" }}></img>
+              </div>
+              <div id="aircover-content">Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.</div>
+            </div>
+          </div>
+          <div id="bookings-right-col">
           <div id="booking-form">
             {errors.map(error => (
               <div className="booking-errors">{error}</div>
@@ -265,6 +281,7 @@ const Spot = ({ isLoaded }) => {
               <div>{monetary(spot.price * days)}</div>
             </div>
           </div>
+        </div>
         </div>
     </div>
     </>

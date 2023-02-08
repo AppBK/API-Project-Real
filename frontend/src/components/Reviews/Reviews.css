@@ -1,7 +1,8 @@
 #reviews-outer {
   /* background-color: red;*/
   height: fit-content;
-  width: 87.3%;
+  width: 86%;
+  max-width: 1280px;
   background-color: transparent;
   margin-top: 32px;
   border-bottom: 2px solid rgb(221,221,221);

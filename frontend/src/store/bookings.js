@@ -33,6 +33,19 @@ export const actionReadBookings = (bookings) => {
   }
 }
 
+export const actionUpdateBooking = (newBooking) => {
+  return {
+    type: UPDATE_BOOKINGS,
+    newBooking,
+  }
+}
+
+export const actionDeleteBooking = (bookingId) => {
+  return {
+    type: DELETE_BOOKING,
+    bookingId
+  }
+}
 
 // Thunks
 export const thunkCreateBooking = (booking, spotId) => async (dispatch) => {
@@ -74,6 +87,44 @@ export const thunkReadBookings = () => async (dispatch) => {
   }
 }
 
+export const thunkUpdateBooking = (newBooking, bookingId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/bookings/${bookingId}`, {
+    method: 'PUT',
+    body: JSON.stringify({
+      ...newBooking
+    })
+  });
+
+  if (response.ok) {
+    const newBook = await response.json();
+    dispatch(actionUpdateBooking(newBook));
+    return null;
+  } else {
+    const data = await response.json();
+    if (data.errors) {
+      return data;
+    } else {
+      return ['Unknown Error: Could Not Update Booking'];
+    }
+  }
+}
+
+export const thunkDeleteBooking = (bookingId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/bookings/${bookingId}`, { method: 'DELETE'});
+
+  if (response.ok) {
+    dispatch(actionDeleteBooking(bookingId));
+    return null;
+  } else {
+    const data = await response.json();
+    if (data.errors) {
+      return data;
+    } else {
+      return ['Unknown Error: Could Not Update Booking'];
+    }
+  }
+}
+
 // Reducer
 export default function bookingsReducer(state = {}, action) {
   switch (action.type) {
@@ -85,6 +136,36 @@ export default function bookingsReducer(state = {}, action) {
     }
     case READ_BOOKINGS_USER: {
       const newState = {...action.bookings};
+      return newState;
+    }
+    case UPDATE_BOOKINGS: {
+      const newState = {...state};
+
+      let temp;
+      for (let i = 0; i < newState.Bookings.length; i++) {
+        temp = newState.Bookings[i];
+
+        if (temp.id === action.newBooking.id) {
+          temp.updatedAt = action.newBooking.updatedAt;
+          temp.startDate = action.newBooking.startDate;
+          temp.endDate = action.newBooking.endDate;
+        }
+      }
+
+      return newState;
+    }
+    case DELETE_BOOKING: {
+      const newState = {...state};
+
+      let temp;
+      for (let i = 0; i < newState.Bookings.length; i++) {
+        temp = newState.Bookings[i];
+
+        if (temp.id === parseInt(action.bookingId)) {
+          console.log('SPLICING')
+          newState.Bookings.splice(i, 1);
+        }
+      }
       return newState;
     }
     default: {
