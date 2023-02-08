@@ -10,7 +10,6 @@ import Spots from './components/Spots';
 import Spot from './components/Spot';
 import { actionUserAdd } from './store/session';
 import ComingSoon from './components/ComingSoon';
-import Test from './components/Test/Test';
 import SplangyIt from './components/SplangyIt/SplangyIt';
 import Trip from './components/Trips/Trips';
 
@@ -60,9 +59,6 @@ function App() {
         <Route path="/coming">
           <Navigation isLoaded={isLoaded} />
           <ComingSoon />
-        </Route>
-        <Route path="/tester">
-          <Test></Test>
         </Route>
         <Route path="/trips">
           <Navigation isLoaded={isLoaded} />
