@@ -87,7 +87,7 @@ function SplangyIt() {
     // setTimeout prevents the scrollbar from awkwardly popping onto the screen when the animation ends
     setTimeout(() => {
       body.style.overflow = "auto"; // Enable the scrollbar once more!
-    }, 600);
+    }, 300);
   }
 
   const openModal = () => {
@@ -343,7 +343,7 @@ function SplangyIt() {
       </div>
       <div id="splangy-it-header">
         <div onClick={goHome} id="splangy-it-gohome">
-          <img id="splangyit-icon-pink" src="/createSpot/airbnb-logo-pink.svg"></img>
+          <img id="splangyit-icon-pink" src="/general/For_Web/png/just-symbol.png"></img>
         </div>
         <div id="ready-setup">
           <div id="ready-margin">Ready to Splangybnb it?</div>
