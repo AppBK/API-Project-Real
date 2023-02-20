@@ -185,7 +185,7 @@ const Spot = ({ isLoaded }) => {
     <>
     <Helmet>
       <title>{spot.name}</title>
-      <link rel="shortcut icon" type="image/x-icon" href="/icons/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="/icons/favicon_io_splangybnb/favicon.ico" />
     </Helmet>
     <div className="spot-page">
       <div id="inner-spot-cont">
